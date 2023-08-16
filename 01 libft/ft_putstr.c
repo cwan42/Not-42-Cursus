@@ -6,14 +6,20 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:12:40 by cwan              #+#    #+#             */
-/*   Updated: 2023/08/14 16:54:59 by cwan             ###   ########.fr       */
+/*   Updated: 2023/08/16 14:03:30 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-	
-	ft_putchar(
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
 }
