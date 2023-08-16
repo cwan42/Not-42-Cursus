@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:32:25 by cwan              #+#    #+#             */
-/*   Updated: 2023/08/14 16:45:19 by cwan             ###   ########.fr       */
+/*   Updated: 2023/08/16 13:39:51 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	ft_isalnum(int c)
 {
-	if(ft_isdigit(c) || ft_isalpha(c))
+	if (ft_isdigit(c) || ft_isalpha(c))
 	{
-		return(1);
+		return (1);
 	}
-	return(0);
+	return (0);
 }
-
-
