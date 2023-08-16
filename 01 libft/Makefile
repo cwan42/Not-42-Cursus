@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/08/14 15:40:47 by cwan             ###   ########.fr        #
+#    Updated: 2023/08/16 14:05:16 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADERS = ./
 
 CC = gcc
 RM = rm -f
-CFLAGS = -Wextra -Wall -Werror -I $(HEADERS)
+CFLAGS = -Wall -Wextra -Werror -I $(HEADERS)
 
 OBJS = $(SRCS:.c=.o)
 
