@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:25:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/08/16 15:44:35 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/07 10:32:49 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	ft_putnbr(int n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr(char *str);
 void	ft_putstr_fd(char *str, int fd);
+
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif
