@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/11 14:31:02 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/11 15:31:51 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = \
 	ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
 	ft_strncmp.c ft_strnstr.c \
 	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
+	ft_calloc.c ft_strdup.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 HEADERS = ./
 
@@ -36,10 +37,10 @@ all: $(NAME)
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) Test1 Test3
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) Test1 Test3
 
 re: fclean all
 
