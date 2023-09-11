@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/11 11:18:26 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/11 12:41:23 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = \
 	ft_toupper.c ft_tolower.c ft_atoi.c \
 	ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
 	ft_strncmp.c ft_strnstr.c \
-	ft_memset.c ft_bzero.c \
+	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 HEADERS = ./
 
