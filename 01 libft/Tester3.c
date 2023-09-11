@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:32:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/11 09:32:09 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/11 10:25:44 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	main(void)
 	printf("ft_memset: %s\n", (char *)ft_memset(string, 'A', len));
 	printf("memset: %s\n", (char *)memset(string, 'B', len));
 	ft_bzero(string, len);
-	printf("bzero: %s\n", string);
+	printf("bzero: %sEOL\n", string);
 }
