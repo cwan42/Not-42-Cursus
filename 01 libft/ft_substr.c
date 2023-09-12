@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:39:18 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/12 14:59:33 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/12 17:19:28 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	slen;
+	char	*str;
 
-	slen = ft_strlen(s);
-	if (start >= s_len)
-		return (NULL);
-	
+	if (!s)
+		return (0);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	str = malloc(len + 1);
+	if (!str)
+		return (0);
+	s += start;
+	if (s)
+		ft_strlcpy(str, s, len + 1);
+	return (str);
 }
