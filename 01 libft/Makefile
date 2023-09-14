@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/13 16:29:58 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/14 15:20:44 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ SRCS = \
 	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	ft_strmapi.c ft_striteri.c
 
+BSRCS = \
+	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+	ft_lstdelone.c ft_lstclear.c ft_lstiter.c
+
 HEADERS = ./
 
 CC = cc
@@ -29,6 +33,7 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I $(HEADERS)
 
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -38,8 +43,11 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
+bonus: $(NAME) $(OBJS) $(BOBJS)
+	ar rcs $(NAME) $?
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
 	$(RM) $(NAME)

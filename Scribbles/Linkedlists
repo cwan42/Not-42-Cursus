@@ -1,0 +1,26 @@
+Linked lists - linear DS linked using ptrs.
+Nodes comprise data and add of next node
+Head pts to first node, last is nullptr.
+
+Dynamic DS, mem alloc or realloc based on insertn/deletn. (efficient alloc based on need)
+Easier to change content since only add need to be updated.
+Used for implementn of stack/queue/graph/hash map etc.
+
+Disadv
+Random access: do not allow direct access to elements by index, Traversal by nodes required.
+Extra mem required for storing pointers.
+
+Three types:
+Single-linked - unidirectional, node = data and next ptr
+Double-linked - Bidirectional, node = data, prev and next ptrs
+Circular linked - Same as single-linked but last node pts back to head node
+
+Operatns: Insertion, deletion, searching
+
+Navigation
+Move through with ptr for head node, ptr+1 for 2nd etc?
+. Member operator
+-> Structure pointer operator (e.g. scanif(%f, &nodePtr->var);
+
+Memory
+ptr = (struct node*) malloc(n * sizeof(struct node)); - for malloc at instance level, because allocating memory only for pointers to total no. of nodes in struct at each runtime.
