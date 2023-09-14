@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/14 15:20:44 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/14 17:32:45 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = \
 
 BSRCS = \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-	ft_lstdelone.c ft_lstclear.c ft_lstiter.c
+	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 HEADERS = ./
 

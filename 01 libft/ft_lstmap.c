@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:21:20 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/14 17:28:43 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/14 17:42:24 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst || !*f || !*del)
 		return (0);
-	newlist = ft_lst_new(f(lst->content));
+	newlist = ft_lstnew(f(lst->content));
 	while (lst->next)
 	{
 		lst = lst->next;
 		newnode = ft_lstnew(f(lst->content));
 		if (!newnode)
 		{
-				ft_lstclear(*newlist, del);
+				ft_lstclear(&newlist, del);
 				return (0);
 		}
 		ft_lstadd_back(&newlist, newnode);
