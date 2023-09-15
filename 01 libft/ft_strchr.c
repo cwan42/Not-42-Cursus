@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:28:35 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/11 10:20:30 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/15 13:47:58 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,9 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-		{
-			return ((char *)s);
-		}
+	while (*s && (*s != (char)c))
 		s++;
-	}
-	if (c == '\0')
+	if ((*s) == (char)c || !c)
 		return ((char *)s);
 	return (NULL);
 }

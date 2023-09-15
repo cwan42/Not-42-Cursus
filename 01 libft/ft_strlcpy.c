@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:41:51 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/12 16:28:13 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/15 15:03:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (!dst || !src)
-		return (0);
 	if (size == 0)
 		return (ft_strlen(src));
 	while (src[i] != '\0' && (i < (size - 1)))

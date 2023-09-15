@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:52:31 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/11 13:43:10 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/15 15:20:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	d = (unsigned char *)dest;
 	s = (const unsigned char *)src;
+	if (!dest && !src)
+		return (NULL);
 	if (d > s && d < s + n)
 	{
 		i = n;

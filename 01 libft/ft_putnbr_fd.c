@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:36:22 by cwan              #+#    #+#             */
-/*   Updated: 2023/08/16 15:43:01 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/15 11:09:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	ft_putnbr_fd(int n, int fd)
 	else if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		n = -n;
+		ft_putnbr_fd(-n, fd);
 	}
-	if (n < 10)
-		ft_putchar_fd(n + '0', fd);
-	else if (n > 9)
+	else
 	{
-		ft_putnbr_fd(n / 10, fd);
+		if (n > 9)
+			ft_putnbr_fd(n / 10, fd);
 		ft_putchar_fd(n % 10 + '0', fd);
 	}
 }
