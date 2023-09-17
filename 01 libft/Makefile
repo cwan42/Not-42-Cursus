@@ -6,11 +6,12 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/14 17:32:45 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/17 12:23:52 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
 SRCS = \
 	ft_isascii.c ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isprint.c \
 	ft_toupper.c ft_tolower.c ft_atoi.c \

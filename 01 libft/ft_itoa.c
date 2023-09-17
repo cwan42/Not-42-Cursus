@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:02:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/15 12:26:33 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/17 09:23:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ static int	ft_intlen(int n)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		sign;
+	int		n2;
 	int		i;
 
 	i = ft_intlen(n);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
+	n2 = n;
 	if (n < 0)
-	{
-		sign = 1;
-		n = -n;
-	}
-	str = malloc(sizeof(char) * (i + 1));
+		n2 = -n;
+	str = malloc(sizeof(char) * (i +1));
+	if (!str)
+		return (NULL);
 	str[i] = '\0';
 	i--;
-	if (n == 0)
+	if (n2 == 0)
 		str[i] = '0';
-	while (n > 0)
+	while (n2 > 0)
 	{
-		str[i--] = '0' + (n % 10);
-		n /= 10;
+		str[i--] = (n2 % 10) + '0';
+		n2 /= 10;
 	}
-	if (sign == 1)
+	if (n < 0)
 		str[i] = '-';
 	return (str);
 }
