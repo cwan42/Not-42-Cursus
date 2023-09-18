@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:39:28 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/15 14:53:27 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/18 20:06:07 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strrchr(const char *s, int c)
 
 	i = (int)ft_strlen(s) +1;
 	while (i--)
-		if (*(s + i) == (char)c)
+		if (*(s + i) == (char)c || !c)
 			return ((char *)s + i);
 	return (NULL);
 }
