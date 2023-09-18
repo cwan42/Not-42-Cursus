@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:25:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/14 17:33:24 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/18 19:47:33 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBFT_H
 
 # include <unistd.h>
-# include <stddef.h>
 # include <stdlib.h>
 
 typedef struct s_list
