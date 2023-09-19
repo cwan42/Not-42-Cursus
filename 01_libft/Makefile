@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/17 15:22:00 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/19 14:48:57 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ BSRCS = \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-HEADERS = ./
-
 CC = cc
+
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -I $(HEADERS)
+
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
@@ -43,20 +43,15 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-bonus: $(NAME) $(OBJS) $(BOBJS)
-	ar rcs $(NAME) $?
+bonus: $(NAME) $(BOBJS)
+	ar rcs $(NAME) $(BOBJS)
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) Test1 Test3
 
 re: fclean all
-
-test:
-	$(CC) $(CFLAGS) -o Test_1 Test_is.c -L -l $(NAME)
-	$(CC) $(CFLAGS) -o Test3 Tester3.c -L -l $(NAME)
 
 .PHONY: all clean fclean re
