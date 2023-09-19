@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:09:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/13 16:23:39 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/19 09:17:10 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !f)
 		return (NULL);
-	len = 0;
-	while (s[len])
-		len++;
+	len = ft_strlen(s);
 	result = malloc(len + 1);
 	if (!result)
 		return (NULL);

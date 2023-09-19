@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:39:18 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/17 11:04:05 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/19 08:49:03 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
-	s += start;
-	if (s)
-		ft_strlcpy(str, s, len + 1);
+	s = s + start;
+	ft_strlcpy(str, s, len + 1);
 	return (str);
 }
