@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:27:43 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/14 14:34:09 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/19 10:19:56 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*temparr;
+	t_list	*temptr;
 
 	while (*lst != NULL)
 	{
-		temparr = (*lst)->next;
+		temptr = (*lst)->next;
 		del((*lst)->content);
 		free(*lst);
-		*lst = temparr;
+		*lst = temptr;
 	}
 	*lst = NULL;
 }
