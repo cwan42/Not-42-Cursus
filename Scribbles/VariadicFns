@@ -28,7 +28,7 @@ int	sum(int num_args, ...)
 	
 	while (i < num_args)
 	{
-		value = va_args(args, int);
+		value = va_arg(args, int);
 		total += value;
 		i++;
 	}
