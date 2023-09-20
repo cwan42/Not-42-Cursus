@@ -1,0 +1,44 @@
+Variadic functions - can accept variable number of arguments
+Implemented using stdarg.h
+
+Declared with ... in parameters i.e. int function(int arg1, ...)
+
+va_list - type variable that holds info needed to access the variable arguments
+va_list args;
+
+va_start - macro that initializes va_list var for processing variable arguments
+va_start(args, arg1);
+
+va_arg - macro that retrieves next argument from variable argument list
+int value = va_arg(args, int);
+
+va_end - macro called when done processing variable arguments
+va_end(args);
+
+EXAMPLE USE:
+
+int	sum(int num_args, ...)
+{
+	va_list		args;
+	va_start	(args, num_args);
+	
+	int	total = 0;
+	int	i = 0;
+	int	value;
+	
+	while (i < num_args)
+	{
+		value = va_args(args, int);
+		total += value;
+		i++;
+	}
+	va_end(args);
+	return (total);	
+}
+
+int	main()
+{
+	int	result = sum(5, 1, 2, 3 ,4, 5);
+	printf("Sum: %d\n", result);
+	return (0);
+}
