@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Tester.c                                           :+:      :+:    :+:   */
+/*   ft_printd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 14:31:39 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/21 11:07:42 by cwan             ###   ########.fr       */
+/*   Created: 2023/09/21 11:01:32 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/21 11:07:03 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	main()
+void	ft_printd(int n)
 {
-	char *str = "abcdefgHIJKLM12345";
-	int	nbr = 123456789;
-
-	ft_printc('X');
-	printf(" : %c\n", 'X');
-	ft_prints(str);
-	printf(" : %s\n", str);
-	ft_printp((unsigned long)str);
-	printf(" : %p\n", str);
-	ft_printd(nbr);
-	printf(" : %d\n", nbr);
-
-	printf(" : %i\n", nbr);
-
-	printf(" : %u\n", (unsigned int)nbr);
-
-	printf(" : %x\n", nbr);
-
-	printf(" : %X\n", nbr);
-
-	printf(" : %%%%\n");
+	if (n == -2147483648)
+		ft_prints("-2147483648");
+	else if (n < 0)
+	{
+		ft_printc('-');
+		ft_printd(-n);
+	}
+	else
+	{
+		if (n > 9)
+			ft_printd(n / 10);
+		ft_printc(n % 10 + '0');
+	}
 }
