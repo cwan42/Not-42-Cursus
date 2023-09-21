@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:31:39 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/21 11:07:42 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/21 17:09:08 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main()
 	printf(" : %p\n", str);
 	ft_printd(nbr);
 	printf(" : %d\n", nbr);
-
+	ft_printd(nbr);
 	printf(" : %i\n", nbr);
 
 	printf(" : %u\n", (unsigned int)nbr);
