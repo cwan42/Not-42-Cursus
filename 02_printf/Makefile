@@ -6,13 +6,13 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 10:20:30 by cwan              #+#    #+#              #
-#    Updated: 2023/09/21 11:06:21 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/22 14:54:35 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = ft_printc.c ft_prints.c ft_printp.c ft_printd.c \
+SRCS = ft_printc.c ft_prints.c ft_printp.c ft_printd.c ft_printf.c \
 
 BSRCS = \
 
