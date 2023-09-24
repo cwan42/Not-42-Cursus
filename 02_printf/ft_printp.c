@@ -6,15 +6,15 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:21:48 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/21 10:28:21 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/25 01:45:27 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	hexconverter(unsigned long n, char *cipher)
+static int	hexconverter(unsigned long n, const char *cipher)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (n < 16)
@@ -29,18 +29,15 @@ static int	hexconverter(unsigned long n, char *cipher)
 
 int		ft_printp(unsigned long ptr)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (!ptr)
-	{
-		ft_prints("NO PTR");
 		return (0);
-	}
 	else
 	{
-		i += write(1, "0x", 2);
-		i += hexconverter(ptr, "0123456789abcdef");
+		len += write(1, "0x", 2);
+		len += hexconverter(ptr, "0123456789abcdef");
 	}
-	return (i);
+	return (len);
 }

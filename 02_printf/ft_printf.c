@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:53:15 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/22 16:24:06 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/25 01:40:42 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,25 @@ int	ft_printf(const char *str, ...)
 {
 	
 	va_list		args;
-	int			i;
+	int		i;
+	int		len;
 	
 	i = 0;
-	va_start	(args, str);
+	len = 0;
+	va_start (args, str);
 	while (str[i])
 	{
 		if (str[i] == '%' && validformat(str[i + 1]))
+		{
 			ft_formatspec(str[++i], args);
+			len++;
+		}
 		else
-			ft_printc(str[i]);
-		i++;
+		{
+			ft_printc(str[i++]);
+			len++;
+		}
 	}
 	va_end(args);
-	return (0);
+	return (len);
 }
