@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 10:20:30 by cwan              #+#    #+#              #
-#    Updated: 2023/09/25 15:06:15 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/25 16:12:40 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ TESTS = $(TEST:.c=.o)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	ar rcs $(NAME) $(OBJS) ./libft/libft.a
+	ar rcs $(NAME) ./libft/libft.a $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
