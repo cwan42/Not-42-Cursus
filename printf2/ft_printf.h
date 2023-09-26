@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:05:36 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/26 12:15:08 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/26 16:10:51 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_putnbr(long n);
 int		ft_putunsnbr(unsigned int n);
 int		ft_printp(void *ptr);
 
-int		ft_hexconv(unsigned long n);
+int		ft_hexconv(unsigned long n, char *base);
 int		ft_printf(const char *str, ...);
 
 #endif

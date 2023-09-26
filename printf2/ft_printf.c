@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:07:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/26 12:13:18 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/26 16:41:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,14 @@ static char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	else
-		return (c);
-}
-
-int	ft_hexconv(unsigned long n)
+int	ft_hexconv(unsigned long n, char *base)
 {
 	int	i;
 
 	i = 0;
 	if (n > 15)
-		i += ft_hexconv(n / 16);
-	i += ft_putchar("0123456789abcdef"[n % 16]);
+		i += ft_hexconv((n / 16), base);
+	i += ft_putchar(base[n % 16]);
 	return (i);
 }
 
@@ -56,9 +48,9 @@ static int	ft_formatspec(const char c, va_list args)
 	else if (c == 'u')
 		i += ft_putunsnbr(va_arg(args, unsigned int));
 	else if (c == 'x')
-		i += ft_hexconv(va_arg(args, unsigned long));
+		i += ft_hexconv(va_arg(args, unsigned int), "0123456789abcdef");
 	else if (c == 'X')
-		i += ft_toupper(ft_hexconv(va_arg(args, unsigned long)));
+		i += ft_hexconv(va_arg(args, unsigned int), "0123456789ABCDEF");
 	else
 		i += ft_putchar('%');
 	return (i);
