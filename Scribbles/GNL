@@ -1,0 +1,16 @@
+FD - non-negative integers, represents open file or IO resource.
+Can point to std channels, open files, devices, anything really.
+
+012 = stdin/stdout/stderr
+open()/fopen() - OS assigns FD
+Common operations: read, write, lseek, close
+
+fcntl.h - file control operations
+Status flags: 0_RDONLY, 0_WRONLY, 0_RDWR, 0_APPEND, 0_CREAT, 0_TRUNC, 0_EXCL
+Record locking: F_SETLK, F_SETLKW, F_GETLK
+Attribute changes: F_SETFL, F_GETFL, F_SETOWN, F_GETOWN
+Sync and advisory locking: F_SETSIG, F_GETSIG, F_GETOWN_EX
+
+E.G int filedescriptor = open("examplefile.txt, 0_RDONLY | 0_CREAT, 0666);
+
+Read function recalls position in a file, every call advances the current position by number of bytes read.
