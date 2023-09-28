@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:46:27 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/28 08:41:12 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/28 11:41:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 69
+#  define BUFFER_SIZE 42
 # endif
 
 # include <stdlib.h>

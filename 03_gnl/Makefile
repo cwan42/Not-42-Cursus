@@ -6,13 +6,13 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 17:53:19 by cwan              #+#    #+#              #
-#    Updated: 2023/09/28 09:41:52 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/28 11:41:42 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = get_next_line.a
 
-SRCS = get_next_line.c
+SRCS = get_next_line.c get_next_line_utils.c
 
 BSRCS = get_next_line_bonus.c get_next_line_utils_bonus.c
 
