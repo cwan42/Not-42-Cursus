@@ -6,23 +6,21 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 17:53:19 by cwan              #+#    #+#              #
-#    Updated: 2023/09/26 18:02:53 by cwan             ###   ########.fr        #
+#    Updated: 2023/09/28 08:32:43 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = get_next_line.a
 
-SRCS = $(wildcard *.c)
+SRCS = get_next_line.c
 
-BSRCS = \
+BSRCS = get_next_line_bonus.c get_next_line_utils_bonus.c
 
 CC = cc
 
 RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
-
-BUFFER = -D BUFFER_SIZE 69
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
@@ -31,7 +29,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(BUFFER) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
