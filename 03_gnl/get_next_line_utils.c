@@ -1,32 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 17:46:27 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/28 08:41:12 by cwan             ###   ########.fr       */
+/*   Created: 2023/09/28 09:42:57 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/28 09:43:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 69
-# endif
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct s_list
-{
-	char			*strbuf;
-	struct s_list	*next;
-}					t_list;
-
-char	*get_next_line(int fd);
-
-#endif
