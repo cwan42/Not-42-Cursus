@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnlcp.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:52:53 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/27 13:56:05 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/29 11:52:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "get_next_line.h"
 
 void	polish_list(t_list **list)
@@ -39,7 +39,7 @@ void	polish_list(t_list **list)
 
 void	copystr(t_list *list, char *str)
 {
-	int i;
+	int	i;
 	int	j;
 
 	if (!list)

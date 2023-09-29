@@ -6,13 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/28 17:03:34 by cwan             ###   ########.fr       */
+/*   Updated: 2023/09/29 15:40:04 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_maxfd()
+int	get_maxfd(void)
 {
 	long	maxfd;
 
@@ -22,7 +22,7 @@ int	get_maxfd()
 	return ((int)maxfd);
 }
 
-t_list ft_lstlastadd(t_list **lst, t_list *new)
+t_list	ft_lstlastadd(t_list **lst, t_list *new)
 {
 	if (!*lst)
 		*lst = new;
@@ -30,35 +30,22 @@ t_list ft_lstlastadd(t_list **lst, t_list *new)
 		return (NULL);
 	while (lst->next != NULL)
 		lst = lst->next;
-	lst->next = new;	
-}
-
-t_list	*ft_lstnew(void *content, fd)
-{
-	t_list	*newlist;
-
-	newlist = (t_list *)malloc(BUFFER_SIZE + 1);
-	if (!newlist)
-		return (NULL);
-	newlist->strbuf = content;
-	newlist->next = NULL;
-	return (newlist);
+	lst->next = new;
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list;
-	char			*nextline;
+	static char	*bufstr;
+	char		*nextline;
 
-	list = NULL;
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0)
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0))
 		return (NULL);
-	ft_listnew(&list, fd);
-	if (!list)
-		return (NULL);
+	bufstr = 
+	
 }
-
+/*
 #include <stdio.h>
+#include <fcntl.h>
 
 int	main(int argc, char *argv[])
 {
@@ -70,17 +57,6 @@ int	main(int argc, char *argv[])
 	close(fd);
 	return (0);
 }
-/*
-FN createlist/lstnew?
-read fd and store info by buf
-lstadd back until EOL?
-return length? needed?
-copy and print line as string
-clean up on aisle 6.
-
-create t_list with fd
-populate with lines, delimited by \n or buf?
-print line, ensure read moves to next line?
 
 GNL should return line read, or NULL if nothing to read or error.
 Should read from both files and stdin
