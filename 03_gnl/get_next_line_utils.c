@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:42:57 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/01 14:27:37 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/02 11:48:43 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,20 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strducpy(const char *s)
+char	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*str;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	str = malloc(ft_strlen(s) + 1);
-	if (!str)
-		return (NULL);
-	while (str[i] && (i < ft_strlen(s)))
+	if (size == 0)
+		return (ft_strlen(src));
+	while (src[i] && (i < (size - 1)))
 	{
-		str[i] = s[i];
+		dst[i] = src[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	dst[i] = '\0';
+	return (ft_strlen(src));	
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

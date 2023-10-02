@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:46:27 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/01 14:19:24 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/02 11:54:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 
 int		ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
-char	*ft_strducpy(const char *s);
+char	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 
+char	*ft_clearbuf(char *bufstr);
 char	*ft_printline(char *bufstr);
 char	*ft_readbuffer(int fd, char *bufstr);
 char	*get_next_line(int fd);
