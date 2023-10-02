@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:42:57 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/02 11:48:43 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/02 11:56:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	ft_strlcpy(char *dst, const char *src, size_t size)
 		i++;
 	}
 	dst[i] = '\0';
-	return (ft_strlen(src));	
+	return (ft_strlen(src));
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

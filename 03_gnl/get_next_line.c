@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/02 11:53:10 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/02 12:08:03 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ char	*ft_clearbuf(char *bufstr)
 		bufstr = NULL;
 		return (NULL);
 	}
-	len = ft_strlen(toclear + 1);
+	toclear ++;
+	len = ft_strlen(toclear);
 	remainstr = malloc(sizeof(char) * (len + 1));
 	if (!remainstr)
 		return (NULL);
-	ft_strducpy(remainstr);
+	ft_strlcpy(remainstr, toclear, len + 1);
 	free(bufstr);
 	bufstr = NULL;
 	return (remainstr);
@@ -47,10 +48,10 @@ char	*ft_printline(char *bufstr)
 		i++;
 	if (ft_strchr(bufstr, '\n'))
 		i++;
-	nextline = malloc(sizeof(char) * (i + 1);
+	nextline = malloc(sizeof(char) * (i + 1));
 	if (!nextline)
 		return (NULL);
-	ft_strlcpy(nextline, bufstr, len + 1);
+	ft_strlcpy(nextline, bufstr, i + 1);
 	return (nextline);
 }
 
@@ -90,7 +91,7 @@ char	*get_next_line(int fd)
 	if (!bufstr)
 	{
 		bufstr = malloc(1);
-		bufstr = '\0';
+		bufstr[0] = '\0';
 	}
 	bufstr = ft_readbuffer(fd, bufstr);
 	if (!bufstr)
