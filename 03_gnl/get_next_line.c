@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/02 12:08:03 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/03 12:11:00 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_clearbuf(char *bufstr)
 	}
 	toclear ++;
 	len = ft_strlen(toclear);
-	remainstr = malloc(sizeof(char) * (len + 1));
+	remainstr = malloc(sizeof(char) * (len));
 	if (!remainstr)
 		return (NULL);
 	ft_strlcpy(remainstr, toclear, len + 1);
@@ -100,19 +100,20 @@ char	*get_next_line(int fd)
 	bufstr = ft_clearbuf(bufstr);
 	return (nextline);
 }
-/*
+
 #include <stdio.h>
 #include <fcntl.h>
 
 int	main(int argc, char *argv[])
 {
-	int	fd;
+	int		fd;
+	char	*line;
 	
 	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd);
+	while (get_next_line(fd) != NULL)
+	{
+		printf("%s", get_next_line(fd));
+		sleep(1);
+	}		
 	return (0);
 }
-GNL should return line read, or NULL if nothing to read or error.
-Line should include \n unless EOF
-undefined behaviour if file being read changed before EOF, and if binary file
-*/

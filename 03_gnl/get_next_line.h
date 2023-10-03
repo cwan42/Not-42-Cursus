@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:46:27 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/02 11:54:27 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/03 10:19:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
-int		ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
-char	ft_strlcpy(char *dst, const char *src, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_clearbuf(char *bufstr);
 char	*ft_printline(char *bufstr);
