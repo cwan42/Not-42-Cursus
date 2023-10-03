@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/03 12:11:00 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/03 12:55:07 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_clearbuf(char *bufstr)
 		bufstr = NULL;
 		return (NULL);
 	}
-	toclear ++;
+	toclear++;
 	len = ft_strlen(toclear);
 	remainstr = malloc(sizeof(char) * (len));
 	if (!remainstr)
@@ -33,6 +33,7 @@ char	*ft_clearbuf(char *bufstr)
 	ft_strlcpy(remainstr, toclear, len + 1);
 	free(bufstr);
 	bufstr = NULL;
+	free(remainstr);
 	return (remainstr);
 }
 
@@ -55,7 +56,7 @@ char	*ft_printline(char *bufstr)
 	return (nextline);
 }
 
-char	*ft_readbuffer(int fd, char *bufstr)
+char	*ft_readbuffer(int fd, char *bufferstr)
 {
 	char	*buffer;
 	int		bytesread;
@@ -64,43 +65,41 @@ char	*ft_readbuffer(int fd, char *bufstr)
 	if (!buffer)
 		return (NULL);
 	bytesread = 1;
-	while (!ft_strchr(bufstr, '\n') && bytesread != 0)
+	while (!ft_strchr(bufferstr, '\n') && bytesread > 0)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread == -1)
 		{
-			free(bufstr);
-			bufstr = NULL;
-			free (buffer);
+			free(bufferstr);
+			bufferstr = NULL;
+			free(buffer);
 			return (NULL);
 		}
-		buffer[bytesread] = '\0';
-		bufstr = ft_strjoin(bufstr, buffer);
+		if (bytesread > 0)
+		{
+			buffer[bytesread] = '\0';
+			bufferstr = ft_strjoin(bufferstr, buffer);
+		}
 	}
 	free(buffer);
-	return (bufstr);
+	return (bufferstr);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*bufstr = NULL;
+	static char	*bufferstr = NULL;
 	char		*nextline;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!bufstr)
-	{
-		bufstr = malloc(1);
-		bufstr[0] = '\0';
-	}
-	bufstr = ft_readbuffer(fd, bufstr);
-	if (!bufstr)
+	bufferstr = ft_readbuffer(fd, bufferstr);
+	if (!bufferstr)
 		return (NULL);
-	nextline = ft_printline(bufstr);
-	bufstr = ft_clearbuf(bufstr);
+	nextline = ft_printline(bufferstr);
+	ft_clearbuf(bufferstr);
 	return (nextline);
 }
-
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -117,3 +116,4 @@ int	main(int argc, char *argv[])
 	}		
 	return (0);
 }
+*/
