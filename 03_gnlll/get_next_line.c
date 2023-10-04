@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/03 17:28:34 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/04 14:35:47 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,31 @@
 
 #include <stdio.h>
 #include <fcntl.h>
+
+void	t_clearlist(t_list **list)
+{
+}
+
+void	t_bufftoline(t_list **list, char *buffer)
+{
+	t_list	*newnode;
+	t_list	*lastnode;
+
+	if (!*list)
+		return ;
+	while ((*list)->next)
+		*list = (*list)->next;
+	lastnode = *list;
+	newnode = malloc(sizeof(t_list));
+	if (!newnode)
+		return ;
+	if (!lastnode)
+		*list = newnode;
+	else
+		lastnode->next = newnode;
+	newnode->content = buffer;
+	newnode->next = NULL;
+}
 
 void	t_loadlist(t_list **list, int fd)
 {
@@ -32,7 +57,7 @@ void	t_loadlist(t_list **list, int fd)
 			return ;
 		}
 		buffer[bytesread] = '\0';
-		APPEND!
+		t_bufftoline(list, buffer);
 	}
 }
 
@@ -46,7 +71,10 @@ char	*get_next_line(int fd)
 	t_loadlist(&list, fd);
 	if (!list)
 		return (NULL);
-	nextline = 
+	nextline = malloc(ft_strlen(list->content) + 1);
+	ft_strlcpy(nextline, list->content, ft_strlen(nextline));
+	t_clearlist(&list);
+	return (nextline);
 }
 
 int	main(int argc, char *argv[])
@@ -62,3 +90,4 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
+
