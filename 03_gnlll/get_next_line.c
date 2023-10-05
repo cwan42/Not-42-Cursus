@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/04 14:35:47 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/05 12:41:18 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,26 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-void	t_clearlist(t_list **list)
+void	t_cleanlist(t_list **list)
 {
+	t_list	*lastnode;
+	t_list	*cleannode;
+	int		i;
+	int		j;
+	char		*buff;
+
+	buff = malloc(BUFFERSIZE + 1);
+	cleannode = malloc (sizeof(t_list));
+	if (!buff || !cleannode)
+		return ;
+	lastnode = FINDLASTNODE 
+
+	i = 0;
+	j = 0;
+	while (lastnode->content[i] != '\0' && lastenode->content[i] != '\n')
+		i++;
+	WIP
+	CLEAR ALL NODES, set LAST TO HEAD
 }
 
 void	t_bufftoline(t_list **list, char *buffer)
@@ -40,6 +58,26 @@ void	t_bufftoline(t_list **list, char *buffer)
 	newnode->next = NULL;
 }
 
+int	t_findnewline(t_list *list)
+{
+	int	i;
+
+	if (!list)
+		return (0);
+	while (list)
+	{
+		i = 0;
+		while (list->content[i] && i < BUFFER_SIZE)
+		{
+			if (list->content[i] == '\n')
+				return (1);
+			i++;
+		}
+		list = list->next;
+	}
+	return (0);
+}
+
 void	t_loadlist(t_list **list, int fd)
 {
 	int		bytesread;
@@ -47,7 +85,7 @@ void	t_loadlist(t_list **list, int fd)
 
 	while (!t_findnewline(*list))
 	{
-		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
 			return ;
 		bytesread = read(fd, buffer, BUFFER_SIZE);
@@ -66,17 +104,18 @@ char	*get_next_line(int fd)
 	static t_list	*list = NULL;
 	char			*nextline;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
+//|| read(fd, &nextline, 0) < 0)
 		return (NULL);
 	t_loadlist(&list, fd);
 	if (!list)
 		return (NULL);
-	nextline = malloc(ft_strlen(list->content) + 1);
+	nextline = t_getline(list);
 	ft_strlcpy(nextline, list->content, ft_strlen(nextline));
-	t_clearlist(&list);
+	t_cleanlist(&list);
 	return (nextline);
 }
-
+/*
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -90,4 +129,4 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-
+*/

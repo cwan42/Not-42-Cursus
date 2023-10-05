@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:18:40 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/03 17:19:59 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/05 12:20:42 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-int	t_findnewline(t_list *list)
-{
-	int	i;
-
-	if (!list)
-		return (0);
-	while (list)
-	{
-		i = 0;
-		while (list->content[i] && i < BUFFER_SIZE)
-		{
-			if (list->content[i] == '\n')
-				return (1);
-			i++;
-		}
-		list = list->next;
-	}
-	return (0);
 }
 
 void	t_freebuffer(t_list *list)
@@ -73,15 +53,42 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+int	lentonewline(t_list *list)
 {
-	if (!str)
+	int	i;
+	int	len;
+
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->content[i])
+		{
+			if (list->content[i] != '\n')
+			{
+				i++;
+				len++;
+			}
+			len++;
+			return (len);
+		}
+		list = list->next;
+	}
+	return (len);
+}
+
+char	t_getline(t_list *list)
+{
+	int		len;
+	char	*nextline;
+
+	len = t_lentonewline(list);
+	nextline = malloc(len + 1);
+	if (!nextline)
 		return (NULL);
-	while (*str && (*str != (char)c))
-		str++;
-	if (*str == (char)c)
-		return ((char *)str);
-	return (NULL);
+	ft_strlcpy(list, nextline, len + 1);
+	nextline = '\0';
+	return (nextline);
 }
 
 char	*ft_strjoin(const char *s1, const char *s2)
