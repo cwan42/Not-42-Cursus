@@ -1,0 +1,15 @@
+ATOI - Only needs to process one - or + sign correctly.
+First while loop iterates through tab, carriage return etc, spaces.
+if conditions for - to set -, and to iterate if one + or -
+
+ITOA - malloc char * intlen
+iterates in reverse order, i.e. \0, i-- while (n2 % 10) + '0', n2 /= 10;
+
+calloc = num of array * size, set to zero (bzero)
+
+For mem fns with const void inputs, declare and initialize to const unsigned chars for processing, then cast back to (void *) for return if applicable. e.g. memchr
+
+Split(const char *s, char c) - malloc arrarr for no. of words + 1, substr by arrarr[i], returns arrarr. Uses wordlen to measure length of each word, wordcount to count no. of words.
+i to count, s += ft_wordlen to skip length of word when counting words/splitting into substrings.
+
+
