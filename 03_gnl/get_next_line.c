@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/03 12:55:07 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/10 18:38:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ char	*ft_clearbuf(char *bufstr)
 	}
 	toclear++;
 	len = ft_strlen(toclear);
-	remainstr = malloc(sizeof(char) * (len));
+	remainstr = malloc(sizeof(char) * (len + 1));
 	if (!remainstr)
 		return (NULL);
 	ft_strlcpy(remainstr, toclear, len + 1);
 	free(bufstr);
 	bufstr = NULL;
-	free(remainstr);
 	return (remainstr);
 }
 
@@ -43,7 +42,7 @@ char	*ft_printline(char *bufstr)
 	int		i;
 
 	i = 0;
-	if (!*bufstr)
+	if (!bufstr[0])
 		return (NULL);
 	while (bufstr[i] && bufstr[i] != '\n')
 		i++;
@@ -65,7 +64,7 @@ char	*ft_readbuffer(int fd, char *bufferstr)
 	if (!buffer)
 		return (NULL);
 	bytesread = 1;
-	while (!ft_strchr(bufferstr, '\n') && bytesread > 0)
+	while (!ft_strchr(bufferstr, '\n') && bytesread != 0)
 	{
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (bytesread == -1)
@@ -75,11 +74,8 @@ char	*ft_readbuffer(int fd, char *bufferstr)
 			free(buffer);
 			return (NULL);
 		}
-		if (bytesread > 0)
-		{
-			buffer[bytesread] = '\0';
-			bufferstr = ft_strjoin(bufferstr, buffer);
-		}
+		buffer[bytesread] = '\0';
+		bufferstr = ft_strjoin(bufferstr, buffer);
 	}
 	free(buffer);
 	return (bufferstr);
@@ -92,28 +88,31 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
+	if (!bufferstr)
+	{
+		bufferstr = malloc(1);
+		bufferstr[0] = '\0';
+	}
 	bufferstr = ft_readbuffer(fd, bufferstr);
 	if (!bufferstr)
 		return (NULL);
 	nextline = ft_printline(bufferstr);
-	ft_clearbuf(bufferstr);
+	bufferstr = ft_clearbuf(bufferstr);
 	return (nextline);
 }
-/*
+
 #include <stdio.h>
 #include <fcntl.h>
 
 int	main(int argc, char *argv[])
 {
 	int		fd;
-	char	*line;
 	
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd) != NULL)
+	while (get_next_line(fd) != NULL && argc == 2)
 	{
 		printf("%s", get_next_line(fd));
 		sleep(1);
 	}		
 	return (0);
 }
-*/

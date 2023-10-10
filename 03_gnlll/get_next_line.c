@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/05 12:41:18 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/10 18:39:49 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	t_cleanlist(t_list **list)
 	int		j;
 	char		*buff;
 
-	buff = malloc(BUFFERSIZE + 1);
+	buff = malloc(BUFFER_SIZE + 1);
 	cleannode = malloc (sizeof(t_list));
 	if (!buff || !cleannode)
 		return ;
@@ -122,7 +122,7 @@ int	main(int argc, char *argv[])
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd) != NULL)
+	while (get_next_line(fd) != NULL && argc == 2)
 	{
 		printf("%s", get_next_line(fd));
 		sleep(1);
