@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:42:57 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/03 11:56:16 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/11 10:03:09 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ char	*ft_strchr(const char *str, int c)
 {
 	if (!str)
 		return (NULL);
-	while (*str && (*str != (char)c))
+	while (*str)
+	{
+		if (*str == (unsigned char)c)
+			return ((char *)str);
 		str++;
-	if ((*str) == (char)c)
-		return ((char *)str);
+	}
 	return (NULL);
 }
 
@@ -38,12 +40,13 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src[i] && (i < (size - 1)))
+	if (size > 0)
 	{
-		dst[i] = src[i];
-		i++;
+		while (i < size - 1 && src[i] != '\0')
+		{
+			dst[i] = src[i];
+			i++;
+		}
 	}
 	dst[i] = '\0';
 	return (i);
@@ -52,27 +55,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
-	int		i;
-	int		j;
 
 	if (!s1 || !s2)
 		return (NULL);
-	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!result)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		result[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		result[i + j] = s2[j];
-		j++;
-	}
-	result[i + j] = '\0';
+	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(result + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s1);
+	s1 = NULL;
 	return (result);
 }
 //strjoin doesn't have free if !result, calling fn needs to have safety check

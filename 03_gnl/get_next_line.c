@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/10 18:38:14 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/11 10:17:25 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*ft_clearbuf(char *bufstr)
 	if (!toclear)
 	{
 		free(bufstr);
-		bufstr = NULL;
 		return (NULL);
 	}
 	toclear++;
@@ -70,7 +69,6 @@ char	*ft_readbuffer(int fd, char *bufferstr)
 		if (bytesread == -1)
 		{
 			free(bufferstr);
-			bufferstr = NULL;
 			free(buffer);
 			return (NULL);
 		}
@@ -83,24 +81,24 @@ char	*ft_readbuffer(int fd, char *bufferstr)
 
 char	*get_next_line(int fd)
 {
-	static char	*bufferstr = NULL;
+	static char	*bufferstr[1024];
 	char		*nextline;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!bufferstr)
+	if (!bufferstr[fd])
 	{
-		bufferstr = malloc(1);
-		bufferstr[0] = '\0';
+		bufferstr[fd] = malloc(1);
+		bufferstr[fd][0] = '\0';
 	}
-	bufferstr = ft_readbuffer(fd, bufferstr);
-	if (!bufferstr)
+	bufferstr[fd] = ft_readbuffer(fd, bufferstr[fd]);
+	if (!bufferstr[fd])
 		return (NULL);
-	nextline = ft_printline(bufferstr);
-	bufferstr = ft_clearbuf(bufferstr);
+	nextline = ft_printline(bufferstr[fd]);
+	bufferstr[fd] = ft_clearbuf(bufferstr[fd]);
 	return (nextline);
 }
-
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -116,3 +114,4 @@ int	main(int argc, char *argv[])
 	}		
 	return (0);
 }
+*/
