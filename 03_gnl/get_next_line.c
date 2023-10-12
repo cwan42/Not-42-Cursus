@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/11 10:17:25 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/11 12:19:19 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,21 @@ char	*get_next_line(int fd)
 #include <stdio.h>
 #include <fcntl.h>
 
-int	main(int argc, char *argv[])
+void	main(int argc, char *argv[])
 {
 	int		fd;
-	
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd) != NULL && argc == 2)
+	char	*line;
+
+	if (argc == 2)
 	{
-		printf("%s", get_next_line(fd));
-		sleep(1);
-	}		
-	return (0);
-}
-*/
+		fd = open(argv[1], O_RDONLY);
+		while ((line = get_next_line(fd)) != NULL && argc == 2)
+			printf("%s", line);
+	}
+	else if (argc == 1)
+	{
+		while ((line = get_next_line(STDIN_FILENO)) != NULL)
+			printf("%s", line);
+			free(line);
+	}
+}*/

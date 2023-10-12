@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/10 18:39:49 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/11 11:35:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,18 @@ char	*get_next_line(int fd)
 	t_cleanlist(&list);
 	return (nextline);
 }
-/*
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd) != NULL && argc == 2)
+	while ((line = get_next_line(fd)) != NULL && argc == 2)
 	{
-		printf("%s", get_next_line(fd));
+		printf("%s", line);
 		sleep(1);
 	}
 	return (0);
 }
-*/
+

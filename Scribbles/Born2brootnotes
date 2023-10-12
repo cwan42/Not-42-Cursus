@@ -1,0 +1,47 @@
+Partioning
+(Only 4 pri per hard drive, or 3 pri and 1 extended) - for MBR Master Boot Record
+GUID partition Table (GPT) supports up to 128 partitions.
+
+Logical - occupies portion or whole of pri/ext partition. Formatted with specific type of file system (e.g ext4), assigned a unit for OS to recognize.
+
+sha1sum - Secure Hash Algorithm 1 produces fixed 160-bit hash value (hex string) UID for contents of a file.
+	sha1sum <name.vdi>
+
+Useful commands and format
+getent - retrieve entries from Name Service Switch (NSS) databases
+	getent group sudo
+sudo adduser <login> - self-explanatory
+sudo addgroup <groupname> - self-explanatory
+apt-get 
+sudo apt install vim
+sudo find /filedir -name filename
+
+sudo hostnamect1 set-hostname <hostname>
+OR sudo vim /eetc/hostname, /etc/hosts
+
+/etc/ssh/sshd_config
+/etc/ssh/ssh_config
+/etc/sudoers.d/sudo_config
+/var/log/sudo
+/etc/login.defs
+
+sudo apt install libpam-pwquality
+/etc/pam.d/common-password
+
+/etc/sudoers for list of superusers
+
+SSH
+sudo apt install openssh-server
+sudo service ssh status
+sudo service ssh restart
+sudo service ssh status
+
+UFW
+sudo apt install ufw
+sudo ufw enable
+sudo ufw allow 4242
+
+crontab
+apt-get install net-tools , installs netstat tools
+/usr/local/bin ~ monitoring.sh
+chmod 777 monitoring.sh

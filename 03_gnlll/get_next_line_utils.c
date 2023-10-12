@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:18:40 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/05 12:20:42 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/11 11:31:48 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src[i] && (i < (size - 1)))
+	if (size > 0)
+	{
+		while (i < size - 1 && src[i] != '\0')
 	{
 		dst[i] = src[i];
 		i++;
@@ -102,18 +102,9 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!result)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		result[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		result[i + j] = s2[j];
-		j++;
-	}
-	result[i + j] = '\0';
+	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(result + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s1);
+	s1 = NULL;
 	return (result);
 }
