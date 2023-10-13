@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:18:40 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/11 11:31:48 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/14 05:25:59 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size > 0)
 	{
 		while (i < size - 1 && src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
+		{
+			dst[i] = src[i];
+			i++;
+		}
 	}
 	dst[i] = '\0';
 	return (i);
 }
 
-int	lentonewline(t_list *list)
+int	t_lentonewline(t_list *list)
 {
 	int	i;
 	int	len;
@@ -77,7 +78,7 @@ int	lentonewline(t_list *list)
 	return (len);
 }
 
-char	t_getline(t_list *list)
+char	*t_getline(t_list *list)
 {
 	int		len;
 	char	*nextline;
@@ -86,11 +87,11 @@ char	t_getline(t_list *list)
 	nextline = malloc(len + 1);
 	if (!nextline)
 		return (NULL);
-	ft_strlcpy(list, nextline, len + 1);
-	nextline = '\0';
+	ft_strlcpy(list->content, nextline, len + 1);
+	nextline[len] = '\0';
 	return (nextline);
 }
-
+/*
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*result;
@@ -108,3 +109,4 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	s1 = NULL;
 	return (result);
 }
+*/

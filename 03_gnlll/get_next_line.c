@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/11 11:35:16 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/14 05:19:18 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,24 @@ void	t_cleanlist(t_list **list)
 	t_list	*cleannode;
 	int		i;
 	int		j;
-	char		*buff;
+	char	*buff;
 
 	buff = malloc(BUFFER_SIZE + 1);
 	cleannode = malloc (sizeof(t_list));
 	if (!buff || !cleannode)
 		return ;
-	lastnode = FINDLASTNODE 
-
+	while ((*list)->next)
+		*list = (*list)->next;
+	lastnode = *list;
 	i = 0;
 	j = 0;
-	while (lastnode->content[i] != '\0' && lastenode->content[i] != '\n')
+	while (lastnode->content[i] != '\0' && lastnode->content[i] != '\n')
 		i++;
-	WIP
-	CLEAR ALL NODES, set LAST TO HEAD
+	while (lastnode->content[i] && lastnode->content[++i])
+		buff[j++] = lastnode->content[i];
+	buff[j] = '\0';
+	cleannode->content = buff;
+	cleannode->next = NULL;
 }
 
 void	t_bufftoline(t_list **list, char *buffer)
@@ -105,17 +109,15 @@ char	*get_next_line(int fd)
 	char			*nextline;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
-//|| read(fd, &nextline, 0) < 0)
 		return (NULL);
 	t_loadlist(&list, fd);
 	if (!list)
 		return (NULL);
 	nextline = t_getline(list);
-	ft_strlcpy(nextline, list->content, ft_strlen(nextline));
 	t_cleanlist(&list);
 	return (nextline);
 }
-
+/*
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -129,4 +131,4 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-
+*/

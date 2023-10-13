@@ -16,14 +16,20 @@ apt-get
 sudo apt install vim
 sudo find /filedir -name filename
 
+ss or netstat -tulpn <port num> (t tcp, u udp, l listening socket, p process name, n print as dotted quad ip add)
+
 sudo hostnamect1 set-hostname <hostname>
 OR sudo vim /eetc/hostname, /etc/hosts
+
+lsblk - shows info abt all block devices (HDDs, SSDs, memory etc)
 
 /etc/ssh/sshd_config
 /etc/ssh/ssh_config
 /etc/sudoers.d/sudo_config
 /var/log/sudo
 /etc/login.defs
+
+/var/log/sudo-io for zcat OUTPUTS
 
 sudo apt install libpam-pwquality
 /etc/pam.d/common-password
@@ -36,6 +42,8 @@ sudo service ssh status
 sudo service ssh restart
 sudo service ssh status
 
+ssh username@localhost -p portnum (i.e. cwan 2222)
+
 UFW
 sudo apt install ufw
 sudo ufw enable
@@ -45,3 +53,10 @@ crontab
 apt-get install net-tools , installs netstat tools
 /usr/local/bin ~ monitoring.sh
 chmod 777 monitoring.sh
+sudo service OR systemctl
+sudo service cron start/stop
+sudo systemctl enable/disable cron
+sudo systemctl status cron
+
+SAVED COMMANDS IN CASE OF RESTORE
+top -bn 1 | awk 'NR > 7' | awk '{sum += $9} END {print sum}'
