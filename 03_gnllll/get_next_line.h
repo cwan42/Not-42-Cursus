@@ -30,6 +30,9 @@ size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *str, int c);
 
+char	*t_printline(t_list *list);
+void	t_addtolist(t_list **list, char *buffer);
+int		t_loadnodes(t_list **list, int fd);
 char	*get_next_line(int fd);
 
 #endif
