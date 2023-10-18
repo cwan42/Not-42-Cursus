@@ -26,9 +26,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *str, int c);
+int		tlist_strlen(t_list *list);
 
 char	*t_printline(t_list *list);
 void	t_addtolist(t_list **list, char *buffer);

@@ -12,33 +12,6 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (size > 0)
-	{
-		while (i < size - 1 && src[i] != '\0')
-		{
-			dst[i] = src[i];
-			i++;
-		}
-	}
-	dst[i] = '\0';
-	return (i);
-}
-
 char	*ft_strchr(const char *str, int c)
 {
 	if (!str)
@@ -50,4 +23,27 @@ char	*ft_strchr(const char *str, int c)
 		str++;
 	}
 	return (NULL);
+}
+
+int	tlist_strlen(t_list *list)
+{
+	int	i;
+	int	len;
+
+	if (!list)
+		return (0);
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->content[i])
+		{
+			if (list->content[i] == '\n')
+				return (len + i + 1);
+			i++;
+		}
+		len += i;
+		list = list->next;
+	}
+	return (len);
 }
