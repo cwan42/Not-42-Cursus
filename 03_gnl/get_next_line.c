@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/13 18:58:50 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/19 10:26:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ char	*get_next_line(int fd)
 	bufferstr[fd] = ft_clearbuf(bufferstr[fd]);
 	return (nextline);
 }
-/*
+
 #include <stdio.h>
 #include <fcntl.h>
 
-void	main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	int		fd;
 	char	*line;
@@ -117,7 +117,6 @@ void	main(int argc, char *argv[])
 	{
 		while ((line = get_next_line(STDIN_FILENO)) != NULL)
 			printf("%s", line);
-			free(line);
 	}
 }
-*/
+
