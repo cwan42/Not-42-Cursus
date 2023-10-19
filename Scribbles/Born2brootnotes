@@ -19,7 +19,7 @@ sudo find /filedir -name filename
 ss or netstat -tulpn <port num> (t tcp, u udp, l listening socket, p process name, n print as dotted quad ip add)
 
 sudo hostnamect1 set-hostname <hostname>
-OR sudo vim /eetc/hostname, /etc/hosts
+OR sudo vim /etc/hostname, /etc/hosts
 
 lsblk - shows info abt all block devices (HDDs, SSDs, memory etc)
 
@@ -58,5 +58,5 @@ sudo service cron start/stop
 sudo systemctl enable/disable cron
 sudo systemctl status cron
 
-SAVED COMMANDS IN CASE OF RESTORE
-top -bn 1 | awk 'NR > 7' | awk '{sum += $9} END {print sum}'
+systemctl status ntp
+ntpq -pqs
