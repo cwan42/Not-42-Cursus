@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/19 15:54:02 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/20 10:57:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,41 +51,14 @@ char	*get_line(t_list *list)
 	copystr(list, nextstr);
 	return (nextstr);
 }
-/*
-char	*t_printline(t_list *list)
-{
-	char	*line;
-	int		i;
-	int		k;
 
-	line = malloc((tlist_strlen(list)) + 1);
-	if (!line)
-		return (NULL);
-	k = 0;
-	while (list)
-	{
-		i = 0;
-		while (list->content[i])
-		{
-			if (list->content[i] == '\n')
-			{
-				line[k++] = '\n';
-				line[k] = '\0';
-				return (line);
-			}
-			line[k++] = list->content[i++];
-		}
-		list = list->next;
-	}
-	line[k] = '\0';
-	return (line);
-}
-*/
 void	t_addtolist(t_list **list, char *buffer)
 {
 	t_list	*node;
 	t_list	*lastnode;
 
+	lastnode = *list;
+	while (lastnode->next)
 	lastnode = findlastnode(*list);
 	node = malloc(sizeof(t_list));
 	if (!node)
@@ -98,49 +71,27 @@ void	t_addtolist(t_list **list, char *buffer)
 	node->next = NULL;
 }
 
-void	createlist(t_list **list, int fd)
-{
-	int		bytesread;
-	char	*buff;
-
-	while (!foundnewline(*list))
-	{
-		buff = malloc(BUFFER_SIZE + 1);
-		if (!buff)
-			return ;
-		bytesread = read(fd, buff, BUFFER_SIZE);
-		if (!bytesread)
-		{
-			free(buff);
-			return ;
-		}
-		buff[bytesread] = '\0';
-		t_addtolist(list, buff);
-	}
-}
-/*
-int	t_loadnodes(t_list **list, int fd)
+int	t_loadlist(t_list **list, int fd)
 {
 	int		bytesread;
 	char	*buffer;
 
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (0);
-	while (read(fd, buffer, BUFFER_SIZE) > 0)
+	while (!foundnewline(*list))
 	{
-		bytesread = 0;
-		while (!buffer[bytesread])
-			bytesread++;
+		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buffer)
+			return (0);
+		bytesread = read(fd, buffer, BUFFER_SIZE);
+		if (!bytesread)
+		{
+			free(buffer);
+			return (0);
+		}
 		buffer[bytesread] = '\0';
 		t_addtolist(list, buffer);
-		if (ft_strchr(buffer, '\n'))
-			return (0);
 	}
-	free(buffer);
 	return (1);
 }
-*/
 
 char	*get_next_line(int fd)
 {
@@ -149,7 +100,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0) < 0)
 		return (NULL);
-	createlist(&buffer, fd);
+	t_loadlist(&buffer, fd);
 	if (!buffer)
 		return (NULL);
 	nextline = get_line(buffer);

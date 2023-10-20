@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:31:39 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/02 17:09:56 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/20 12:30:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(void)
 		nbr = atoi(str);
 		ft_printf("Char:%c\tString:%s\n", *str, str);
 		printf("Real:%c\tReal: %s\n", *str, str);
+	//	printf("Number of characters returned: %d, %d\n", i, i2);
 		ft_printf("Pointer\t%p", str);
 		printf(" : %p\n", str);
 		ft_printf("Decimal\t%d", nbr);

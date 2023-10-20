@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 07:36:27 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/19 11:36:59 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/20 10:29:56 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	copystr(t_list *list, char *str)
 	int	k;
 
 	if (!list)
-		return;
+		return ;
 	k = 0;
 	while (list)
 	{
@@ -65,19 +65,6 @@ void	copystr(t_list *list, char *str)
 		list = list->next;
 	}
 	str[k] = '\0';
-}
-
-char	*ft_strchr(const char *str, int c)
-{
-	if (!str)
-		return (NULL);
-	while (*str)
-	{
-		if (*str == (unsigned char)c)
-			return ((char *)str);
-		str++;
-	}
-	return (NULL);
 }
 
 int	tlist_strlen(t_list *list)

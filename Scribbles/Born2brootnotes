@@ -60,3 +60,6 @@ sudo systemctl status cron
 
 systemctl status ntp
 ntpq -pqs
+
+RANDOM EXTRA STUFF
+du -h --max-depth=1 | sort -rh | head -n 10 ~ for check disk usage
