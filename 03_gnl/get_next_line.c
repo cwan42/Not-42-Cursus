@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 08:30:05 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/19 10:26:34 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/23 17:32:10 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,24 @@ char	*ft_readbuffer(int fd, char *bufferstr)
 
 char	*get_next_line(int fd)
 {
-	static char	*bufferstr[1024];
+	static char	*buffer[1024];
 	char		*nextline;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!bufferstr[fd])
+	if (!buffer[fd])
 	{
-		bufferstr[fd] = malloc(1);
-		bufferstr[fd][0] = '\0';
+		buffer[fd] = malloc(1);
+		buffer[fd][0] = '\0';
 	}
-	bufferstr[fd] = ft_readbuffer(fd, bufferstr[fd]);
-	if (!bufferstr[fd])
+	buffer[fd] = ft_readbuffer(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	nextline = ft_printline(bufferstr[fd]);
-	bufferstr[fd] = ft_clearbuf(bufferstr[fd]);
+	nextline = ft_printline(buffer[fd]);
+	buffer[fd] = ft_clearbuf(buffer[fd]);
 	return (nextline);
 }
-
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -119,4 +119,4 @@ int	main(int argc, char *argv[])
 			printf("%s", line);
 	}
 }
-
+*/
