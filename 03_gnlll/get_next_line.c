@@ -6,129 +6,124 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:17:59 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/14 05:19:18 by cwan             ###   ########.fr       */
+/*   Updated: 2023/10/20 10:57:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <stdio.h>
-#include <fcntl.h>
-
-void	t_cleanlist(t_list **list)
+void	t_cleanarray(t_list **list)
 {
 	t_list	*lastnode;
 	t_list	*cleannode;
 	int		i;
-	int		j;
-	char	*buff;
+	int		k;
+	char	*buffer;
 
-	buff = malloc(BUFFER_SIZE + 1);
-	cleannode = malloc (sizeof(t_list));
-	if (!buff || !cleannode)
+	buffer = malloc(BUFFER_SIZE + 1);
+	cleannode = malloc(sizeof(t_list));
+	if (!buffer || !cleannode)
 		return ;
-	while ((*list)->next)
-		*list = (*list)->next;
-	lastnode = *list;
+	lastnode = findlastnode(*list);
 	i = 0;
-	j = 0;
-	while (lastnode->content[i] != '\0' && lastnode->content[i] != '\n')
-		i++;
+	k = 0;
+	while (lastnode->content[i] && lastnode->content[i] != '\n')
+		++i;
 	while (lastnode->content[i] && lastnode->content[++i])
-		buff[j++] = lastnode->content[i];
-	buff[j] = '\0';
-	cleannode->content = buff;
+		buffer[k++] = lastnode->content[i];
+	buffer[k] = '\0';
+	cleannode->content = buffer;
 	cleannode->next = NULL;
+	dealloc(list, cleannode, buffer);
 }
 
-void	t_bufftoline(t_list **list, char *buffer)
+char	*get_line(t_list *list)
 {
-	t_list	*newnode;
-	t_list	*lastnode;
-
-	if (!*list)
-		return ;
-	while ((*list)->next)
-		*list = (*list)->next;
-	lastnode = *list;
-	newnode = malloc(sizeof(t_list));
-	if (!newnode)
-		return ;
-	if (!lastnode)
-		*list = newnode;
-	else
-		lastnode->next = newnode;
-	newnode->content = buffer;
-	newnode->next = NULL;
-}
-
-int	t_findnewline(t_list *list)
-{
-	int	i;
+	int		strlen;
+	char	*nextstr;
 
 	if (!list)
-		return (0);
-	while (list)
-	{
-		i = 0;
-		while (list->content[i] && i < BUFFER_SIZE)
-		{
-			if (list->content[i] == '\n')
-				return (1);
-			i++;
-		}
-		list = list->next;
-	}
-	return (0);
+		return (NULL);
+	strlen = tlist_strlen(list);
+	nextstr = malloc(strlen + 1);
+	if (!nextstr)
+		return (NULL);
+	copystr(list, nextstr);
+	return (nextstr);
 }
 
-void	t_loadlist(t_list **list, int fd)
+void	t_addtolist(t_list **list, char *buffer)
+{
+	t_list	*node;
+	t_list	*lastnode;
+
+	lastnode = findlastnode(*list);
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return ;
+	if (!lastnode)
+		*list = node;
+	else
+		lastnode->next = node;
+	node->content = buffer;
+	node->next = NULL;
+}
+
+int	t_loadlist(t_list **list, int fd)
 {
 	int		bytesread;
 	char	*buffer;
 
-	while (!t_findnewline(*list))
+	while (!foundnewline(*list))
 	{
-		buffer = malloc(BUFFER_SIZE + 1);
+		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
-			return ;
+			return (0);
 		bytesread = read(fd, buffer, BUFFER_SIZE);
 		if (!bytesread)
 		{
 			free(buffer);
-			return ;
+			return (0);
 		}
 		buffer[bytesread] = '\0';
-		t_bufftoline(list, buffer);
+		t_addtolist(list, buffer);
 	}
+	return (1);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list = NULL;
+	static t_list	*buffer = NULL;
 	char			*nextline;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0) < 0)
 		return (NULL);
-	t_loadlist(&list, fd);
-	if (!list)
+	t_loadlist(&buffer, fd);
+	if (!buffer)
 		return (NULL);
-	nextline = t_getline(list);
-	t_cleanlist(&list);
+	nextline = get_line(buffer);
+	t_cleanarray(&buffer);
 	return (nextline);
 }
 /*
+#include <stdio.h>
+#include <fcntl.h>
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
 	char	*line;
 
-	fd = open(argv[1], O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL && argc == 2)
+	if (argc == 2)
 	{
-		printf("%s", line);
-		sleep(1);
+		fd = open(argv[1], O_RDONLY);
+		while (((line = get_next_line(fd)) != NULL) && argc == 2)
+			printf("%s", line);
 	}
-	return (0);
+	else if (argc == 1)
+	{
+		while ((line = get_next_line(STDIN_FILENO)) != NULL)
+			printf("%s", line);
+	}
 }
 */
