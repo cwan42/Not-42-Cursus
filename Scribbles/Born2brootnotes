@@ -59,6 +59,7 @@ sudo systemctl enable/disable cron
 sudo systemctl status cron
 
 systemctl status ntp
+su > systemctl start ntp
 ntpq -pqs
 
 RANDOM EXTRA STUFF
