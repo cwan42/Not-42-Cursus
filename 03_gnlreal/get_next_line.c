@@ -25,10 +25,16 @@ void	t_loadnode(int fd, t_list **node)
 
 	while (!ft_strchr((*node)->content, '\n'))
 	{
+		*node = malloc(BUFFER_SIZE + 1);
 		bytesread = read(fd, &buffer, BUFFER_SIZE);
+		if (bytesread <= 0)
+			break;
 		(*node)->content = malloc(bytesread + 1);
-		(*node)->content = buffer; -- need to copy and terminate
+		if ((*node)->content == NULL)
+			break;
+		(*node)->content = buffer;
 		(*node)->content[bytesread + 1] = '\0';
+		*node = (*node)->next;
 	}	
 	ADD TO LIST
 		UNTIL \n
@@ -42,5 +48,5 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0) < 0)
 		return (NULL);
-	t_loadnode(fd, &node)
+	t_loadnode(fd, &node);
 }
