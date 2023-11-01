@@ -27,6 +27,12 @@ typedef struct s_list
 }					t_list;
 
 char	*ft_strchr(const char *str, int c);
+void	resetnodes(t_list **node);
+void	dealloc(t_list **list, t_list *cleannode, char *buffer);
 
+void	copynodes(t_list *node, char *line);
+char	*printline(t_list *node);
+void	t_addbynode(char *buffer, t_list **node);
+void	t_loadnode(int fd, t_list **node);
 char	*get_next_line(int fd);
 #endif
