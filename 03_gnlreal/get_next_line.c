@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:14:49 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/27 18:21:12 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/02 16:58:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ void	t_loadnode(int fd, t_list **node)
 	char	*buffer;
 	int		bytesread;
 
-	while (!ft_strchr((*node)->content, '\n'))
+	while (!t_findnewline(*node))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
 			return ;
 		bytesread = read(fd, buffer, BUFFER_SIZE);
-		if (bytesread <= 0 || !*node)
+		if (!bytesread)
 		{
 			free(buffer);
 			return ;
@@ -108,15 +108,34 @@ void	t_loadnode(int fd, t_list **node)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*buffer = NULL;
+	static t_list	*node = NULL;
 	char			*nextline;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &nextline, 0) < 0)
 		return (NULL);
-	t_loadnode(fd, &buffer);
-	if (!buffer)
+	t_loadnode(fd, &node);
+	if (!node)
 		return (NULL);
-	nextline = printline(buffer);
-	resetnodes(&buffer);
+	nextline = printline(node);
+	resetnodes(&node);
 	return (nextline);
 }
+/*
+int	main(int argc, char *argv[])
+{
+	int		fd;
+	char	*line;
+
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		while (((line = get_next_line(fd)) != NULL) && argc == 2)
+			printf("%s", line);
+	}
+	else if (argc == 1)
+	{
+		while ((line = get_next_line(STDIN_FILENO)) != NULL)
+			printf("%s", line);
+	}
+}
+*/

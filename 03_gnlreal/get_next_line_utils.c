@@ -6,23 +6,43 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:38:44 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/27 17:40:25 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/02 15:53:45 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int c)
+int	t_findnewline(t_list *node)
+{
+	int	i;
+
+	if (!node)
+		return (0);
+	while (node)
+	{
+		i = 0;
+		while (node->content[i] && node->content[i] != '\n')
+		{
+			if (node->content[i] == '\n')
+				return (1);
+			i++;
+		}
+		node = node->next;
+	}
+	return (0);
+}
+
+int	ft_strchr(const char *str, int c)
 {
 	if (!str)
-		return (NULL);
+		return (0);
 	while (*str)
 	{
 		if (*str == (unsigned char)c)
-			return ((char *)str);
+			return (1);
 		str++;
 	}
-	return (NULL);
+	return (0);
 }
 
 void	resetnodes(t_list **node)

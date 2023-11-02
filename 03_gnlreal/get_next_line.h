@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:06:03 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/27 17:40:51 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/02 16:58:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 8
 # endif
 
 # include <stdlib.h>
@@ -26,7 +26,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-char	*ft_strchr(const char *str, int c);
+int		t_findnewline(t_list *node);
+int		ft_strchr(const char *str, int c);
 void	resetnodes(t_list **node);
 void	dealloc(t_list **list, t_list *cleannode, char *buffer);
 
