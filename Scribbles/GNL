@@ -13,4 +13,7 @@ Sync and advisory locking: F_SETSIG, F_GETSIG, F_GETOWN_EX
 
 E.G int filedescriptor = open("examplefile.txt, 0_RDONLY | 0_CREAT, 0666);
 
-Read function recalls position in a file, every call advances the current position by number of bytes read. Returns no. of bytes read, 0 if EOF, -1 if error.
+Read function recalls position in a file, every call advances the current position by number of bytes read.
+Returns no. of bytes read, 0 if EOF, -1 if error.
+
+Compile command: cc - Wall -Wextra - Werror -D BUFFER_SIZE=XX x.c x.c
