@@ -1,13 +1,73 @@
+Why OS?
+Rocky - downstream version alt to CentOS, which diverged from RHEL to be CentOS Stream, rolling-release.
+	Binary-compatible with RHEL packages, YUM package manager and RH's subscription service and repo.
+	Drop-in replacement for CentOS, esp for enterprise server env.
+Debian - traditionally open-source, emphasis on stability, has own APT system, and repos. Free and volunteer dev.
+	Used in wide range of apps from desktops to servers.
+
 Partioning
 (Only 4 pri per hard drive, or 3 pri and 1 extended) - for MBR Master Boot Record
 GUID partition Table (GPT) supports up to 128 partitions.
+Logical - occupies portion or whole of pri/ext partition. Formatted with specific type of file system (e.g ext4),
 
-Logical - occupies portion or whole of pri/ext partition. Formatted with specific type of file system (e.g ext4), assigned a unit for OS to recognize.
-
-sha1sum - Secure Hash Algorithm 1 produces fixed 160-bit hash value (hex string) UID for contents of a file.
-	sha1sum <name.vdi>
-
+Types - Root / Core operating system files, top-level direcory
+	/home contains user home directories and user-specific data
+	/tmp used for temporary storage
+	/swap used for virtual memory
+	/var contains variable data, i.e. logs, spool files, temp files
+	/var/log contains system and application log files
+	/srv used for data served by the system, such as websites or FTP files
+	
 Useful commands and format
+AS SUDO systemctl status XXX
+
+SSH
+systemctl status ssh/sshd
+ss or netstat -tulpn <port num> (t tcp, u udp, l listening socket, p process name, n print as dotted quad ip add)
+host terminal> ssh username@localhost -p <port num>
+/etc/ssh/sshd_config
+/etc/ssh/ssh_config
+
+UFW
+systemctl status ufw
+sudo ufw status
+
+HOSTNAME
+sudo hostnamect1 set-hostname <hostname>
+OR sudo vim /etc/hostname, /etc/hosts
+sudo reboot
+
+PASSWORD POLICY
+sudo apt install libpam-pwquality
+/etc/pam.d/common-password
+/etc/login.defs
+passwd
+/etc/sudoers.d/sudo_config - for personalized message
+
+SUDO
+tty -> for path to terminal, will display if tty mode is enabled
+OR ps -p $$ OR w (pts/0 pseudo-terminal slave, tty1 physical console terminal)
+zcat sudo log outputs
+/var/log/sudo/
+/var/log/sudo-io/
+/etc/sudoers OR sudo visudo for secure path
+
+/usr/local/bin/monitoring.sh
+chmod 777 monitoring.sh
+TO STOP
+sudo service cron start/stop
+sudo systemctl enable/disable cron --now
+sudo systemctl status cron
+
+BONUS
+On host terminal: 127.0.0.1:2224 or localhost:2224
+/var/www/wordpress
+/etc/mysql -mariadb
+sudo systemctl status ntp
+sudo service ntp start/stop
+
+USEFUL COMMANDS AND MISC
+sha1sum - Secure Hash Algorithm 1 produces fixed 160-bit hash value (hex string) UID for contents of a file.
 getent - retrieve entries from Name Service Switch (NSS) databases
 	getent group sudo
 sudo adduser <login> - self-explanatory
@@ -16,33 +76,13 @@ apt-get
 sudo apt install vim
 sudo find /filedir -name filename
 
-ss or netstat -tulpn <port num> (t tcp, u udp, l listening socket, p process name, n print as dotted quad ip add)
-
-sudo hostnamect1 set-hostname <hostname>
-OR sudo vim /etc/hostname, /etc/hosts
-
 lsblk - shows info abt all block devices (HDDs, SSDs, memory etc)
-
-/etc/ssh/sshd_config
-/etc/ssh/ssh_config
-/etc/sudoers.d/sudo_config
-/var/log/sudo
-/etc/login.defs
-
-/var/log/sudo-io for zcat OUTPUTS
-
-sudo apt install libpam-pwquality
-/etc/pam.d/common-password
-
-/etc/sudoers for list of superusers
 
 SSH
 sudo apt install openssh-server
 sudo service ssh status
 sudo service ssh restart
 sudo service ssh status
-
-ssh username@localhost -p portnum (i.e. cwan 2222)
 
 UFW
 sudo apt install ufw
@@ -52,7 +92,6 @@ sudo ufw allow 4242
 crontab
 apt-get install net-tools , installs netstat tools
 /usr/local/bin ~ monitoring.sh
-chmod 777 monitoring.sh
 sudo service OR systemctl
 sudo service cron start/stop
 sudo systemctl enable/disable cron
@@ -62,5 +101,33 @@ systemctl status ntp
 su > systemctl start ntp
 ntpq -pqs
 
-RANDOM EXTRA STUFF
 du -h --max-depth=1 | sort -rh | head -n 10 ~ for check disk usage
+
+MONITORING.sh
+#!/bin/bash
+Arc=$(uname -a)
+PhyP=$(grep "physical id" /proc/cpuinfo | uniq | wc -l)
+VirP=$(grep processor /proc/cpuinfo | wc -l)
+MemUsed=$(free -m | awk '$1 == "Mem:" {printf "%d/%dMB (%d%%)", $3, $2, $3/$2*100}')
+DiskUsed=$(df -m | grep "/dev/" | grep -v "tmpfs" | awk '{sum += $3; sum2 += $4} END {printf "%d/%dGb (%d%%)", sum, (sum + sum2)/1024, (sum/(sum + sum2)) * 100}')
+CPUsed=$(top -bn 1 | awk 'NR > 7 {sum += $9} END {print sum}')
+Lastboot=$(uptime -s)
+LVMused=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
+TCPs=$(ss -t -a | grep "ESTAB" | wc -l)
+Users=$(who | wc -l)
+ip=$(ip a | grep "dynamic" | awk '{print $2}' | cut -d / -f 1)
+Mac=$(ip link | grep "link/ether" | awk '{print $2}')
+cmdsudo=$(cat /var/log/sudo/sudo_config | grep COMMAND | wc -l)
+
+wall "	#Architecture: $Arc
+	#CPU physical : $PhyP
+	#vCPU : $VirP
+	#Memory Usage: $MemUsed
+	#Disk Usage: $DiskUsed
+	#CPU load: $CPUsed%
+	#Last boot: $Lastboot
+	#LVM use: $LVMused
+	#Connections TCP : $TCPs ESTABLISHED
+	#User log: $Users
+	#Network: IP $ip ($Mac)
+	#Sudo : $cmdsudo cmd"
