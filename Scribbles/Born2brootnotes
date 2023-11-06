@@ -37,14 +37,21 @@ sudo hostnamect1 set-hostname <hostname>
 OR sudo vim /etc/hostname, /etc/hosts
 sudo reboot
 
+ADDUSER
+getent - retrieve entries from Name Service Switch (NSS) databases e.g getent group sudo
+sudo adduser <login>
+sudo addgroup <groupname>
+sudo adduser <name> <groupname>
+/etc/sudoers.d/sudo_config - for personalized message
+
 PASSWORD POLICY
 sudo apt install libpam-pwquality
 /etc/pam.d/common-password
 /etc/login.defs
 passwd
-/etc/sudoers.d/sudo_config - for personalized message
 
 SUDO
+which sudo OR dpkg -s sudo
 tty -> for path to terminal, will display if tty mode is enabled
 OR ps -p $$ OR w (pts/0 pseudo-terminal slave, tty1 physical console terminal)
 zcat sudo log outputs
@@ -68,10 +75,6 @@ sudo service ntp start/stop
 
 USEFUL COMMANDS AND MISC
 sha1sum - Secure Hash Algorithm 1 produces fixed 160-bit hash value (hex string) UID for contents of a file.
-getent - retrieve entries from Name Service Switch (NSS) databases
-	getent group sudo
-sudo adduser <login> - self-explanatory
-sudo addgroup <groupname> - self-explanatory
 apt-get 
 sudo apt install vim
 sudo find /filedir -name filename
