@@ -65,6 +65,7 @@ TO STOP
 sudo service cron start/stop
 sudo systemctl enable/disable cron --now
 sudo systemctl status cron
+sudo crontab -u root -e
 
 BONUS
 On host terminal: 127.0.0.1:2224 or localhost:2224
@@ -72,6 +73,9 @@ On host terminal: 127.0.0.1:2224 or localhost:2224
 /etc/mysql -mariadb
 sudo systemctl status ntp
 sudo service ntp start/stop
+
+To check if service active
+systemctl is-active <service> OR dpkg -l | grep <service>
 
 USEFUL COMMANDS AND MISC
 sha1sum - Secure Hash Algorithm 1 produces fixed 160-bit hash value (hex string) UID for contents of a file.
