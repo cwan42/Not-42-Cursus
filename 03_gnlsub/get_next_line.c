@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/07 15:20:30 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/07 16:05:22 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	theline = buffer[fd];
 	return (theline);
 }
-/*
+
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -48,4 +48,4 @@ int	main(int ac, char *av[])
 			printf("%s", line);
 	}
 }
-*/
+
