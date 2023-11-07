@@ -20,6 +20,7 @@ Types - Root / Core operating system files, top-level direcory
 	
 Useful commands and format
 AS SUDO systemctl status XXX
+sudo chage -l <username> for PW policy
 
 SSH
 systemctl status ssh/sshd
