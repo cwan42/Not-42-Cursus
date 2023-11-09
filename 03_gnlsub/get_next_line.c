@@ -6,25 +6,91 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/07 16:05:22 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/09 11:32:51 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*cleanup(char *mainstr)
+{
+	char	*toclean;
+	char	*tokeep;
+	size_t	len;
+
+	toclean = ft_strchr(mainstr, '\n');
+	if (!toclean)
+		return (free(mainstr), NULL);
+	toclean++;
+	len = ft_strlen(toclean);
+	tokeep = ft_calloc(len + 1, sizeof(char));
+	if (!tokeep)
+		return (NULL);
+	while (*toclean)
+		*tokeep++ = *toclean++;
+	free(mainstr);
+	mainstr = NULL;
+	return (tokeep);	
+}
+
+char	*nextline(char *mainstr)
+{
+	char	*nextline;
+	int		i;
+	int		j;
+
+	i = 0;
+	if (!mainstr)
+		return (NULL);
+	while (mainstr[i] && mainstr[i] != '\n')
+		i++;
+	if (ft_strchr(mainstr, '\n'))
+		i++;
+	nextline = ft_calloc(i + 1, sizeof(char));
+	if (!nextline)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		nextline[j] = mainstr[j];
+		j++;
+	}
+	return (nextline);
+}
+
+char	*readnjoin(char *mainstr, int fd)
+{
+	char	*curbuffer;
+	int		bytesread;
+
+	curbuffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!curbuffer)
+		return (NULL);
+	while (!ft_strchr(mainstr, '\n') && bytesread > 0)
+	{
+		bytesread = read(fd, curbuffer, BUFFER_SIZE);
+		if (bytesread == -1)
+			return (free(mainstr), free(curbuffer), NULL);
+		mainstr = ft_strjoin(mainstr, curbuffer);
+	}
+	free(curbuffer);
+	return (mainstr);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buffer[1024];
 	char		*theline;
-	int			bytesread;
 
-	buffer[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (buffer[fd] == NULL)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	bytesread = read(fd, buffer[fd], BUFFER_SIZE);
-	if (bytesread < 1)
+	if (!buffer[fd])
+		buffer[fd] = ft_calloc(1, sizeof(char));
+	buffer[fd] = readnjoin(buffer[fd], fd);
+	if (!buffer[fd])
 		return (NULL);
-	theline = buffer[fd];
+	theline = nextline(buffer[fd]);
+	buffer[fd] = cleanup(buffer[fd]);
 	return (theline);
 }
 
@@ -47,5 +113,9 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(STDIN_FILENO)) != NULL)
 			printf("%s", line);
 	}
+	else
+	{
+		printf("Error opening file");
+		return (1);
+	}
 }
-
