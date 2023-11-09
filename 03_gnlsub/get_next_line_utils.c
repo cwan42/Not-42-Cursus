@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/09 11:25:39 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:00:15 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*ft_calloc(size_t numelem, size_t size)
 		return (NULL);
 	i = 0;
 	ptr = array;
-	while (i < (numelem * size))
+	while (i < numelem)
 		ptr[i++] = '\0';
 	return (array);
 }
