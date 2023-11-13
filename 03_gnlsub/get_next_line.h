@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:17:53 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/09 10:09:19 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:53:39 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 void	*ft_calloc(size_t numelem, size_t size);
 
+char	*cleanup(char *mainstr);
+char	*nextline(char *mainstr);
+char	*readnjoin(char *mainstr, int fd);
 char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/09 12:00:15 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/10 15:12:07 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ char	*ft_strchr(char *s, int c)
 	if (!s)
 		return (NULL);
 	while (*s && (*s != (char)c))
+	{
+		if (*s == (char)c)
+			return ((char *)s);
 		s++;
-	if (*s == (char)c)
-		return ((char *)s);
+	}
 	return (NULL);
 }
 
@@ -41,7 +43,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!result)
 		return (NULL);
 	i = -1;

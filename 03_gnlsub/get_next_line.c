@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/09 11:57:27 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/10 15:12:23 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*nextline(char *mainstr)
 	int		j;
 
 	i = 0;
-	if (!mainstr)
+	if (!*mainstr)
 		return (NULL);
 	while (mainstr[i] && mainstr[i] != '\n')
 		i++;
@@ -50,7 +50,7 @@ char	*nextline(char *mainstr)
 	if (!nextline)
 		return (NULL);
 	j = 0;
-	while (j < i)
+	while (j < i + 1)
 	{
 		nextline[j] = mainstr[j];
 		j++;
@@ -63,14 +63,15 @@ char	*readnjoin(char *mainstr, int fd)
 	char	*curbuffer;
 	int		bytesread;
 
-	curbuffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	curbuffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!curbuffer)
 		return (NULL);
-	while (!ft_strchr(mainstr, '\n') && bytesread > 0)
+//	bytesread = 0;
+	while (!ft_strchr(mainstr, '\n') && (bytesread = read(fd, curbuffer, BUFFER_SIZE)) > 0)
 	{
-		bytesread = read(fd, curbuffer, BUFFER_SIZE);
 		if (bytesread == -1)
 			return (free(mainstr), free(curbuffer), NULL);
+		curbuffer[bytesread] = '\0';
 		mainstr = ft_strjoin(mainstr, curbuffer);
 	}
 	free(curbuffer);
@@ -82,7 +83,7 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024];
 	char		*theline;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &buffer[fd], 0) < 0)
 		return (NULL);
 	if (!buffer[fd])
 		buffer[fd] = ft_calloc(1, sizeof(char));
@@ -93,7 +94,7 @@ char	*get_next_line(int fd)
 	buffer[fd] = cleanup(buffer[fd]);
 	return (theline);
 }
-
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -105,7 +106,7 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
-		while ((line = get_next_line(fd)) != NULL)
+		while ((line = get_next_line(fd)) != NULL && ac == 2)
 			printf("%s", line);
 	}
 	else if (ac == 1)
@@ -113,9 +114,5 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(STDIN_FILENO)) != NULL)
 			printf("%s", line);
 	}
-	else
-	{
-		printf("Error opening file");
-		return (1);
-	}
 }
+*/
