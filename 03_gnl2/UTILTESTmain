@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tester.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwan42 <cwan42@student.42singapore.sg>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 23:14:24 by cwan42            #+#    #+#             */
+/*   Updated: 2023/11/15 00:07:59 by cwan42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+#include <stdio.h>
+
+int	main(void)
+{
+	char	word[200];
+	char	strcpyword[10];
+	void	*array;
+
+	scanf("%199s", word);
+	printf("strlen: %s is %lu bytes.\n", word, ft_strlen(word));
+	printf("strchr: %s has X in it.\n", ft_strchr(word, 'X'));
+	printf("strjoin: %s\n", ft_strjoin("Nama saya ", word));
+	ft_strcpy(strcpyword, word);
+	printf("strcpy: %s\n", strcpyword);
+	array = ft_calloc(ft_strlen(word), sizeof(char));
+	if (array)
+	{
+		printf("calloc: allocated %lu bytes\n", ft_strlen(array));
+		free(array);
+	}
+	else
+		printf("Calloc failed\n");
+}

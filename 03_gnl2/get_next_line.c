@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/09 11:57:27 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/14 17:22:09 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ char	*readnjoin(char *mainstr, int fd)
 	char	*curbuffer;
 	int		bytesread;
 
+	if (!mainstr)
+		mainstr = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	curbuffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!curbuffer)
-		return (NULL);
 	while (!ft_strchr(mainstr, '\n') && bytesread > 0)
 	{
 		bytesread = read(fd, curbuffer, BUFFER_SIZE);
@@ -73,8 +73,7 @@ char	*readnjoin(char *mainstr, int fd)
 			return (free(mainstr), free(curbuffer), NULL);
 		mainstr = ft_strjoin(mainstr, curbuffer);
 	}
-	free(curbuffer);
-	return (mainstr);
+	return (free(curbuffer), mainstr);
 }
 
 char	*get_next_line(int fd)
@@ -84,6 +83,22 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
+	while (!(ft_strchr(buffer[fd], '\n')))
+	{
+		buffer[fd] = readnjoin(buffer[fd], fd);
+		if (!buffer[fd])
+			break ;
+	}
+//	if (ft_strchr(buffer[fd], '\n')
+//	return (
+	if (!buffer[fd])
+		return (NULL);
+	theline = nextline(buffer[fd]);
+	buffer[fd] = cleanup(buffer[fd]);
+	return (theline);
+}
+
+/*
 	if (!buffer[fd])
 		buffer[fd] = ft_calloc(1, sizeof(char));
 	buffer[fd] = readnjoin(buffer[fd], fd);
@@ -92,7 +107,7 @@ char	*get_next_line(int fd)
 	theline = nextline(buffer[fd]);
 	buffer[fd] = cleanup(buffer[fd]);
 	return (theline);
-}
+}*/
 
 #include <stdio.h>
 #include <fcntl.h>
