@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 05:23:24 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/15 05:32:34 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 		if (!nextline)
 			return (NULL);
 		ft_strlcpy(nextline, buffer[fd], trimlen + 1);
-		buffer[fd] = clearbuffer(buffer[fd], trimlen + 1);
+//	buffer[fd] = clearbuffer(buffer[fd], trimlen + 1);
 		return (nextline);
 	}
 	else
