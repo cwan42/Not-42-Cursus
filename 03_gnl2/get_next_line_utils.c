@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 00:14:54 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/15 05:05:42 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-void	*ft_strcpy(char *s1, char *s2)
+void	ft_strlcpy(char *s1, char *s2, size_t size)
 {
-	while (*s2)
+	size_t	i;
+
+	i = 0;
+	while (*s2 && i < size - 1)
 		*s1++ = *s2++;
 	*s1 = '\0';
 }
@@ -66,7 +69,7 @@ void	*ft_calloc(size_t numelem, size_t size)
 	if (!array)
 		return (NULL);
 	while (numelem > 0)
-		array[--numelem] == 0;
+		array[--numelem] = 0;
 	array[numelem] = 0;
 	return ((void *)array);
 }

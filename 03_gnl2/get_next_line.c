@@ -6,108 +6,67 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/14 17:22:09 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/15 05:23:24 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*cleanup(char *mainstr)
+char	*clearbuffer(char *buffer, int len)
 {
-	char	*toclean;
-	char	*tokeep;
-	size_t	len;
-
-	toclean = ft_strchr(mainstr, '\n');
-	if (!toclean)
-		return (free(mainstr), NULL);
-	toclean++;
-	len = ft_strlen(toclean);
-	tokeep = ft_calloc(len + 1, sizeof(char));
-	if (!tokeep)
-		return (NULL);
-	while (*toclean)
-		*tokeep++ = *toclean++;
-	free(mainstr);
-	mainstr = NULL;
-	return (tokeep);	
+	char	*temp;
+	
+	if (!ft_strchr(buffer, '\n'))
+		return(free(buffer), NULL);
+	temp = malloc(len * sizeof(char));	
+	ft_strlcpy(temp, ft_strchr(buffer, '\n'), len + 1);
+	return (free(buffer), temp);
 }
 
-char	*nextline(char *mainstr)
+char	*readnjoin(char *buffer, int fd)
 {
-	char	*nextline;
-	int		i;
-	int		j;
+	char	*tmpbuff;
 
-	i = 0;
-	if (!mainstr)
-		return (NULL);
-	while (mainstr[i] && mainstr[i] != '\n')
-		i++;
-	if (ft_strchr(mainstr, '\n'))
-		i++;
-	nextline = ft_calloc(i + 1, sizeof(char));
-	if (!nextline)
-		return (NULL);
-	j = 0;
-	while (j < i)
+	if (!buffer)
+		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	tmpbuff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (read(fd, tmpbuff, BUFFER_SIZE) < 1)
 	{
-		nextline[j] = mainstr[j];
-		j++;
+		if (read(fd, tmpbuff, BUFFER_SIZE) == 0)
+			return (free(tmpbuff), buffer);
+		else
+			return (free(buffer), free(tmpbuff), NULL);
 	}
-	return (nextline);
-}
-
-char	*readnjoin(char *mainstr, int fd)
-{
-	char	*curbuffer;
-	int		bytesread;
-
-	if (!mainstr)
-		mainstr = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	curbuffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	while (!ft_strchr(mainstr, '\n') && bytesread > 0)
-	{
-		bytesread = read(fd, curbuffer, BUFFER_SIZE);
-		if (bytesread == -1)
-			return (free(mainstr), free(curbuffer), NULL);
-		mainstr = ft_strjoin(mainstr, curbuffer);
-	}
-	return (free(curbuffer), mainstr);
+	buffer = ft_strjoin(buffer, tmpbuff);
+	return (free(tmpbuff), buffer);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer[1024];
-	char		*theline;
+	char		*nextline;
+	int			trimlen;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 )
+//|| read(fd, &nextline, 0) == -1)
 		return (NULL);
-	while (!(ft_strchr(buffer[fd], '\n')))
-	{
+	while (!(ft_strchr(buffer[fd], '\n')) && buffer[fd])
 		buffer[fd] = readnjoin(buffer[fd], fd);
-		if (!buffer[fd])
-			break ;
+	if (!buffer[fd])
+		return (NULL);
+	if (ft_strchr(buffer[fd], '\n'))
+	{
+		trimlen = ft_strchr(buffer[fd], '\n') - buffer[fd] + 1;
+		nextline = malloc(trimlen + 1);
+		if (!nextline)
+			return (NULL);
+		ft_strlcpy(nextline, buffer[fd], trimlen + 1);
+		buffer[fd] = clearbuffer(buffer[fd], trimlen + 1);
+		return (nextline);
 	}
-//	if (ft_strchr(buffer[fd], '\n')
-//	return (
-	if (!buffer[fd])
-		return (NULL);
-	theline = nextline(buffer[fd]);
-	buffer[fd] = cleanup(buffer[fd]);
-	return (theline);
+	else
+		return (buffer[fd]);
 }
-
-/*
-	if (!buffer[fd])
-		buffer[fd] = ft_calloc(1, sizeof(char));
-	buffer[fd] = readnjoin(buffer[fd], fd);
-	if (!buffer[fd])
-		return (NULL);
-	theline = nextline(buffer[fd]);
-	buffer[fd] = cleanup(buffer[fd]);
-	return (theline);
-}*/
 
 #include <stdio.h>
 #include <fcntl.h>
