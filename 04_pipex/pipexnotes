@@ -1,0 +1,75 @@
+Pipex subfunctions:
+
+open - <fcntl.h>, <sys/types.h>, <sys/stat.h>
+int	open(const char *pathname, int flags)
+int	open(const char *pathname, int flags, mode_t mode)
+Flags: O_RDONLY, O_WRONLY, O_RDWR and more.
+Return value: fd
+
+close - <unistd.h>
+int	close(int fd);
+Return value: 0 on success / -1 on error, errno set appropriately
+
+read - <unistd.h>
+ssize_t read(int fd, void *buf, size_t count);
+Return value: bytes read, 0 if EOF, file position advanced by bytes read / -1 error
+
+write - <unistd.h>
+ssize_t write(int fd, const void *buf, size_t count);
+Return value: bytes written / -1 error
+
+malloc - <stdlib.h>
+void	*malloc(size_t size);
+Returns pointer to allocated memory/ NULL on error. Hence use as variable = malloc(xx);
+
+free - <stdlib.h>
+void	free(void *ptr);
+No return value
+
+perror - <stdio.h>, <errno.h>
+void	perror(const char *s)
+Return value: if valid *s && s, print s:  / then error message according to errno and \n
+
+strerror - <string.h>
+char	*strerror(int errnum)
+Return value: approp error desc string, OR "unknown error nnn" if errno unknown
+
+access - <unistd.h>
+int	access(const char *pathname, int mode)
+//Check if calling process can access file pathname, if symbolic link, is dereferenced.
+Return value: 0 success, -1 error
+
+dup, dup2 - <unistd.h>
+int	dup(int oldfd) / int dup2(int oldfd, int newfd)
+//Creates copy of oldfd, using lowest-numbered unused fd for newfd, or specified num for dup2
+//Use for combining with pipes to redirect stdin or stdout, i.e. dup2 to STDOUT_FILENO, so anything written to stdout also gets appended to orig fd like a specified txt file.
+Return value: new fd / -1 error
+
+execve - <unistd.h>
+int	execve(const char *pathname, char *const argv[], char *const envp[])
+//argv = array of pointers to strings passed to new program.
+//envp = array of pointers to strings, conventionally of form KEY=VALUE, passed as environment of new program.
+Return value: no return on success/ -1 error
+
+exit - <unistd.h>
+void _exit(int status)
+Return value: nil
+
+fork - <unistd.h>, <sys/types.h>
+pid_t	fork(void)
+//duplicates calling process into parent/child processes, runs in separate memory space, exact duplicated except child has own unique PID and other diffs.
+Return value: child PID returned to parent, 0 to child / -1 on error, no child created
+
+pipe - <unistd.h>
+int	pipe(int pipefd[2]) / int pipe2(intfd[2], int flags)
+Return value: 2 fds referring to ends, pipefd[0] read end, pipefd[1] write end.
+
+unlink - <unistd.h>
+int	unlink(const char *pathname)
+//deletes name from filesys (if last link, delete, if not, keep open until process terminated)
+Return value: 0 on success/ -1 on error
+
+wait, waitpid - <sys/types.h>, <sys/wait.h>
+pid_t	wait(int *wstatus) / pid_t waitpid(pid_t pid, int *wstatus, int options)
+//suspends execution of calling thread until one of its children terminates / changed state
+Return value: PID of terminated child / -1 on error
