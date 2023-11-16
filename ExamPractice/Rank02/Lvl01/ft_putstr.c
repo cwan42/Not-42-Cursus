@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:41:34 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/20 15:10:20 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/16 11:52:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putstr(char *str)
 
 int	main(void)
 {
-	ft_putstr("fucker wing dango 1 2 3 end \t \n \n \r\r\r\t\t\%%%");
+	ft_putstr("test string 123 \t \n \n \r\r\r\t\t\%%%");
 }
 
 /*
