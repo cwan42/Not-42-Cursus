@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 05:05:42 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/17 12:02:54 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
+char	*ft_strdup(char *s)
+{
+	char	*str;
+
+	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	while (*s)
+		*str++ = *s++;
+	*str = '\0';
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
@@ -50,7 +62,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		result[i++] = *s2++;
 	return (result);
 }
-
+/*
 void	ft_strlcpy(char *s1, char *s2, size_t size)
 {
 	size_t	i;
@@ -59,19 +71,6 @@ void	ft_strlcpy(char *s1, char *s2, size_t size)
 	while (*s2 && i < size - 1)
 		*s1++ = *s2++;
 	*s1 = '\0';
-}
-/*
-void	*ft_calloc(size_t numelem, size_t size)
-{
-	char	*array;
-
-	array = malloc(numelem *size);
-	if (!array)
-		return (NULL);
-	while (numelem > 0)
-		array[--numelem] = 0;
-	array[numelem] = 0;
-	return ((void *)array);
 }
 */
 void	*ft_calloc(size_t numelem, size_t size)
@@ -84,6 +83,6 @@ void	*ft_calloc(size_t numelem, size_t size)
 		return (NULL);
 	i = 0;
 	while (i < (numelem * size))
-		((char *)array)[i++] = 0;
+		((char *)array)[i++] = '\0';
 	return (array);
 }

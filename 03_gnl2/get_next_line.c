@@ -6,33 +6,26 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 05:32:34 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/17 12:21:55 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*clearbuffer(char *buffer, int len)
-{
-	char	*temp;
-	
-	if (!ft_strchr(buffer, '\n'))
-		return(free(buffer), NULL);
-	temp = malloc(len * sizeof(char));	
-	ft_strlcpy(temp, ft_strchr(buffer, '\n'), len + 1);
-	return (free(buffer), temp);
-}
+char	*trimmedline(char **buffer);
 
 char	*readnjoin(char *buffer, int fd)
 {
 	char	*tmpbuff;
+	int		readbytes;
 
 	if (!buffer)
 		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	tmpbuff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (read(fd, tmpbuff, BUFFER_SIZE) < 1)
+	readbytes = read(fd, tmpbuff, BUFFER_SIZE);
+	if (readbytes < 1)
 	{
-		if (read(fd, tmpbuff, BUFFER_SIZE) == 0)
+		if (readbytes == 0)
 			return (free(tmpbuff), buffer);
 		else
 			return (free(buffer), free(tmpbuff), NULL);
@@ -45,27 +38,18 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer[1024];
 	char		*nextline;
-	int			trimlen;
+	char		*tmpptr;
+	int			i;
 
-	if (fd < 0 || BUFFER_SIZE < 1 )
-//|| read(fd, &nextline, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	while (!(ft_strchr(buffer[fd], '\n')) && buffer[fd])
+	while (!(ft_strchr(buffer[fd], '\n')))
 		buffer[fd] = readnjoin(buffer[fd], fd);
 	if (!buffer[fd])
 		return (NULL);
-	if (ft_strchr(buffer[fd], '\n'))
-	{
-		trimlen = ft_strchr(buffer[fd], '\n') - buffer[fd] + 1;
-		nextline = malloc(trimlen + 1);
-		if (!nextline)
-			return (NULL);
-		ft_strlcpy(nextline, buffer[fd], trimlen + 1);
-//	buffer[fd] = clearbuffer(buffer[fd], trimlen + 1);
-		return (nextline);
-	}
-	else
-		return (buffer[fd]);
+//	if (ft_strchr(buffer[fd], '\n'))
+//		return(trimmedline(&buffer[fd]));STOPPED HERE
+	return(buffer[fd]);
 }
 
 #include <stdio.h>
@@ -81,6 +65,7 @@ int	main(int ac, char *av[])
 		fd = open(av[1], O_RDONLY);
 		while ((line = get_next_line(fd)) != NULL)
 			printf("%s", line);
+			sleep(3);
 	}
 	else if (ac == 1)
 	{
@@ -92,4 +77,5 @@ int	main(int ac, char *av[])
 		printf("Error opening file");
 		return (1);
 	}
+	return(free(line), close(fd), 0);
 }

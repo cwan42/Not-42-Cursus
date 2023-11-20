@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:17:53 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 05:32:16 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/17 12:22:17 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+#  define BUFFER_SIZE 3
 # endif
 
 # include <stdlib.h>
@@ -22,8 +22,9 @@
 
 size_t	ft_strlen(char *s);
 char	*ft_strchr(char *s, int c);
+char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
-void	ft_strlcpy(char *s1, char *s2, size_t size);
+//void	ft_strlcpy(char *s1, char *s2, size_t size);
 void	*ft_calloc(size_t numelem, size_t size);
 
 char	*clearbuffer(char *buffer, int len);
