@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/21 10:33:27 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:05:14 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*trimmedline(char **buffer)
 	char	*tmpptr;
 	char	*trimline;
 	int		i;
-	
+
 	i = 0;
 	tmpptr = *buffer;
 	while ((*buffer)[i] != '\n')
@@ -27,7 +27,7 @@ char	*trimmedline(char **buffer)
 	while (i--)
 		trimline[i] = (*buffer)[i];
 	*buffer = ft_strdup(ft_strchr(*buffer, '\n') + 1);
-	return(free(tmpptr), trimline);
+	return (free(tmpptr), trimline);
 }
 
 char	*readnjoin(int fd, char *buffer, int *readbytes)
@@ -41,12 +41,11 @@ char	*readnjoin(int fd, char *buffer, int *readbytes)
 	tmpbuff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	*readbytes = read(fd, tmpbuff, BUFFER_SIZE);
 	buffer = ft_strjoin(buffer, tmpbuff);
+	free(tmpbuff);
 	free(tmpptr);
-	if (*readbytes == 0)
-			return (free(tmpbuff), buffer);
-	if (*readbytes == -1)
-			return (free(buffer), free(tmpbuff), NULL);
-	return (free(tmpbuff), buffer);
+	if (*readbytes < 0 || (!*readbytes && !*buffer))
+		return (free(buffer), buffer = NULL, buffer);
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
@@ -55,21 +54,23 @@ char	*get_next_line(int fd)
 	char		*nextline;
 	int			readbytes;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	readbytes = 1;
-	while (!(ft_strchr(buffer[fd], '\n')) && readbytes)
+	while (ft_strchr(buffer[fd], '\n') == NULL && readbytes)
 	{
 		buffer[fd] = readnjoin(fd, buffer[fd], &readbytes);
 		if (!buffer[fd])
-			break;
+			break ;
 	}
+	if (ft_strchr(buffer[fd], '\n') != NULL)
+		return (trimmedline(&buffer[fd]));
 	if (!buffer[fd])
 		return (NULL);
-	if (ft_strchr(buffer[fd], '\n'))
-		return (trimmedline(&buffer[fd]));
-	else
-		return (buffer[fd]);
+	nextline = ft_strdup(buffer[fd]);
+	free(buffer[fd]);
+	buffer[fd] = NULL;
+	return (nextline);
 }
 
 #include <stdio.h>
@@ -84,8 +85,10 @@ int	main(int ac, char *av[])
 	{
 		fd = open(av[1], O_RDONLY);
 		while ((line = get_next_line(fd)) != NULL)
+		{
 			printf("%s", line);
 			sleep(3);
+		}
 	}
 	else if (ac == 1)
 	{

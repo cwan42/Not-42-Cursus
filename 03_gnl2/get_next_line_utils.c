@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/17 12:02:54 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:13:49 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ char	*ft_strchr(char *s, int c)
 char	*ft_strdup(char *s)
 {
 	char	*str;
+	char	*ptr;
 
 	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
+	ptr = str;
 	while (*s)
 		*str++ = *s++;
 	*str = '\0';
+	return (ptr);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -73,6 +76,7 @@ void	ft_strlcpy(char *s1, char *s2, size_t size)
 	*s1 = '\0';
 }
 */
+
 void	*ft_calloc(size_t numelem, size_t size)
 {
 	void			*array;
