@@ -1,6 +1,6 @@
 1234567890
 2234567890
-3
+3third line
 42
 523
 6234
@@ -9,7 +9,7 @@
 9234567
 01234567890
 
-
+BLANK UP AND DOWN
 
 Last line here
 EOF->

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/21 13:05:14 by cwan42           ###   ########.fr       */
+/*   Updated: 2023/11/22 11:21:41 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	readbytes = 1;
-	while (ft_strchr(buffer[fd], '\n') == NULL && readbytes)
+	while ((!ft_strchr(buffer[fd], '\n') && readbytes))
 	{
 		buffer[fd] = readnjoin(fd, buffer[fd], &readbytes);
 		if (!buffer[fd])
@@ -68,11 +68,10 @@ char	*get_next_line(int fd)
 	if (!buffer[fd])
 		return (NULL);
 	nextline = ft_strdup(buffer[fd]);
-	free(buffer[fd]);
-	buffer[fd] = NULL;
-	return (nextline);
+	return (free(buffer[fd]), buffer[fd] = NULL, nextline);
 }
 
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -87,7 +86,6 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(fd)) != NULL)
 		{
 			printf("%s", line);
-			sleep(3);
 		}
 	}
 	else if (ac == 1)
@@ -95,5 +93,6 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(STDIN_FILENO)) != NULL)
 			printf("%s", line);
 	}
-	return(free(line), close(fd), 0);
+//	return(free(line), close(fd), 0);
 }
+*/
