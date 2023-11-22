@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:49:11 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/22 11:21:41 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/22 16:10:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*readnjoin(int fd, char *buffer, int *readbytes)
 	free(tmpbuff);
 	free(tmpptr);
 	if (*readbytes < 0 || (!*readbytes && !*buffer))
-		return (free(buffer), buffer = NULL, buffer);
+		return (free(buffer), NULL);
 	return (buffer);
 }
 
@@ -70,7 +70,6 @@ char	*get_next_line(int fd)
 	nextline = ft_strdup(buffer[fd]);
 	return (free(buffer[fd]), buffer[fd] = NULL, nextline);
 }
-
 /*
 #include <stdio.h>
 #include <fcntl.h>
@@ -86,6 +85,7 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(fd)) != NULL)
 		{
 			printf("%s", line);
+			free(line);
 		}
 	}
 	else if (ac == 1)
@@ -93,6 +93,6 @@ int	main(int ac, char *av[])
 		while ((line = get_next_line(STDIN_FILENO)) != NULL)
 			printf("%s", line);
 	}
-//	return(free(line), close(fd), 0);
+	return(0);
 }
 */
