@@ -5,66 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 09:42:57 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/11 10:03:09 by cwan             ###   ########.fr       */
+/*   Created: 2023/11/07 14:11:47 by cwan              #+#    #+#             */
+/*   Updated: 2023/11/22 14:16:26 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(char *s, int c)
 {
-	if (!str)
+	if (!s)
 		return (NULL);
-	while (*str)
-	{
-		if (*str == (unsigned char)c)
-			return ((char *)str);
-		str++;
-	}
+	while (*s && (*s != (char)c))
+		s++;
+	if (*s == (char)c)
+		return ((char *)s);
 	return (NULL);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strdup(char *s)
 {
-	size_t	i;
+	char	*str;
+	char	*ptr;
 
-	i = 0;
-	if (size > 0)
-	{
-		while (i < size - 1 && src[i] != '\0')
-		{
-			dst[i] = src[i];
-			i++;
-		}
-	}
-	dst[i] = '\0';
-	return (i);
+	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	ptr = str;
+	while (*s)
+		*str++ = *s++;
+	*str = '\0';
+	return (ptr);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
+	int		i;
 
 	if (!s1 || !s2)
 		return (NULL);
-	result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	result = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!result)
 		return (NULL);
-	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
-	ft_strlcpy(result + ft_strlen(s1), s2, ft_strlen(s2) + 1);
-	free(s1);
-	s1 = NULL;
+	i = 0;
+	while (*s1)
+		result[i++] = *s1++;
+	while (*s2)
+		result[i++] = *s2++;
 	return (result);
 }
-//strjoin doesn't have free if !result, calling fn needs to have safety check
+
+void	*ft_calloc(size_t numelem, size_t size)
+{
+	void			*array;
+	size_t			i;
+
+	array = malloc(numelem * size);
+	if (!array)
+		return (NULL);
+	i = 0;
+	while (i < (numelem * size))
+		((char *)array)[i++] = '\0';
+	return (array);
+}
