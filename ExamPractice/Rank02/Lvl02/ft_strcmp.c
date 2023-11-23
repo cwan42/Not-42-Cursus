@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:09:51 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/22 13:15:21 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/23 14:55:55 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	return(strcmp(s1, s2));
-}
+	int	i;
 
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return(0);
+}
+/*
 #include <stdio.h>
 
 int	main(int ac, char *av[])
@@ -24,7 +33,7 @@ int	main(int ac, char *av[])
 	if (ac != 3)
 		return (0);
 	printf("Real strcmp: %d\nft_strcmp:  %d\n", strcmp(av[1], av[2]), ft_strcmp(av[1], av[2]));
-}
+}*/
 /*
 Assignment name  : ft_strcmp
 Expected files   : ft_strcmp.c
