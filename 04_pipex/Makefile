@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2023/11/27 13:19:08 by cwan             ###   ########.fr        #
+#    Updated: 2023/11/27 13:23:40 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ $(NAME): $(OBJS)
 	@echo "Making libft.a in ./libft"
 	@$(MAKE) -C libft bonus > /dev/null
 	@echo "Making printf.a in ./printf"
-	@$(MAKE) -C printf > /dev/null
-	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./printf/printf.a -o $(NAME)
+	@$(MAKE) -C ft_printf > /dev/null
+	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

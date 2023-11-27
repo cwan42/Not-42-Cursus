@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:56:43 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 13:19:21 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/27 13:23:18 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define PIPEX_H
 
 # include "./libft/libft.h"
-# include "./printf/ft_printf.h"
+# include "./ft_printf/ft_printf.h"
 
 #endif
