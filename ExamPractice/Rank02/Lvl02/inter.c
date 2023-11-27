@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:06:36 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/24 17:57:24 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/27 16:10:01 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int	ft_strchr(char *str, char c)
 {
+	int	count;
+
+	count = 0;
 	while (*str)
 	{
 		if (*str == c)
-			return (1);
+			count++;
 		str++;
 	}
-	return (0);
+	return (count);
 }
 
 int	main(int ac, char *av[])
@@ -28,10 +31,22 @@ int	main(int ac, char *av[])
 	int	i;
 	int	j;
 
-loop av1 into av2
-	check if first instance of av1
-		write if first else no
-
+	if (ac == 3)
+	{
+		i = 0;
+		while (av[1][i])
+		{
+			j = 0;
+			while (av[2][j])
+			{
+				if (av[1][i] == av[2][j])
+					write (1, &av[1][i], 1);
+				j++;	
+			}
+			i++;
+		}
+	}
+	write (1, "\n", 1);
 }
 
 /*
