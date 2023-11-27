@@ -5,17 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2023/11/27 13:19:08 by cwan             ###   ########.fr        #
+#    Created: 2023/09/26 09:59:34 by cwan              #+#    #+#              #
+#    Updated: 2023/11/27 13:14:37 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = printf.a
 
-SRCS = \
-		pipex.c\
-
-BSRCS = \
+SRCS = ft_printf.c ft_printf2.c
 
 CC = cc
 
@@ -25,31 +22,20 @@ CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-BOBJS = $(BSRCS:.c=.o)
-
 $(NAME): $(OBJS)
-	@echo "Making libft.a in ./libft"
-	@$(MAKE) -C libft bonus > /dev/null
-	@echo "Making printf.a in ./printf"
-	@$(MAKE) -C printf > /dev/null
-	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./printf/printf.a -o $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-bonus: $(NAME) $(BOBJS)
-	$(CC) $(CFLAGS) $(NAME) $(BOBJS) -o $(NAME)
-
 clean:
-	$(RM) $(OBJS) $(BOBJS)
-	@$(MAKE) -C libft clean > /dev/null
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
-	@$(MAKE) -C libft fclean > /dev/null
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
