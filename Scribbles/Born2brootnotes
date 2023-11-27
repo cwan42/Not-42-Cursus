@@ -98,6 +98,10 @@ sudo ufw enable
 sudo ufw allow 4242
 
 crontab
+export VISUAL=vim || export EDITOR=vim to change editor to vim || select-editor
+export VISUAL=/usr/bin/vim
+//remember run source ~/.bashrc or relevant file to refresh rc config after editing
+sudo crontab -u root -e || crontab -e
 apt-get install net-tools , installs netstat tools
 /usr/local/bin ~ monitoring.sh
 sudo service OR systemctl
@@ -110,6 +114,8 @@ su > systemctl start ntp
 ntpq -pqs
 
 du -h --max-depth=1 | sort -rh | head -n 10 ~ for check disk usage
+
+find / -type f -name "NAME" // 2>/dev/null
 
 MONITORING.sh
 #!/bin/bash
