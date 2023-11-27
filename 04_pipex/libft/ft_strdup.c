@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:45 by cwan             ###   ########.fr       */
+/*   Created: 2023/09/11 15:04:53 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/12 16:32:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+char	*ft_strdup(const char *s)
 {
-	
-	ft_putchar_fd('1', 1);
-	return (0);
+	char	*str;
+
+	str = malloc(ft_strlen(s) + 1);
+	if (str == NULL)
+		return (NULL);
+	ft_strlcpy(str, s, ft_strlen(s) + 1);
+	return (str);
 }

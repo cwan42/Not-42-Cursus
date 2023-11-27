@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:45 by cwan             ###   ########.fr       */
+/*   Created: 2023/08/14 16:12:40 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/19 09:23:00 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	
-	ft_putchar_fd('1', 1);
-	return (0);
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		ft_putchar_fd(s[i], fd);
 }

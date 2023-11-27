@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:45 by cwan             ###   ########.fr       */
+/*   Created: 2023/09/11 10:56:20 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/18 20:18:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	
-	ft_putchar_fd('1', 1);
-	return (0);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (*little == '\0')
+		return ((char *)big);
+	while (big[i] && i < len)
+	{
+		while (big[i + j] == little[j] && big[i + j] && (i + j < len))
+			j++;
+		if (little[j] == '\0')
+			return ((char *)&big[i]);
+		i++;
+		j = 0;
+	}
+	return (NULL);
 }

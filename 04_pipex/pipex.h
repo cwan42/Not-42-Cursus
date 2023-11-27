@@ -6,11 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:56:43 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/15 10:56:56 by cwan             ###   ########.fr       */
+/*   Updated: 2023/11/27 12:19:28 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef pipex.h
-# define pipex.h
+#ifndef PIPEX_H
+# define PIPEX_H
+
+# include "./libft/libft.h"
 
 #endif

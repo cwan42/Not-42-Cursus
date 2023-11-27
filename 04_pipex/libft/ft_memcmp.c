@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:45 by cwan             ###   ########.fr       */
+/*   Created: 2023/09/11 13:56:31 by cwan              #+#    #+#             */
+/*   Updated: 2023/09/18 20:45:01 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	
-	ft_putchar_fd('1', 1);
+	unsigned char	*s1c;
+	unsigned char	*s2c;
+	size_t			i;
+
+	s1c = (unsigned char *)s1;
+	s2c = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (s1c[i] != s2c[i])
+			return (s1c[i] - s2c[i]);
+		i++;
+	}
 	return (0);
 }
