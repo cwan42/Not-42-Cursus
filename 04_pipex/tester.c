@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 15:14:05 by cwan             ###   ########.fr       */
+/*   Created: 2023/11/27 13:44:26 by cwan              #+#    #+#             */
+/*   Updated: 2023/11/27 15:13:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-/*
-int	main(int ac, char *av[])
+//#include "./libft/libft.h"
+//#include "./ft_printf/ft_printf.h"
+
+int	main(void)
 {
-//	if (ac != 5)
-//		return (0);
-	if (ac > 1 || av[0])
-		ft_printf("Poop\n");
-	ft_putstr_fd("on a pumpkin\n", 1);
+	ft_printf("Test print\n");
 }
-*/
