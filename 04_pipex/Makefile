@@ -6,12 +6,12 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2023/11/27 15:14:19 by cwan             ###   ########.fr        #
+#    Updated: 2023/11/28 17:40:10 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#NAME = pipex
-NAME = pipex.a
+NAME = pipex
+#NAME = pipex.a
 
 SRCS = \
 		pipex.c\
@@ -31,8 +31,8 @@ BOBJS = $(BSRCS:.c=.o)
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft bonus > /dev/null
 	@$(MAKE) -C ft_printf > /dev/null
-#	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
-	ar rcs $(NAME) ./libft/libft.a ./ft_printf/printf.a $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
+#	ar rcs $(NAME) ./libft/libft.a ./ft_printf/printf.a $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
