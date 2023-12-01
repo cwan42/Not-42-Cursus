@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/01 16:44:42 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/01 17:41:13 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
-
 
 char	*ft_findpath(char *cmdzero, char **envp)
 {
@@ -45,7 +44,6 @@ char	*ft_findpath(char *cmdzero, char **envp)
 			return (free(path), testpath);
 		i++;
 		free(testpath);
-		testpath = NULL;
 	}
 	return (free(path), NULL);
 }
@@ -61,8 +59,8 @@ void	ft_process(char *file, char *cmd, int fd, char **envp)
 	if (fd == 0)
 	{
 		filefd = open(file, O_RDONLY);
-		dup2(fd, 1);
 		dup2(filefd, 0);
+		dup2(fd, 1);
 	}
 	else
 	{
@@ -70,8 +68,14 @@ void	ft_process(char *file, char *cmd, int fd, char **envp)
 		dup2(filefd, 1);
 		dup2(fd, 0);
 	}
-	execve(cmdpath, cmdsplit, envp);
-	exit(1);
+	if (execve(cmdpath, cmdsplit, envp) == -1)
+	{
+		perror("execve failed");
+		exit(1);
+	}
+	free(cmdpath);
+	free(cmdsplit);
+	exit(0);
 }
 
 int	main(int ac, char *av[], char *envp[])
