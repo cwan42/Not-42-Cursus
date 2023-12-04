@@ -6,43 +6,50 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:06:36 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/27 16:10:01 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/04 10:09:59 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+int	ft_isfirst(char *str, char c, int pos)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			break ;
+		i++;
+	}
+	if (i == pos)
+		return (1);
+	return (0);
+}
+
 int	ft_strchr(char *str, char c)
 {
-	int	count;
-
-	count = 0;
 	while (*str)
 	{
 		if (*str == c)
-			count++;
+			return (1);
 		str++;
 	}
-	return (count);
+	return (0);
 }
 
 int	main(int ac, char *av[])
 {
 	int	i;
-	int	j;
 
 	if (ac == 3)
 	{
 		i = 0;
 		while (av[1][i])
 		{
-			j = 0;
-			while (av[2][j])
-			{
-				if (av[1][i] == av[2][j])
-					write (1, &av[1][i], 1);
-				j++;	
-			}
+			if (ft_isfirst(av[1], av[1][i], i) && ft_strchr(av[2], av[1][i]))
+				write (1, &av[1][i], 1);
 			i++;
 		}
 	}
