@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:06:36 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/04 10:09:59 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/04 13:06:03 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	ft_isfirst(char *str, char c, int pos)
 			break ;
 		i++;
 	}
-	if (i == pos)
-		return (1);
-	return (0);
+	return (i == pos);
 }
 
 int	ft_strchr(char *str, char c)
