@@ -6,17 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:57:07 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/06 18:54:19 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/07 19:16:39 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
-#include <errno.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/wait.h>
 
+/*
 char	*ft_findpath(char *cmdzero, char **envp)
 {
 	char	**path;
@@ -47,7 +43,7 @@ char	*ft_findpath(char *cmdzero, char **envp)
 	}
 	return (free(path), NULL);
 }
-
+*/
 void	ft_process(char *file, char *cmd, int fd, char **envp)
 {
 	char	**cmdsplit;
@@ -55,12 +51,14 @@ void	ft_process(char *file, char *cmd, int fd, char **envp)
 	int		filefd;
 
 	cmdsplit = ft_split(cmd, ' ');
-	cmdpath = ft_findpath(cmdsplit[0], envp);
-	if (fd == 0)
+	cmdpath = ft_strjoin("/bin/", cmdsplit[0]);
+//	cmdpath = ft_findpath(cmdsplit[0], envp);
+	if (fd == 4)
 	{
 		filefd = open(file, O_RDONLY | O_CREAT, 0644);
 		dup2(filefd, 0);
 		dup2(fd, 1);
+		close(filefd);
 		printf("child newfd is %d\n", fd);
 	}
 	else
@@ -68,10 +66,14 @@ void	ft_process(char *file, char *cmd, int fd, char **envp)
 		filefd = open(file, O_WRONLY | O_CREAT, 0644);
 		dup2(filefd, 1);
 		dup2(fd, 0);
+		close(filefd);
 		printf("parent newfd is %d\n", fd);
 	}
 	if (execve(cmdpath, cmdsplit, envp) == -1)
+	{
 		perror("execve failed");
+		exit(0);
+	}
 	free(cmdpath);
 	free(cmdsplit);
 	exit(0);
@@ -82,22 +84,22 @@ int	main(int ac, char *av[], char *envp[])
 	int	pid;
 	int	pipefd[2];
 
-	if (ac != 5 || !av[1])
+	if (ac != 5)
 		return (errno = EINVAL, perror("Wrong argument count"), 0);
 	(void)(pipe(pipefd), pid = fork());
 	if (pid == -1)
 		return (errno = EPERM, perror("Failed fork: "), 0);
 	if (pid == 0)
 	{
-		close(pipefd[0]);
-		printf("Outgoing fd is %d\n", pipefd[1]);
+//		close(pipefd[0]);
+		printf("Outgoing fd for child is %d\n", pipefd[1]);
 		ft_process(av[1], av[2], pipefd[1], envp);
 	}
 	else
 	{
 		wait(NULL);
-		close(pipefd[1]);
-		printf("Ingoing fd is %d\n", pipefd[1]);
+//		close(pipefd[1]);
+		printf("Ingoing fd for parent is %d\n", pipefd[0]);
 		ft_process(av[4], av[3], pipefd[0], envp);
 	}
 	return (0);
