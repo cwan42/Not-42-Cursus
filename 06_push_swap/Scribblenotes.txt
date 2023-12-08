@@ -1,0 +1,15 @@
+Operations:
+sa - swap top 2 elem of A / NA if 1 or 0
+sb - swap top 2 elem of B / NA if 1 or 0
+ss - swap top 2 elem of both / NA if 1 or 0
+
+pa - move top elem of B to A / NA if !B
+pb - move top elem of A to B / NA if !A
+
+ra - Shift all elem of A up by 1
+rb - Shift all elem of B up by 1
+rr - Shift all elem of both up by 1
+
+rra - Shift all elem of A down by 1
+rrb	- Shift all elem of B down by 1
+rrr	- Shift all elem of both down by 1
