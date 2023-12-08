@@ -13,3 +13,13 @@ rr - Shift all elem of both up by 1
 rra - Shift all elem of A down by 1
 rrb	- Shift all elem of B down by 1
 rrr	- Shift all elem of both down by 1
+
+Basic principles of sorting
+
+Creat circular linked list for both stacks, so rotate ops work.
+
+Ideally, stack B should be created in inverted pyramid format, so that 'pa' efficiently stacks them back big to small
+
+Superlative (biggest or smallest) numbers from stack A should correctly be placed next to B's superlative numbers, e.g. A 1 should be put above B's largest number (4, 3, 2), so 'rb' sorts it with 1 operation.
+
+
