@@ -6,17 +6,17 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2023/12/07 20:30:45 by cwan             ###   ########.fr        #
+#    Updated: 2023/12/12 18:36:37 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-#NAME = pipex.a
 
 SRCS = \
 		pipex.c\
 
 BSRCS = \
+		pipexbonus.c\
 
 CC = cc
 
@@ -32,7 +32,6 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C libft bonus > /dev/null
 	@$(MAKE) -C ft_printf > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
-#	ar rcs $(NAME) ./libft/libft.a ./ft_printf/printf.a $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -40,7 +39,8 @@ $(NAME): $(OBJS)
 all: $(NAME)
 
 bonus: $(NAME) $(BOBJS)
-	$(CC) $(CFLAGS) $(NAME) $(BOBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(BOBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
+#still relinks
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
