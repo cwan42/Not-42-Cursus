@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/12 18:06:20 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/12 18:21:19 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int ac, char *av[])
 	int	pid;
 	int	pipefd[2];
 
-	if (ac != 5 || !av[1])
+	if (ac != 5)
 		return (ft_printf("Invalid argument count", 0));
 	pipe(pipefd);
 	pid = fork();
