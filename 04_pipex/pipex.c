@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/07 20:29:00 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/12 18:06:20 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_findpath(char *cmdzero, char **envp)
 }
 */
 
-void	ft_process(char *file, char *cmd, int fd, int pid)
+int	ft_process(char *file, char *cmd, int fd, int pid)
 {
 	char	**cmdsplit;
 	char	*cmdpath;
@@ -53,21 +53,23 @@ void	ft_process(char *file, char *cmd, int fd, int pid)
 
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_strjoin("/bin/", cmdsplit[0]);
+	if (access(cmdpath, F_OK))
+		return (ft_printf("command not found: %s\n", cmdsplit[0]), -1);
 	if (pid == 0)
 	{
-		filefd = open(file, O_RDONLY);
+		filefd = open(file, O_RDONLY | R_OK);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
 		dup2(filefd, 0);
-		dup2(fd, 1);
-		close(filefd);
-		execve(cmdpath, cmdsplit, NULL);
+		return (dup2(fd, 1), close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
 	}
 	else
 	{
 		filefd = open(file, O_WRONLY | O_CREAT, 0644);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
 		dup2(filefd, 1);
-		dup2(fd, 0);
-		close(filefd);
-		execve(cmdpath, cmdsplit, NULL);
+		return (dup2(fd, 0), close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
 	}
 }
 
@@ -77,7 +79,7 @@ int	main(int ac, char *av[])
 	int	pipefd[2];
 
 	if (ac != 5 || !av[1])
-		return (errno = EINVAL, perror("Wrong argument count"), 0);
+		return (ft_printf("Invalid argument count", 0));
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
