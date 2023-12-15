@@ -6,17 +6,30 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:56:35 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/14 16:59:17 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/15 11:33:40 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-//int	ft_putnbr()
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
-//int	ft_isprime(int num)
+void	ft_putnbr(long n)
+{
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = -n;
+	}
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + '0');
+}	
 
-int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
 	int		i;
 	int		sign;
@@ -36,15 +49,47 @@ int	ft_atoi(char *str)
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
-	return (sign * res);
+	return (long)(sign * res);
 }
 
-#include <stdio.h>
+long	ft_isprime(long n)
+{
+	int	i;
+
+	if (n < 2 || (n > 2 && !(n % 2)))
+		return (0);
+	if (n == 2)
+		return (1);
+	i = 3;
+	while (i * i <= n)
+	{
+		if (!(n % i))
+			return (0);
+		i += 2;
+	}
+	return (1);
+}
 
 int	main(int ac, char *av[])
 {
-	if (ac == 2)
-		printf("%d", ft_atoi(av[1]));
+	int		i;
+	long	res;
+	long	num;
+
+	i = 0;
+	res = 0;
+	if (av[1])
+		num = ft_atoi(av[1]);
+	if (ac != 2 || num < 0)
+		return  (write(1, "0\n", 2), 0);
+	while (i <= num)
+	{
+		if (ft_isprime(i))
+			res += i;
+		i++;
+	}
+	ft_putnbr(res);
+	ft_putchar('\n');
 }
 
 /*
