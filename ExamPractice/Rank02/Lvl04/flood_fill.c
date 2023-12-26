@@ -6,9 +6,17 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:03:42 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/26 14:04:09 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/26 14:41:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+typedef struct s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+void	flood_fill(char **tab, t_point size, t_point begin)
 
 /*
 Assignment name  : flood_fill
