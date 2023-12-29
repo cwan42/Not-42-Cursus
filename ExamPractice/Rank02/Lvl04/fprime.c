@@ -6,11 +6,42 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:42:25 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/28 09:42:49 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/29 10:04:09 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
+
+void	fprime(int n)
+{
+	int	i = 2;
+	if (n == 1)
+	{
+		printf("1");
+		return ;
+	}
+	while (n >= i)
+	{
+		if (n % i == 0)
+		{
+			printf("%d", i);
+			if (n != i)
+				printf("*");
+			n /= i;
+			i--;
+		}
+		i++;
+	}
+}
+
+int	main(int ac, char *av[])
+{
+	if (ac == 2)
+		fprime(atoi(av[1]));
+	printf("\n");
+	return (0);
+}
 
 /*
 Assignment name  : fprime
