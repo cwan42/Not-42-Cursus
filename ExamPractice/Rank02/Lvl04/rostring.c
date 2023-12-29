@@ -6,10 +6,42 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:45:58 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/28 09:46:10 by cwan             ###   ########.fr       */
+/*   Updated: 2023/12/29 11:55:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+
+int	main(int ac, char *av[])
+{
+	int	i = 0;
+	int	j;
+
+	if (ac == 2)
+	{
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+		j = i;
+		while (av[1][i] > 32)
+			i++;
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+		while (av[1][i])
+		{
+			if (av[1][i] > 32)
+				write(1, &av[1][i], 1);
+			else if ((av[1][i] == ' ' || av[1][i] == '\t') && av[1][i - 1] > 32)
+				write(1, &av[1][i], 1);
+			i++;
+		}
+		if (av[1][j])
+			write(1, " ", 1);
+		while (av[1][j] > 32)
+			write(1, &av[1][j++], 1);
+	}
+	return (write(1, "\n", 1), 0);
+}
 /*
 Assignment name  : rostring
 Expected files   : rostring.c
