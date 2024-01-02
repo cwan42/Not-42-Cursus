@@ -6,9 +6,35 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:46:50 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/28 09:47:05 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/02 15:33:17 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+{
+	int		tmp;
+	t_list	*node;
+
+	node = lst;
+	while (lst->next)
+	{
+		if (!(*cmp)(lst->data, lst->next->data))
+		{
+			tmp = lst->data;
+			lst->data = lst->next->data;
+			lst->next->data = tmp;
+			lst = tmp;
+		}
+		else
+			lst = lst->next;
+	}
+	lst = tmp;
+	return (lst);
+}
+
+int	main(int ac, char *av[])
+{
+}
 
 /*
 Assignment name  : sort_list
