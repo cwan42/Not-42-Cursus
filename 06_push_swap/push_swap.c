@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/03 10:16:46 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 10:18:33 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_createstacka(char **av, t_stack **stack, int ac)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	if (ac != 2)
 		av++;
@@ -32,6 +32,7 @@ int	main(int ac, char *av[])
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_stack	*cur;
 
 	a = NULL;
 	b = NULL;
@@ -40,7 +41,7 @@ int	main(int ac, char *av[])
 	else if (ac == 2)
 		av = ft_split(av[1], ' ');
 	ft_createstacka(av, &a, ac);
-	t_stack *cur = a;
+	cur = a;
 	while (cur)
 	{
 		ft_printf("%d ", cur->value);
