@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/03 10:49:19 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 12:45:41 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int ac, char *av[])
 		av = ft_split(av[1], ' ');
 	ft_createstacka(av, &a, ac);
 	cur = a;
+	sa(a);
 	while (cur)
 	{
 		ft_printf("%d ", cur->value);

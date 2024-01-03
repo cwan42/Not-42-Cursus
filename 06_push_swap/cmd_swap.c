@@ -6,15 +6,24 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:30:21 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/03 10:44:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 12:57:37 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(t_stack **node)
+static void	swap(t_stack *node)
 {
-	if (*node && (*node)->next)
+/*
+	int	tmp;
+
+	if (!node || !node->next)
+		return ;
+	tmp = node->value;
+	node->value = node->next->value;
+	node->next->value = tmp;
+*/
+/*	if (*node && (*node)->next)
 	{
 		*node = (*node)->next;
 		(*node)->prev->prev = *node;
@@ -23,22 +32,27 @@ static void	swap(t_stack **node)
 			(*node)->next->prev = (*node)->prev;
 		(*node)->next = (*node)->prev;
 		(*node)->prev = NULL;
+	}*/
+}
+
+void	sa(t_stack *a)
+{
+	if (a && a->next)
+	{
+	ft_printf("B4 swap: (*a)->value = %d, (*a)->next->value = %d\n", a->value, a->next->value);
+	swap(a);
+	ft_printf("After swap: (*a)->value = %d, (*a)->next->value = %d\n", a->value, a->next->value);
+	ft_printf("sa\n");
 	}
 }
 
-void	sa(t_stack **a)
-{
-	swap(a);
-	ft_printf("sa\n");
-}
-
-void	sb(t_stack **b)
+void	sb(t_stack *b)
 {
 	swap(b);
 	ft_printf("sb\n");
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	ss(t_stack *a, t_stack *b)
 {
 	swap(a);
 	swap(b);
