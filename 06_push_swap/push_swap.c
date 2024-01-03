@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/02 12:56:21 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 09:30:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 #include <stdio.h>
 
-void	ft_createstacka(char **av, t_list **stack)
+void	ft_createstacka(char **av, t_stack **stack)
 {
-	t_list *node;
+	t_stack *node;
 
+	av++;
 	while (*av)
 	{
-		node = ft_lstnew(ft_atoi(*av));
+		node = ft_stacknew(ft_atoi(*av));
 		if (!node)
 			break ;
-		ft_lstadd_back(stack, node);
+		ft_stackadd_back(stack, node);
 		av++;
 	}
 }
 
 int	main(int ac, char *av[])
 {
-	t_list	*a;
-	t_list	*b;
+	t_stack	*a;
+	t_stack	*b;
 
 	a = NULL;
 	b = NULL;
@@ -44,20 +45,18 @@ int	main(int ac, char *av[])
 	{
 		if (!av[i + 1])
 		{
-			printf("%s", av[i++]);
+			printf("%s\n", av[i++]);
 			break ; 
 		}
 		printf("%s, ", av[i++]);
 	}
 	ft_createstacka(av, &a);
-	t_list *cur = a;
-	printf("\n");
+	t_stack *cur = a;
 	while (cur)
 	{
-		printf("%d ", cur->data);
+		printf("%d ", cur->value);
 		cur = cur->next;
 	}
 	printf("\n");
-	ft_lstclear(&a, free);
 	return (0);
 }
