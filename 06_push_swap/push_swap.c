@@ -6,19 +6,18 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/03 09:30:16 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 10:16:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#include <stdio.h>
-
-void	ft_createstacka(char **av, t_stack **stack)
+void	ft_createstacka(char **av, t_stack **stack, int ac)
 {
 	t_stack *node;
 
-	av++;
+	if (ac != 2)
+		av++;
 	while (*av)
 	{
 		node = ft_stacknew(ft_atoi(*av));
@@ -36,27 +35,17 @@ int	main(int ac, char *av[])
 
 	a = NULL;
 	b = NULL;
-	if (ac < 2 || !av[1])
+	if (ac < 2 || (ac == 2 && !av[1][0]))
 		return (1);
 	else if (ac == 2)
 		av = ft_split(av[1], ' ');
-	int	i = 1;
-	while (av[i])
-	{
-		if (!av[i + 1])
-		{
-			printf("%s\n", av[i++]);
-			break ; 
-		}
-		printf("%s, ", av[i++]);
-	}
-	ft_createstacka(av, &a);
+	ft_createstacka(av, &a, ac);
 	t_stack *cur = a;
 	while (cur)
 	{
-		printf("%d ", cur->value);
+		ft_printf("%d ", cur->value);
 		cur = cur->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 	return (0);
 }
