@@ -6,13 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/02 16:59:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/03 08:30:23 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-const extern char **environ;
+const extern char	**environ;
 
 char	*ft_findpath(char *cmdzero)
 {
@@ -27,16 +27,13 @@ char	*ft_findpath(char *cmdzero)
 	while (environ[i])
 	{
 		if (!(ft_strncmp(environ[i], "PATH=", 5)))
-		{
 			path = ft_split(environ[i] + 5, ':');
-			break ;
-		}
 		i++;
 	}
 	i = 0;
-	while (path[i])
+	while (path[0])
 	{
-		testpath = ft_strjoin(ft_strjoin(path[i], "/"), cmdzero);
+		testpath = ft_strjoin(ft_strjoin(path[0], "/"), cmdzero);
 		if (!(access(testpath, F_OK)))
 			return (free(path), testpath);
 		free(testpath);
@@ -65,9 +62,8 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_findpath(cmdsplit[0]);
-//	cmdpath = ft_strjoin("/bin/", cmdsplit[0]);
 	if (access(cmdpath, F_OK))
-		return(ft_invalidcmd(cmdsplit, cmdpath), -1);
+		return (ft_invalidcmd(cmdsplit, cmdpath), -1);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
