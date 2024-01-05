@@ -6,9 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:46:50 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/02 15:33:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/05 16:11:28 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "list.h"
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
@@ -23,17 +25,84 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 			tmp = lst->data;
 			lst->data = lst->next->data;
 			lst->next->data = tmp;
-			lst = tmp;
+			lst = node;
 		}
 		else
 			lst = lst->next;
 	}
-	lst = tmp;
-	return (lst);
+	return (node);
 }
 
-int	main(int ac, char *av[])
+#include <stdlib.h>
+#include <stdio.h>
+
+int	ascending(int a, int b)
 {
+	return (a <= b); 
+}
+
+int	descending(int a, int b)
+{
+	return (a >= b);
+}
+
+t_list	*createnode(int n)
+{
+	t_list	*newnode;
+
+	newnode = (t_list*)malloc(sizeof(t_list));
+	if (newnode)
+	{
+		newnode->data = n;
+		newnode->next = NULL;
+	}
+	return (newnode);
+}
+
+int	main(void)
+{
+	t_list	*list = NULL;
+	t_list	*newnode;
+	t_list	*temp;
+	int		array[] = {3, 5, 8, 1, 2};
+	int		i = 0;
+
+	while (i < 5)
+	{
+		newnode = createnode(array[i]);
+		if (!list)
+			list = newnode;
+		else
+		{
+			temp = list;
+			while (temp->next)
+				temp = temp->next;
+			temp->next = newnode;
+		}
+		i++;
+	}
+	list = sort_list(list, ascending);
+	temp = list;
+	while (temp)
+	{
+		printf("%d ", temp->data);
+		temp = temp->next;
+	}
+	printf("\n");
+	list = sort_list(list, descending);
+	temp = list;
+	while (temp)
+	{
+		printf("%d ", temp->data);
+		temp = temp->next;
+	}
+	while (list)
+	{
+		temp = list;
+		list = list->next;
+		free(temp);
+	}
+	return (0);
 }
 
 /*
