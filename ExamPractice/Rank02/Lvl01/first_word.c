@@ -6,30 +6,25 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:09:31 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/20 12:36:39 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 15:32:32 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <unistd.h>
 
 int	main(int ac, char *av[])
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
 	if (ac == 2)
 	{
 		while (av[1][i] == '\t' || av[1][i] == ' ')
 			i++;
-		while (av[1][i] != '\t' && av[1][i] != ' ' && av[1][i] != '\0')
-		{
-			write(1, &av[1][i], 1);
-			i++;
-		}
+		while (av[1][i] != '\t' && av[1][i] != ' ' && av[1][i])
+			write(1, &av[1][i++], 1);
 	}
-	write(1, "\n", 1);
-	return (0);
+	return (write(1, "\n", 1), 0);
 }
-
 /*
 Assignment name  : first_word
 Expected files   : first_word.c
