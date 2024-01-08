@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:30:25 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/22 12:43:16 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 17:25:03 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ int	main(int ac, char *av[])
 		else if (operand == '%')
 			printf("%d", atoi(av[1]) % atoi(av[3]));
 	}
-	write(1, "\n", 1);
+	printf("\n");
+	return (0);
 }
+
+// cannot use * without "*" because interpreted as wildcard
+// use printf for \n instead of write because printf flushes buffer, otherwise write creates extra newline before answer.
 /*
 Assignment name  : do_op
 Expected files   : *.c, *.h
