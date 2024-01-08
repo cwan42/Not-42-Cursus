@@ -6,12 +6,12 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:41:34 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/16 11:52:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 15:47:39 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
+/*
 void	ft_putstr(char *str)
 {
 	int	i;
@@ -19,12 +19,21 @@ void	ft_putstr(char *str)
 	i = 0;
 	while (str[i])
 		write(1, &str[i++], 1);
-}
+}*/
 
+void	ft_putstr(char *str)
+{
+	while (*str)
+	{
+		write(1, &*str, 1);
+		str++;
+	}
+}
+/*
 int	main(void)
 {
-	ft_putstr("test string 123 \t \n \n \r\r\r\t\t\%%%");
-}
+	ft_putstr("   test str xyz 1 33 908 dknnc \t x\n \r  poop 123 END");
+}*/
 
 /*
 Assignment name  : ft_putstr
