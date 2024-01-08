@@ -6,11 +6,9 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:49:43 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/24 16:35:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 18:23:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <string.h>
 
 char	*ft_strpbrk(const char *s1, const char *s2)
 {
@@ -33,6 +31,7 @@ char	*ft_strpbrk(const char *s1, const char *s2)
 }
 /*
 #include <stdio.h>
+#include <string.h>
 
 int	main(int ac, char *av[])
 {
