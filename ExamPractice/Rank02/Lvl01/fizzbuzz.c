@@ -6,41 +6,38 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:41:26 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/20 14:02:13 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 15:42:49 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	writenumber(int n)
+void	ft_putnbr(int n)
 {
 	char	num;
 
 	if (n > 9)
-		writenumber(n / 10);
+		ft_putnbr(n / 10);
 	num = '0' + n % 10;
 	write (1, &num, 1);
-	
 }
 
-void	main(void)
+int	main(void)
 {
-	int	i;
-
-	i = 1;
-	while (i < 101)
+	int	i = 1;
+	while (i <= 100)
 	{
-		if (i % 3 == 0 && i % 5 == 0)
+		if (!(i % 3) && !(i % 5))
 			write(1, "fizzbuzz", 8);
-		else if (i % 3 == 0)
+		else if (!(i % 3))
 			write(1, "fizz", 4);
-		else if (i % 5 == 0)
+		else if (!(i % 5))
 			write(1, "buzz", 4);
 		else
-			writenumber(i);
+			ft_putnbr(i);
 	write(1, "\n", 1);
 	i++;
-	}
+	}	
 }
 
 /*
