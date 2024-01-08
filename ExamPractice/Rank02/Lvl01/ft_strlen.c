@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:10:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/10/20 15:13:10 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 16:05:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-
+/*
 #include <stdio.h>
 
 int	main(void)
 {
-	printf("String length of \"Poop on a string\" is:%d", ft_strlen("Poop on a string"));
-}
+	printf("String length of \"Poop on a string\" is: %d", ft_strlen("Poop on a string"));
+}*/
 
 /*
 Assignment name  : ft_strlen
