@@ -6,11 +6,10 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:24:48 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/23 15:52:14 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/08 17:40:54 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <string.h>
+/*
 #include <stdlib.h>
 
 char	*ft_strdup(char *src)
@@ -32,9 +31,28 @@ char	*ft_strdup(char *src)
 	}
 	result[i] = '\0';
 	return(result);
+}*/
+
+#include <stdlib.h>
+
+char	*ft_strdup(char *src)
+{
+	int		i = 0;
+	char	*str;
+
+	while (src[i])
+		i++;
+	str = (char *)malloc(i + 1);
+	if (!str)
+		return (NULL);
+	str[++i] = '\0';
+	while (i-- >= 0)
+		str[i] = src[i];
+	return (str);
 }
 /*
 #include <stdio.h>
+#include <string.h>
 
 int	main(int ac, char *av[])
 {
