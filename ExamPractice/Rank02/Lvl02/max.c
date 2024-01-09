@@ -6,10 +6,10 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:29:04 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/04 11:57:11 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/09 15:25:12 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/* Solulu 1
 int	max(int* tab, unsigned int len)
 {
 	int				maximum;
@@ -24,6 +24,18 @@ int	max(int* tab, unsigned int len)
 		i++;
 	}
 	return (maximum);
+}*/
+
+int	max(int* tab, unsigned int len)
+{
+	int				max = tab[0];
+
+	while (--len > 0)
+	{
+		if (tab[len] > max)
+			max = tab[len];
+	}
+	return (max);
 }
 /*
 #include <stdio.h>
@@ -44,7 +56,7 @@ int	main(void)
 	}
 	printf(", the largest number is: %d\n", max(tab, len));
 	return (0);
-} */
+}*/
 
 /*
 Assignment name  : max
