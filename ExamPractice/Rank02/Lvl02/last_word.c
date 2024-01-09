@@ -6,10 +6,10 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:45:29 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/04 11:28:31 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/09 15:11:44 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/* Solulu 1
 #include <unistd.h>
 
 int	main(int ac, char *av[])
@@ -31,6 +31,23 @@ int	main(int ac, char *av[])
 	}
 	write(1, "\n", 1);
 	return (0);
+}*/
+
+#include <unistd.h>
+
+int	main(int ac, char *av[])
+{
+	int	i = 0;
+	while (ac == 2 && av[1][i])
+		i++;
+	i--;
+	while (av[1][i] == ' ' || av[1][i] == '\t')
+		i--;
+	while (av[1][i - 1] != ' ' && av[1][i - 1] != '\t' && i >= 0)
+		i--;
+	while (av[1][i] != ' ' && av[1][i] != '\t' && av[1][i])
+		write(1, &av[1][i++], 1);
+	return (write(1, "\n", 1), 0);
 }
 
 /*
