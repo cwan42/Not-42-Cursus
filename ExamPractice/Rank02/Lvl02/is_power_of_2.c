@@ -6,15 +6,12 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:11:20 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/04 10:41:25 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/09 14:42:11 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	is_power_of_2(unsigned int n)
 {
-	unsigned long	i;
-
-	i = 0;
 	if (n == 0)
 		return (0);
 	while (n % 2 == 0)
@@ -29,12 +26,17 @@ int	main(void)
 	int	i;
 
 	i = 1;
-	while (i < 1025)
+	while (i < 8193)
 	{
 		if (is_power_of_2(i))
 			printf("\33[32m%d \033[0m", i);
 		else
-			printf("\33[31m%d \033[0m", i);
+		{
+			if (!is_power_of_2(i) && i > 1000)
+				printf("\33[31m.\033[0m");
+			else
+				printf("\33[31m%d \033[0m", i);
+		}
 		i++;
 	}
 	return (0);
