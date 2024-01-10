@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:15:19 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/15 13:18:31 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/10 13:24:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,21 @@ int	ft_atoi_base(const char *str, int str_base)
 	i = 0;
 	sign = 1;
 	res = 0;
-	if (str[i++] == '-')
+	if (str[i] == '-')
+	{
 		sign = -1;
+		i++;
+	}
 	while (str[i])
 	{
+		res *= str_base;
+		if (str[i] >= '0' && str[i] <= '9')
+			res += str[i] - 48;
+		else if (str[i] >= 'A' && str[i] <= 'Z')
+			res += str[i] - 55;
+		else if (str[i] >= 'a' && str[i] <= 'z')
+			res += str[i] - 87;
+		i++;
 	}
 	return (res * sign);
 }
