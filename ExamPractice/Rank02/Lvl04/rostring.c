@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:45:58 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/29 11:55:50 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/16 18:09:32 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	main(int ac, char *av[])
 {
 	int	i = 0;
 	int	j;
+	int	firstword = 0;
 
-	if (ac == 2)
+	if (ac >= 2)
 	{
 		while (av[1][i] == ' ' || av[1][i] == '\t')
 			i++;
@@ -30,15 +31,19 @@ int	main(int ac, char *av[])
 		while (av[1][i])
 		{
 			if (av[1][i] > 32)
+			{
 				write(1, &av[1][i], 1);
-			else if ((av[1][i] == ' ' || av[1][i] == '\t') && av[1][i - 1] > 32)
+				firstword = 1;
+			}
+			if ((av[1][i] < 33) && (av[1][i - 1] > 32) && av[1][i + 1])
 				write(1, &av[1][i], 1);
 			i++;
 		}
-		if (av[1][j])
+		if (firstword)
 			write(1, " ", 1);
 		while (av[1][j] > 32)
-			write(1, &av[1][j++], 1);
+				write(1, &av[1][j++], 1);
+
 	}
 	return (write(1, "\n", 1), 0);
 }
