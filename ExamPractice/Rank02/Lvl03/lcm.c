@@ -6,11 +6,25 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:45:13 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/20 15:23:14 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/17 10:25:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+/* Solulu 1
+unsigned int	lcm(unsigned int a, unsigned int b)
+{
+	unsigned int	n;
+
+	if (!a || !b)
+		return (0);
+	n = a;
+	while (1)
+	{
+		if (!(n % a) && !(n % b))
+			return (n);
+		++n;
+	}
+}*/
 
 unsigned int	ft_hcf(unsigned int a, unsigned int b)
 {
@@ -30,6 +44,7 @@ unsigned int	lcm(unsigned int a, unsigned int b)
 	return (lcm);
 }
 /*
+#include <stdio.h>
 #include <stdlib.h>
 
 int	main(int ac, char *av[])

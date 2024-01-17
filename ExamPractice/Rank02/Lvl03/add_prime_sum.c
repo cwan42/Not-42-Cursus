@@ -6,11 +6,77 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:56:35 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/15 11:33:40 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/17 17:01:32 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//Solulu 1
+
 #include <unistd.h>
+
+void	ft_putnbr(int n)
+{
+	char	c;
+
+	if (n > 9)
+		ft_putnbr(n / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i = 0;
+	int	sign = 1;
+	int	res = 0;
+
+	while (str[i] < 33)
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	while (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res * sign);
+}
+
+int	ft_isprime(int n)
+{
+	int	i = 2;
+	if (n <= 1)
+		return (0);
+	while (i * i <= n)
+	{
+		if (n % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	main(int ac, char *av[])
+{
+	int	n;
+	int sum = 0;
+
+	if (ac == 2)
+	{
+		n = ft_atoi(av[1]);
+		while (n)
+		{
+			if (ft_isprime(n))
+				sum += n;
+			n--;
+		}
+		ft_putnbr(sum);
+	}
+	return (write(1, "\n", 1), 0);
+}
+/* Solulu 2
 
 void	ft_putchar(char c)
 {
@@ -91,7 +157,7 @@ int	main(int ac, char *av[])
 	ft_putnbr(res);
 	ft_putchar('\n');
 }
-
+*/
 /*
 Assignment name  : add_prime_sum
 Expected files   : add_prime_sum.c

@@ -6,10 +6,46 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:15:19 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/10 13:24:14 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/17 17:44:26 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+Solulu WIP
+int	ft_atoi_base(const char *str, int str_base)
+{
+	int	i = 0;
+	int	sign = 1;
+	int	res = 0;
+
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] > 32)
+	{
+		res *= str_base;
+		if (str[i] >= '0' && str[i] <= '9')
+			res += str[i] - '0';
+		else if (str[i] >= 'A' && str[i] <= 'F')
+			res += str[i] - 'A' + 10;
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			res += str[i] - 'a' + 10;
+		i++;
+	}
+	return (res * sign);
+}
+
+#include <stdio.h>
+
+int	main(int ac, char *av[])
+{
+	char *str = "Ceci permet de decouvrir le fonctionnement de ton ft_atoi_base.";
+	if (ac == 2 || av[0])
+		printf("%d\n", ft_atoi_base(str, 16));
+}
+
+/* Solulu 2
 int	ft_atoi_base(const char *str, int str_base)
 {
 	int	i;
@@ -44,7 +80,7 @@ int	main(int ac, char *av[])
 {
 	if (ac == 2)
 		printf("%d", ft_atoi_base(av[1], 16));
-}
+}*/
 /*
 Assignment name  : ft_atoi_base
 Expected files   : ft_atoi_base.c
