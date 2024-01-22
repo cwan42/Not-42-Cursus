@@ -6,12 +6,51 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:49:23 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/26 13:27:05 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/22 18:35:58 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+//Solulu 1
+
+int	main(int ac, char *av[])
+{
+	int	i;
+	int	j = 1;
+
+	if (ac < 2)
+		write(1, "\n", 1);
+	else
+	{
+		while (j < ac)
+		{
+			i = 0;
+			while (av[j][i])
+			{
+				if (av[j][i] >= 'a' && av[j][i] <= 'z')
+					av[j][i] -= 32;
+				write (1, &av[j][i++], 1);
+				while (av[j][i])
+				{
+					if (av[j][i] >= 'A' && av[j][i] <= 'Z')
+						av[j][i] += 32;
+					if (av[j][i] >= 'a' && av[j][i] <= 'z' && 
+					av[j][i - 1] == ' ')
+						av[j][i] -= 32;
+					write(1, &av[j][i], 1);
+					i++;
+				}
+			}
+			write(1, "\n", 1);
+			j++;
+		}
+	}
+	return (0);
+}
+
+
+/* Solulu 2
 int	ft_toupper(char c, char d)
 {
 	if (c >= 'a' && c <= 'z')
@@ -60,7 +99,7 @@ int	main(int ac, char *av[])
 	else
 		write(1, "\n", 1);
 	return (0);
-}
+}*/
 
 /*
 Assignment name  : str_capitalizer
