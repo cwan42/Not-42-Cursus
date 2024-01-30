@@ -6,12 +6,33 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:58:50 by cwan              #+#    #+#             */
-/*   Updated: 2023/11/16 11:13:59 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/30 15:20:15 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+int	main(int ac, char *av[])
+{
+	int	i = 0;
+
+	if (ac == 2)
+	{
+		while (av[1][i])
+		{
+			if (av[1][i] >= 'a' && av[1][i] <= 'y')
+				av[1][i] += 1;
+			else if (av[1][i] >= 'A' && av[1][i] <= 'Y')
+				av[1][i] += 1;
+			else if (av[1][i] == 'z' || av[1][i] == 'Z')
+				av[1][i] -= 25;
+			write(1, &av[1][i++], 1);
+		}
+	}
+	return(write(1, "\n", 1), 0);
+}
+
+/* Solulu 02
 int	main(int ac, char *av[])
 {
 	int	i;
