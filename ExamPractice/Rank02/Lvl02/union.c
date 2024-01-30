@@ -6,10 +6,54 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:00:28 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/04 13:52:28 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/30 13:40:13 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
+int	isfirst(char *str, char c, int pos)
+{
+	int	i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == c)
+			break ;
+		i++;
+	}
+	return (i == pos);
+}
+
+int	main(int ac, char *av[])
+{
+	int	i = 0;
+	int	j = 0;
+	char 	*str;
+
+	if (ac != 3)
+		return (write(1, "\n", 1), 0);
+	str = av[1];
+	while (str[i])
+		i++;
+	while (av[2][j])
+	{
+		str[i] = av[2][j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	i = 0;
+	while (str[i])
+	{
+		if (isfirst(str, str[i], i))
+			write(1, &str[i], 1);
+		i++;
+	}
+	return (write(1, "\n", 1), 0);
+}
+
+/* Solulu 02
 #include <unistd.h>
 
 int	ft_isfirst(char *str, char c, int pos)
@@ -62,7 +106,8 @@ int	main(int ac, char *av[])
 	}
 	write(1, "\n", 1);
 	return (0);
-}
+}*/
+
 /*
 Assignment name  : union
 Expected files   : union.c
