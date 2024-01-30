@@ -6,26 +6,38 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:03:42 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/05 16:20:52 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:28 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdio.h>
 
-typedef struct s_point
+typedef struct	s_point
 {
-	int			x;
-	int			y;
-}				t_point;
+	int	x;
+	int	y;
+}		t_point;
+
+void	fill(char **tab, t_point size, t_point cur, char to_fill)
+{
+	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
+		|| tab[cur.y][cur.x] != to_fill)
+		return;
+
+	tab[cur.y][cur.x] = 'F';
+	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
+	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
+	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
+	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
+}
 
 void	flood_fill(char **tab, t_point size, t_point begin)
 {
-	
+	fill(tab, size, begin, tab[begin.y][begin.x]);
 }
 
-#include <stdlib.h>
-#include <stdio.h>
-//#include "flood_fill.h" not necessary cos' it's on top
-
+/*
 char**	make_area(char ** zone, t_point size)
 {
 	char**	new;
@@ -61,7 +73,7 @@ int	main(void)
 	for (int i = 0; i < size.y; ++i)
 		printf("%s\n", area[i]);
 	return (0);
-}
+}*/
 
 /*
 Assignment name  : flood_fill
