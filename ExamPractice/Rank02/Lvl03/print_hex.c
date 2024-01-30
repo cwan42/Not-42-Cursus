@@ -6,11 +6,50 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 10:16:53 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/26 10:44:02 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/30 14:05:39 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	simpleatoi(char *str)
+{
+	int	i = 0;
+	int	res = 0;
+
+	while (str[i])
+		res = (res * 10) + (str[i++] - '0');
+	return (res);
+}
+
+void	hexconv(int n)
+{
+	if (n > 15)
+	{
+		hexconv(n / 16);
+		hexconv(n % 16);
+	}
+	if (n < 10)
+		ft_putchar(n + '0');
+	else if (n < 16)
+		ft_putchar(n - 10 + 'a');
+}
+
+int	main(int ac, char *av[])
+{
+	if (ac == 2)
+	{
+		hexconv(simpleatoi(av[1]));
+	}
+	return (write(1, "\n", 1), 0);
+}
+
+/* Solulu 02
 
 void	ft_putchar(char c)
 {
@@ -49,7 +88,7 @@ int	main(int ac, char *av[])
 		ft_hexconv(ft_atoi(av[1]));
 	}
 	return (ft_putchar('\n'), (0));
-}
+} */
 
 /*
 Assignment name  : print_hex
