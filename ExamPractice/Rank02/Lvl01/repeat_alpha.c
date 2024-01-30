@@ -6,12 +6,37 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:49:42 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/08 16:32:21 by cwan             ###   ########.fr       */
+/*   Updated: 2024/01/24 17:00:07 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
+
 #include <unistd.h>
 
+int	main(int ac, char *av[])
+{
+	int	i = 0;
+	int	ct;
+
+	while (ac == 2 && av[1][i])
+	{
+		if (av[1][i] >= 'a' && av[1][i] <= 'z')
+		{
+			ct = av[1][i] - 96;
+			while (ct-- > 1)
+				write(1, &av[1][i], 1);
+		}
+		else if (av[1][i] >= 'A' && av[1][i] <= 'Z')
+		{
+			ct = av[1][i] - 64;
+			while (ct-- > 1)
+				write(1, &av[1][i], 1);
+		}
+		write(1, &av[1][i++], 1);
+	}
+	return (write(1, "\n", 1), 0);
+}
+
+/* Solulu 1
 int	main(int ac, char *av[])
 {
 	int	i;
@@ -46,9 +71,9 @@ int	main(int ac, char *av[])
 		}
 	}
 	write(1, "\n", 1);
-}*/
+}
 
-#include <unistd.h>
+Solulu 3
 
 int	main(int ac, char *av[])
 {
@@ -79,7 +104,6 @@ int	main(int ac, char *av[])
 	return (write(1, "\n", 1), 0);
 }
 
-/*
 Assignment name  : repeat_alpha
 Expected files   : repeat_alpha.c
 Allowed functions: write
