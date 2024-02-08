@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 14:02:21 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/08 16:15:47 by cwan             ###   ########.fr       */
+/*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
+/*   Updated: 2024/02/08 13:46:15 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 const extern char	**environ;
 
-void	ft_free(char **arr)
+void	ft_free(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
 
 char	*ft_findpath(char *cmdzero)
@@ -30,11 +30,19 @@ char	*ft_findpath(char *cmdzero)
 	char	*testpath;
 	int		i;
 
+	if (!*environ || !environ)
+		return (NULL);
+	path = NULL;
 	i = 0;
-	while (environ[i] && (ft_strncmp(environ[i], "PATH=", 5)))
+	while (environ[i])
+	{
+		if (!(ft_strncmp(environ[i], "PATH=", 5)))
+		{
+			path = ft_split(environ[i] + 5, ':');
+			break ;
+		}
 		i++;
-	if (environ[i] && !(ft_strncmp(environ[i], "PATH=", 5)))
-		path = ft_split(environ[i] + 5, ':');
+	}
 	i = 0;
 	while (path[i])
 	{
@@ -47,6 +55,19 @@ char	*ft_findpath(char *cmdzero)
 	return (ft_free(path), NULL);
 }
 
+/*
+void	ft_invalidcmd(char **cmdsplit, char *cmdpath)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("command not found: %s\n", cmdsplit[0], 1);
+	while (cmdsplit[i])
+		free(cmdsplit[i++]);
+	free(cmdsplit);
+	free(cmdpath);
+}*/
+
 int	ft_process(char *file, char *cmd, int fd, int pid)
 {
 	char	**cmdsplit;
@@ -56,8 +77,27 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_findpath(cmdsplit[0]);
 	if (access(cmdpath, F_OK))
-		return (ft_printf("command not found: %s\n", cmdsplit[0]), \
-			ft_free(cmdsplit), free(cmdpath), -1);
+	{
+		ft_printf("command not found: %s\n", cmdsplit[0]);
+		return (ft_free(cmdsplit), free(cmdpath), -1);
+	}
+//		return (ft_invalidcmd(cmdsplit, cmdpath), -1);
+	if (pid == 0)
+	{
+		filefd = open(file, O_RDONLY | R_OK);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
+		dup2(filefd, 0);
+		return (dup2(fd, 1), close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
+	}
+	else
+	{
+		filefd = open(file, O_WRONLY | O_CREAT, 0644);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
+		dup2(filefd, 1);
+		return (dup2(fd, 0), close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
+	}
 }
 
 int	main(int ac, char *av[])
@@ -65,8 +105,8 @@ int	main(int ac, char *av[])
 	int	pid;
 	int	pipefd[2];
 
-	if (ac != 5 || !av[0])
-		return (ft_printf("Invalid argument count\n"), 0);
+	if (ac != 5)
+		return (ft_printf("Invalid argument count", 0));
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
