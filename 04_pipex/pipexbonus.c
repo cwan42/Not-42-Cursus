@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipexbonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
-/*   Updated: 2023/12/12 18:21:19 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/08 12:01:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ char	*ft_findpath(char *cmdzero, char **envp)
 }
 */
 
+void	ft_invalidcmd(char **cmdsplit, char *cmdpath)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("command not found: %s\n", cmdsplit[0], 1);
+	while (cmdsplit[i])
+		free(cmdsplit[i++]);
+	free(cmdsplit);
+	free(cmdpath);
+}
+
 int	ft_process(char *file, char *cmd, int fd, int pid)
 {
 	char	**cmdsplit;
@@ -54,7 +66,7 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_strjoin("/bin/", cmdsplit[0]);
 	if (access(cmdpath, F_OK))
-		return (ft_printf("command not found: %s\n", cmdsplit[0]), -1);
+		return (ft_invalidcmd(cmdsplit, cmdpath), -1);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);

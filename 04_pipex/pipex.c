@@ -6,13 +6,23 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:45:26 by cwan              #+#    #+#             */
-/*   Updated: 2024/01/03 08:30:23 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/08 13:46:15 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 const extern char	**environ;
+
+void	ft_free(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
 
 char	*ft_findpath(char *cmdzero)
 {
@@ -27,21 +37,25 @@ char	*ft_findpath(char *cmdzero)
 	while (environ[i])
 	{
 		if (!(ft_strncmp(environ[i], "PATH=", 5)))
+		{
 			path = ft_split(environ[i] + 5, ':');
+			break ;
+		}
 		i++;
 	}
 	i = 0;
-	while (path[0])
+	while (path[i])
 	{
-		testpath = ft_strjoin(ft_strjoin(path[0], "/"), cmdzero);
+		testpath = ft_strjoin(ft_strjoin(path[i], "/"), cmdzero);
 		if (!(access(testpath, F_OK)))
-			return (free(path), testpath);
+			return (ft_free(path), testpath);
 		free(testpath);
 		i++;
 	}
-	return (free(path), NULL);
+	return (ft_free(path), NULL);
 }
 
+/*
 void	ft_invalidcmd(char **cmdsplit, char *cmdpath)
 {
 	int	i;
@@ -52,7 +66,7 @@ void	ft_invalidcmd(char **cmdsplit, char *cmdpath)
 		free(cmdsplit[i++]);
 	free(cmdsplit);
 	free(cmdpath);
-}
+}*/
 
 int	ft_process(char *file, char *cmd, int fd, int pid)
 {
@@ -63,7 +77,11 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_findpath(cmdsplit[0]);
 	if (access(cmdpath, F_OK))
-		return (ft_invalidcmd(cmdsplit, cmdpath), -1);
+	{
+		ft_printf("command not found: %s\n", cmdsplit[0]);
+		return (ft_free(cmdsplit), free(cmdpath), -1);
+	}
+//		return (ft_invalidcmd(cmdsplit, cmdpath), -1);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
