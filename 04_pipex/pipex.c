@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:02:21 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/13 13:18:16 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/13 14:22:37 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ char	*ft_findpath(char *cmdzero)
 		free(testpath);
 		i++;
 	}
-	return (ft_free(path), free(testpath), NULL);
+	ft_printf("command not found: %s\n", cmdzero);
+	ft_free(path);
+	return (NULL);
 }
 
 int	ft_process(char *file, char *cmd, int fd, int pid)
@@ -58,16 +60,15 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_findpath(cmdsplit[0]);
-	if (access(cmdpath, F_OK))
-		return (ft_printf("command not found: %s\n", cmdsplit[0]), \
-			ft_free(cmdsplit), free(cmdpath), -1);
+	if (cmdpath == NULL)
+		return (ft_free(cmdsplit), -1);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
 		if (filefd == -1)
 			return (ft_printf("permission denied: %s", file), -1);
 		return (dup2(filefd, 0), dup2(fd, 1), close(filefd), \
-		execve(cmdpath, cmdsplit, NULL));
+		execve(cmdpath, cmdsplit, NULL), 0);
 	}
 	else
 	{
