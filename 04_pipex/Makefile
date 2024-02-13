@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2023/12/12 18:36:37 by cwan             ###   ########.fr        #
+#    Updated: 2024/02/13 13:19:32 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ bonus: $(NAME) $(BOBJS)
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
-	@$(MAKE) -C libft clean > /dev/null
-	@$(MAKE) -C ft_printf clean > /dev/null
+	@$(MAKE) -C libft fclean > /dev/null
+	@$(MAKE) -C ft_printf fclean > /dev/null
 	
 
 fclean: clean
