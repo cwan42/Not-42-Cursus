@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:02:21 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/08 16:15:47 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:47:02 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ char	*ft_findpath(char *cmdzero)
 	int		i;
 
 	i = 0;
+	path = NULL;
 	while (environ[i] && (ft_strncmp(environ[i], "PATH=", 5)))
 		i++;
 	if (environ[i] && !(ft_strncmp(environ[i], "PATH=", 5)))
 		path = ft_split(environ[i] + 5, ':');
+	else
+		return (NULL);
 	i = 0;
 	while (path[i])
 	{
@@ -44,7 +47,7 @@ char	*ft_findpath(char *cmdzero)
 		free(testpath);
 		i++;
 	}
-	return (ft_free(path), NULL);
+	return (ft_free(path), free(testpath), NULL);
 }
 
 int	ft_process(char *file, char *cmd, int fd, int pid)
@@ -58,6 +61,22 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	if (access(cmdpath, F_OK))
 		return (ft_printf("command not found: %s\n", cmdsplit[0]), \
 			ft_free(cmdsplit), free(cmdpath), -1);
+	if (pid == 0)
+	{
+		filefd = open(file, O_RDONLY | R_OK);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
+		return (dup2(filefd, 0), dup2(fd, 1), close(filefd), \
+		execve(cmdpath, cmdsplit, NULL));
+	}
+	else
+	{
+		filefd = open(file, O_WRONLY | O_CREAT, 0644);
+		if (filefd == -1)
+			return (ft_printf("permission denied: %s", file), -1);
+		return (dup2(filefd, 1), dup2(fd, 0), close(filefd), \
+			execve(cmdpath, cmdsplit, NULL), 0);
+	}
 }
 
 int	main(int ac, char *av[])
@@ -65,12 +84,12 @@ int	main(int ac, char *av[])
 	int	pid;
 	int	pipefd[2];
 
-	if (ac != 5 || !av[0])
-		return (ft_printf("Invalid argument count\n"), 0);
+	if (ac != 5)
+		return (ft_printf("Invalid argument count\n"), 1);
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
-		return (errno = EPERM, perror("Failed fork: "), 0);
+		return (errno = EPERM, perror("Failed fork: "), 1);
 	if (pid == 0)
 	{
 		close(pipefd[0]);
