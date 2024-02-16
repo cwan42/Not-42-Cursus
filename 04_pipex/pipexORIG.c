@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-const extern char	**environ;
+extern const char	**environ;
 
 void	ft_free(char **arr)
 {
@@ -28,41 +28,37 @@ char	*ft_findpath(char *cmdzero)
 {
 	char	**path;
 	char	*testpath;
-	int		i;
+	char	**tmptr;
 
-	i = 0;
-	path = NULL;
-	while (environ[i] && (ft_strncmp(environ[i], "PATH=", 5)))
-		i++;
-	if (environ[i] && !(ft_strncmp(environ[i], "PATH=", 5)))
-		path = ft_split(environ[i] + 5, ':');
-	else
-		return (NULL);
-	i = 0;
-	while (path[i])
+	while (*(environ) && (ft_strncmp(*(environ), "PATH=", 5)))
+		environ++;
+	path = ft_split(*(environ) + 5, ':');
+	tmptr = path;
+	while (*tmptr)
 	{
-		testpath = ft_strjoin(ft_strjoin(path[i], "/"), cmdzero);
-		if (access(testpath, X_OK) == 0)
-			return (ft_free(path), testpath);
-		else
-			free(testpath);
-		i++;
+		testpath = ft_strjoin(*(tmptr), cmdzero);
+		if (!access(testpath, X_OK))
+			return (ft_free(path), free(cmdzero), testpath);
+		free(testpath);
+		tmptr++;
 	}
 	ft_printf("command not found: %s\n", cmdzero);
 	ft_free(path);
-	return (NULL);
+	return (ft_free(path), tmptr = NULL, NULL);
 }
 
 int	ft_process(char *file, char *cmd, int fd, int pid)
 {
 	char	**cmdsplit;
+	char	*cmdzero;
 	char	*cmdpath;
 	int		filefd;
 
 	cmdsplit = ft_split(cmd, ' ');
-	cmdpath = ft_findpath(cmdsplit[0]);
+	cmdzero = ft_strjoin("/", cmdsplit[0]);
+	cmdpath = ft_findpath(cmdzero);
 	if (!cmdpath)
-		return (ft_free(cmdsplit), -1);
+		return (ft_free(cmdsplit), free(cmdzero), -1);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
