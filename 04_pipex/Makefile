@@ -6,17 +6,15 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2024/02/13 13:19:32 by cwan             ###   ########.fr        #
+#    Updated: 2024/02/17 14:31:35 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRCS = \
-		pipex.c\
+SRCS =	pipex.c
 
-BSRCS = \
-		pipexbonus.c\
+BSRCS = pipexbonus.c
 
 CC = cc
 
