@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 14:02:21 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/17 17:05:18 by cwan             ###   ########.fr       */
+/*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
+/*   Updated: 2024/02/19 10:45:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,23 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	cmdsplit = ft_split(cmd, ' ');
 	cmdpath = ft_findpath(cmdsplit[0]);
 	if (!cmdpath)
-		return (ft_free(cmdsplit), -1);
+		return (ft_free(cmdsplit), 127);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
-		if (filefd == -1)
-			return (ft_free(cmdsplit), free(cmdpath), \
-			ft_printf("permission denied: %s\n", file), -1);
-		return (dup2(filefd, 0), dup2(fd, 1), close(filefd), \
-		execve(cmdpath, cmdsplit, NULL), 0);
+		dup2(filefd, 0);
+		dup2(fd, 1);
 	}
 	else
 	{
 		filefd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (filefd == -1)
-			return (ft_free(cmdsplit), free(cmdpath), \
-			ft_printf("permission denied: %s\n", file), -1);
-		return (dup2(filefd, 1), dup2(fd, 0), close(filefd), \
-		execve(cmdpath, cmdsplit, NULL), 0);
+		dup2(filefd, 1);
+		dup2(fd, 0);
 	}
+	if (filefd == -1)
+		return (ft_free(cmdsplit), free(cmdpath), \
+		ft_putstr_fd("permission denied: ", 2), ft_putstr_fd(file, 2), -1);
+	return (close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
 }
 
 int	main(int ac, char *av[])
@@ -84,21 +82,17 @@ int	main(int ac, char *av[])
 	int	pipefd[2];
 
 	if (ac != 5)
-		return (ft_printf("Invalid argument count\n"), 1);
+		return (ft_printf("Prog req 4 arguments.\n"), 3);
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
-		return (errno = EPERM, perror("Failed fork: "), 1);
+		exit(1);
 	if (pid == 0)
-	{
-		close(pipefd[0]);
 		ft_process(av[1], av[2], pipefd[1], pid);
-	}
 	else
 	{
-		wait(NULL);
+		waitpid(pid, NULL, 0);
 		close(pipefd[1]);
 		ft_process(av[4], av[3], pipefd[0], pid);
 	}
-	return (0);
 }
