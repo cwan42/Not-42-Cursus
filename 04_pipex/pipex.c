@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/19 12:57:55 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/19 15:54:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
-		if (errno == ENOENT)
-			return (ft_printf("no such file or directory: %s\n", file));
+//		if (errno == ENOENT)
+//			return (ft_printf("no such file or directory: %s\n", file));
 		dup2(filefd, 0);
 		dup2(fd, 1);
 	}
