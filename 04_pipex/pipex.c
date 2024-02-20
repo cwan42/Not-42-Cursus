@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/19 15:54:21 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:51:59 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,17 @@ char	*ft_findpath(char *cmdzero)
 		free(testpath);
 		tmptr++;
 	}
-	ft_printf("command not found: %s\n", cmdzero);
-	return (ft_free(path), free(cmd), tmptr = NULL, NULL);
+	return (ft_putstr_fd("command not found: ", 2), ft_putstr_fd(cmdzero, 2), \
+	ft_putstr_fd("\n", 2), (ft_free(path), free(cmd), tmptr = NULL, NULL));
 }
 
-int	ft_process(char *file, char *cmd, int fd, int pid)
+int	ft_process2(char *file, int fd, int pid)
 {
-	char	**cmdsplit;
-	char	*cmdpath;
-	int		filefd;
+	int	filefd;
 
-	cmdsplit = ft_split(cmd, ' ');
-	cmdpath = ft_findpath(cmdsplit[0]);
-	if (!cmdpath)
-		return (ft_free(cmdsplit), 127);
 	if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
-//		if (errno == ENOENT)
-//			return (ft_printf("no such file or directory: %s\n", file));
 		dup2(filefd, 0);
 		dup2(fd, 1);
 	}
@@ -72,10 +64,31 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 		dup2(filefd, 1);
 		dup2(fd, 0);
 	}
-	if (filefd == -1)
-		return (ft_free(cmdsplit), free(cmdpath), \
-		ft_putstr_fd("permission denied: ", 2), ft_putstr_fd(file, 2), 1);
-	return (close(filefd), execve(cmdpath, cmdsplit, NULL), 0);
+	if (errno == EBADF)
+		return (ft_putstr_fd("no such file or directory: ", 2), \
+		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
+	return (filefd);
+}
+
+int	ft_process(char *file, char *cmd, int fd, int pid)
+{
+	char	**cmdsplit;
+	char	*cmdpath;
+	int		filefd;
+
+	filefd = ft_process2(file, fd, pid);
+	cmdsplit = ft_split(cmd, ' ');
+	cmdpath = ft_findpath(cmdsplit[0]);
+	if (!cmdpath)
+		return (ft_free(cmdsplit), 127);
+	if (filefd != -1)
+		return (execve(cmdpath, cmdsplit, NULL), 0);
+	ft_free(cmdsplit);
+	free(cmdpath);
+	if (errno == EBADF)
+		exit(0);
+	return (ft_putstr_fd("permission denied: ", 2), \
+		ft_putstr_fd(file, 2), 1);
 }
 
 int	main(int ac, char *av[])
