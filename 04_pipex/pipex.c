@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/20 12:51:59 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/22 14:15:58 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	ft_process2(char *file, int fd, int pid)
 {
 	int	filefd;
 
-	if (pid == 0)
+	if (pid == 0 && access(file, F_OK) == -1)
+		return (ft_putstr_fd("no such file or directory: ", 2), \
+		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
+	else if (pid == 0)
 	{
 		filefd = open(file, O_RDONLY | R_OK);
 		dup2(filefd, 0);
@@ -64,9 +67,6 @@ int	ft_process2(char *file, int fd, int pid)
 		dup2(filefd, 1);
 		dup2(fd, 0);
 	}
-	if (errno == EBADF)
-		return (ft_putstr_fd("no such file or directory: ", 2), \
-		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
 	return (filefd);
 }
 
@@ -85,10 +85,8 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 		return (execve(cmdpath, cmdsplit, NULL), 0);
 	ft_free(cmdsplit);
 	free(cmdpath);
-	if (errno == EBADF)
-		exit(0);
 	return (ft_putstr_fd("permission denied: ", 2), \
-		ft_putstr_fd(file, 2), 1);
+		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
 }
 
 int	main(int ac, char *av[])
