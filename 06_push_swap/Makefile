@@ -6,14 +6,14 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/01/03 10:45:33 by cwan             ###   ########.fr        #
+#    Updated: 2024/02/22 15:33:34 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = \
-		push_swap.c stackfunctions.c cmd_swap.c\
+		push_swap.c\
 
 BSRCS = \
 
