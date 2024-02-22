@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/22 14:15:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/22 15:18:38 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 		return (execve(cmdpath, cmdsplit, NULL), 0);
 	ft_free(cmdsplit);
 	free(cmdpath);
+	if (filefd == -1 && access(file, F_OK) == -1)
+		exit(0);
 	return (ft_putstr_fd("permission denied: ", 2), \
 		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
 }
