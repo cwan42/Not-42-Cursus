@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2024/02/22 15:47:51 by cwan             ###   ########.fr        #
+#    Updated: 2024/02/23 13:43:00 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 
 SRCS =	pipex.c
 
-BSRCS = pipex.c
+BSRCS = pipexbonus.c
 
 CC = cc
 
