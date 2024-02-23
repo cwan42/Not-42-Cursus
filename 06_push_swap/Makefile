@@ -6,14 +6,13 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/02/22 16:15:16 by cwan             ###   ########.fr        #
+#    Updated: 2024/02/23 17:55:48 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = 	srcs/*.c \
-		push_swap.c\
+SRCS = 	srcs/stackfns.c srcs/ops_swap.c push_swap.c
 
 BSRCS = \
 
@@ -28,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 $(NAME):$(OBJS)
-	@$(MAKE) -C libft bonus > /dev/null
+	@$(MAKE) -C libft > /dev/null
 	@$(MAKE) -C ft_printf > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
 

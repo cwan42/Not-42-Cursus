@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/22 15:46:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/23 17:37:44 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,22 @@
 
 typedef struct s_stack
 {
-	int				value;
+	int				num;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
+
+t_stack	*ft_stklast(t_stack *lst);
+t_stack	*ft_stknew(int value);
+void	ft_stkadd_back(t_stack **lst, t_stack *node);
+void	ft_freestack(t_stack **lst, t_stack *head);
+
+void	sa(t_stack **heada);
+void	sb(t_stack **headb);
+void	ss(t_stack **heada, t_stack **headb);
+void	swap(t_stack **head);
+//pa, pb, push
+//ra, rb, rr, rotate
+//rra, rrb, rrr, rrotate
 
 #endif
