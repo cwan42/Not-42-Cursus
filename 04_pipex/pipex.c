@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/22 15:18:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/23 12:12:19 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_process(char *file, char *cmd, int fd, int pid)
 	if (filefd == -1 && access(file, F_OK) == -1)
 		exit(0);
 	return (ft_putstr_fd("permission denied: ", 2), \
-		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), -1);
+		ft_putstr_fd(file, 2), ft_putstr_fd("\n", 2), 1);
 }
 
 int	main(int ac, char *av[])
@@ -105,7 +105,10 @@ int	main(int ac, char *av[])
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
+	{
+		close(pipefd[0]);
 		ft_process(av[1], av[2], pipefd[1], pid);
+	}
 	else
 	{
 		waitpid(pid, NULL, 0);
