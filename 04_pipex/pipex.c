@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 08:04:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/23 12:12:19 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/24 12:04:37 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int ac, char *av[])
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, WNOHANG);
 		close(pipefd[1]);
 		exitc = ft_process(av[4], av[3], pipefd[0], pid);
 	}
