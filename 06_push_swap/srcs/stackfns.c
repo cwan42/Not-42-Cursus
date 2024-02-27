@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:05:49 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/25 17:27:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/27 18:28:09 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_stack	*ft_stknew(int value)
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
-		return (NULL);
+			return (NULL);
 	new->num = value;
 	new->next = new;
 	new->prev = new;
@@ -62,7 +62,7 @@ void	ft_freestack(t_stack **lst, t_stack *head)
 	t_stack	*current = *lst;
 	t_stack	*nextnode;
 
-	if (!*lst)
+	if (!lst)
 		return ;
 	while (current->next != head)
 	{
