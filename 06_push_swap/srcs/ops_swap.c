@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:43 by cwan              #+#    #+#             */
-/*   Updated: 2024/02/23 17:59:14 by cwan             ###   ########.fr       */
+/*   Updated: 2024/02/28 15:28:43 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	swap(t_stack **head)
 	first = *head;
 	second = first->next;
 	first->next = second->next;
+	first->prev = second;
 	second->next = first;
+	second->prev = first->prev;
 	*head = second;
 }
