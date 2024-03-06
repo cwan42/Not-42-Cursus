@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/01 16:04:57 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/06 19:44:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,20 @@ int	main(void)
 		head = head->next;
 	}
 	ft_printf("%d.\n", head->num);
+	sb(list);
 	sa(list);
+	sb(list);
 	head = *list;
-	while (head->next != *list && i++ < 11)
+	while (head->next->num != (*list)->num)
 	{
-		ft_printf("Head/*list value is: %d, %d\n", head->num, (*list)->num);
-		ft_printf("Second values are: %d, %d\n", head->next->num, (*list)->next->num);
-		int	*ptr = &head->next;
-		int *ptr2 = &*list;
-		ft_printf("Mem add of head->next/*list = %p, %p\n", (void *)ptr, (void *)ptr2);
-//		ft_printf("%d ", head->num);
+//		ft_printf("Head/*list value is: %d, %d. ", head->num, (*list)->num);
+//		ft_printf("Second values are: %d, %d\n", head->next->num, (*list)->next->num);
+//		ft_printf("Mem of head->next/*list = %p, %p\n", (void *)head->next, (void *)(list));
+		ft_printf("%d ", head->num);
 		head = head->next;
 	}
-//	ft_printf("%d.\n", head->num);
+	ft_printf("%d.\n", head->num);
+	ft_printf("Head/*list value is: %d, %d.\n", head->next->num, (*list)->num);
 	ft_freestack(list);
 	return (0);
 }
