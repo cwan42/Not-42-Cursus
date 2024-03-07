@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/07 15:47:08 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/07 16:54:54 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CC = cc
 
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -g -I ./
+CFLAGS = -Wall -Wextra -Werror -g -I .
 
 OBJS = $(SRCS:.c=.o)
 
