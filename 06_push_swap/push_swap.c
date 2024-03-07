@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/06 20:47:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/07 16:17:04 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void printloop(t_stack **list)
 	{
 		ft_printf("%d ", head->num);
 		head = head->next;
-		ft_printf("(hnn = %d, ln = %d) ", head->next->num, (*list)->num);
+		ft_printf("(hnn = %d, hpn = %d) ", head->next->num, head->prev->num);
 	}
 	ft_printf("%d.\n", head->num);
 }
@@ -44,11 +44,14 @@ int	main(void)
 		ft_stkadd_back(list, newnode);
 	}
 	printloop(list);
+	rra(list);
 	sb(list);
 	printloop(list);
 	ra(list);
-	ft_printf("Supposed to output 4, 3, 2, 1, 5\n");
+	rb(list);
+	sa(list);
 	printloop(list);
+	
 	ft_freestack(list);
 	return (0);
 }

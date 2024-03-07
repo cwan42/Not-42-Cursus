@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/06 20:13:08 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/07 15:46:33 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void	ra(t_stack **heada);
 void	rb(t_stack **headb);
 void	rr(t_stack **heada, t_stack **headb);
 void	rotate(t_stack **head);
+
+void	rra(t_stack **heada);
+void	rrb(t_stack **headb);
+void	rrr(t_stack **heada, t_stack **headb);
+void	rrotate(t_stack **head);
 
 //pa, pb, push
 //rra, rrb, rrr, rrotate
