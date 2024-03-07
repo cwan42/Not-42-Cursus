@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:03:22 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/06 20:38:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/07 15:50:04 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,7 @@ void	rr(t_stack **heada, t_stack **headb)
 
 void	rotate(t_stack **head)
 {
-	t_stack	*first;
-	t_stack *last;
-
 	if (!*head || (!(*head)->next) || (!(*head)->prev))
 		return ;
-	first = *head;
-	last = first->prev;
-	last->next = first->next;
-	first->next = last;
-	first->prev = last->prev;
-	last->prev = first;
-	*head = last;
-	(*head)->prev = first;
+	*head = (*head)->next;
 }

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:43 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/06 19:42:18 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/07 16:16:13 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,25 @@ void	ss(t_stack **heada, t_stack **headb)
 
 void	swap(t_stack **head)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*last;
+	t_stack	*third;
 
 	if (!*head || (!(*head)->next))
 		return ;
+	third = NULL;
+	if ((*head)->next->next != *head)
+	{
+		third = (*head)->next->next;
+		(*head)->prev->next = (*head)->next;
+		*head = (*head)->next;
+		(*head)->next = (*head)->prev;
+		(*head)->prev = (*head)->prev->prev;
+		(*head)->next->next = third;
+		(*head)->next->prev = *head;
+		third->prev = (*head)->next;
+	}
+	else
+		*head = (*head)->next;
+/*
 	first = *head;
 	second = first->next;
 	last = first->prev;
@@ -49,5 +62,5 @@ void	swap(t_stack **head)
 	second->prev = (*head)->prev;
 	*head = second;
 	(*head)->next = first;
-	(*head)->prev = last;
+	(*head)->prev = last;*/
 }
