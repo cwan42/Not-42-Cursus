@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/07 17:54:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/07 19:22:07 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ int	main(void)
 			swap(listb);
 		else if (ft_strncmp(str, "ss", 3) == 0)
 			ss(list, listb);
-/*		else if (ft_strncmp(str, "pa", 3) == 0)
-			pa(list);
+		else if (ft_strncmp(str, "pa", 3) == 0)
+			pa(list, listb);
 		else if (ft_strncmp(str, "pb", 3) == 0)
-			pb(list);*/
+			pb(list, listb);
 		else if (ft_strncmp(str, "ra", 3) == 0)
 			rotate(list);
 		else if (ft_strncmp(str, "rb", 3) == 0)

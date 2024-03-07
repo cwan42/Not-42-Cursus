@@ -6,14 +6,14 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/07 16:54:54 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/07 18:54:17 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = 	srcs/stackfns.c srcs/ops_swap.c srcs/ops_rotate.c srcs/ops_rrotate.c \
-		push_swap.c
+SRCS = 	srcs/stackfns.c srcs/ops_push.c srcs/ops_swap.c srcs/ops_rotate.c \
+		srcs/ops_rrotate.c push_swap.c
 
 BSRCS = \
 
