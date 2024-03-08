@@ -6,32 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:43 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/07 18:49:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/08 09:55:20 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack **heada)
-{
-	swap(heada);
-	ft_printf("sa\n");
-}
-
-void	sb(t_stack **headb)
-{
-	swap(headb);
-	ft_printf("sb\n");
-}
-
-void	ss(t_stack **heada, t_stack **headb)
-{
-	swap(heada);
-	swap(headb);
-	ft_printf("ss\n");
-}
-
-void	swap(t_stack **head)
+static void	swap(t_stack **head)
 {
 	t_stack	*third;
 
@@ -51,16 +32,23 @@ void	swap(t_stack **head)
 	}
 	else
 		*head = (*head)->next;
-/*
-	first = *head;
-	second = first->next;
-	last = first->prev;
-	last->next = second;
-	first->next = second->next;
-	first->prev = second;
-	second->next = first;
-	second->prev = (*head)->prev;
-	*head = second;
-	(*head)->next = first;
-	(*head)->prev = last;*/
+}
+
+void	sa(t_stack **heada)
+{
+	swap(heada);
+	ft_printf("sa\n");
+}
+
+void	sb(t_stack **headb)
+{
+	swap(headb);
+	ft_printf("sb\n");
+}
+
+void	ss(t_stack **heada, t_stack **headb)
+{
+	swap(heada);
+	swap(headb);
+	ft_printf("ss\n");
 }

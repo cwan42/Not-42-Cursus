@@ -6,11 +6,18 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:03:22 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/07 15:50:04 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/08 09:50:22 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	rotate(t_stack **head)
+{
+	if (!*head || (!(*head)->next) || (!(*head)->prev))
+		return ;
+	*head = (*head)->next;
+}
 
 void	ra(t_stack **heada)
 {
@@ -29,11 +36,4 @@ void	rr(t_stack **heada, t_stack **headb)
 	rotate(heada);
 	rotate(headb);
 	ft_printf("rr\n");
-}
-
-void	rotate(t_stack **head)
-{
-	if (!*head || (!(*head)->next) || (!(*head)->prev))
-		return ;
-	*head = (*head)->next;
 }
