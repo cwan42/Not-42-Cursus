@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/07 18:07:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/08 09:55:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,17 @@ void	ft_freestack(t_stack **lst);
 
 void	pa(t_stack **heada, t_stack **headb);
 void	pb(t_stack **heada, t_stack **headb);
-void    push(t_stack **heada, t_stack **headb);
 
 void	sa(t_stack **heada);
 void	sb(t_stack **headb);
 void	ss(t_stack **heada, t_stack **headb);
-void	swap(t_stack **head);
 
 void	ra(t_stack **heada);
 void	rb(t_stack **headb);
 void	rr(t_stack **heada, t_stack **headb);
-void	rotate(t_stack **head);
 
 void	rra(t_stack **heada);
 void	rrb(t_stack **headb);
 void	rrr(t_stack **heada, t_stack **headb);
-void	rrotate(t_stack **head);
 
 #endif

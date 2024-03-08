@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/07 18:54:17 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/08 09:51:04 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 
 BOBJS = $(BSRCS:.c=.o)
 
-$(NAME):$(OBJS)
+$(NAME):$(OBJS) push_swap.h
 	@$(MAKE) -C libft > /dev/null
 	@$(MAKE) -C ft_printf > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
