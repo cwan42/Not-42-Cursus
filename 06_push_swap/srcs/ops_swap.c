@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:43 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 09:55:20 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/08 13:26:33 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 static void	swap(t_stack **head)
 {
-	t_stack	*third;
+	t_stack	*oldhead;
+	t_stack	*newhead;
 
 	if (!*head || (!(*head)->next))
 		return ;
-	third = NULL;
-	if ((*head)->next->next != *head)
-	{
-		third = (*head)->next->next;
-		(*head)->prev->next = (*head)->next;
+	oldhead = *head;
+	newhead = (*head)->next;
+	if ((*head)->next == *head)
 		*head = (*head)->next;
-		(*head)->next = (*head)->prev;
-		(*head)->prev = (*head)->prev->prev;
-		(*head)->next->next = third;
-		(*head)->next->prev = *head;
-		third->prev = (*head)->next;
-	}
 	else
-		*head = (*head)->next;
+	{
+		oldhead->prev->next = newhead;
+		newhead->prev = oldhead->prev;
+		oldhead->prev = newhead;
+		oldhead->next = newhead->next;
+		newhead->next->prev = oldhead;
+		newhead->next = oldhead;
+		*head = newhead;
+	}
 }
 
 void	sa(t_stack **heada)
