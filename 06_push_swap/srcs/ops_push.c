@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:32 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 12:46:40 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/08 16:33:50 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 
 static void	push(t_stack **heada, t_stack **headb)
 {
-	t_stack	*tmp;
-	t_stack	*tmp2;
+	t_stack	*oga;
+	t_stack	*ogb;
 
 	if (!*heada || !*headb)
 		return ;
-	tmp = *heada;
+	oga = *heada;
+	ogb = *headb;
+	(*heada)->prev->next = (*heada)->next;
+	(*heada)->next->prev = (*heada)->prev;
 	*heada = (*heada)->next;
-	(*heada)->prev = tmp->prev;
-	tmp->prev->next = *heada;
-	tmp2 = *headb;
-	*headb = tmp;
-	(*headb)->next = tmp2;
-	(*headb)->prev = tmp2->prev;
-	tmp2->prev->next = *headb;
-	tmp2->next->prev = *headb;
+	if (*headb)
+	{
+		oga->next = *headb;
+		oga->prev = (*headb)->prev;
+		*headb = oga;
+		(*headb)->prev->next = oga;
+	}
+	else
+	{
+		*headb = oga;
+		oga->next = oga;
+		oga->prev = oga;
+	}
 }
 
 void	pa(t_stack **heada, t_stack **headb)
