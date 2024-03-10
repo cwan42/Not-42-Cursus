@@ -12,31 +12,32 @@
 
 #include "push_swap.h"
 
-static void	push(t_stack **heada, t_stack **headb)
+static	void	push(t_stack **heada, t_stack **headb)
 {
 	t_stack	*oga;
 	t_stack	*ogb;
 
-	if (!*heada || !*headb)
+	if (!*heada)
 		return ;
 	oga = *heada;
-	ogb = *headb;
 	(*heada)->prev->next = (*heada)->next;
 	(*heada)->next->prev = (*heada)->prev;
 	*heada = (*heada)->next;
 	if (*headb)
 	{
-		oga->next = *headb;
-		oga->prev = (*headb)->prev;
+		ogb = *headb;
+		ogb->prev->next = oga;
 		*headb = oga;
-		(*headb)->prev->next = oga;
+		(*headb)->prev = ogb->prev;
+		(*headb)->next = ogb;
+		ogb->prev = *headb;
 	}
 	else
 	{
 		*headb = oga;
-		oga->next = oga;
-		oga->prev = oga;
-	}
+		(*headb)->prev = oga;
+		(*headb)->next = oga;
+	}	
 }
 
 void	pa(t_stack **heada, t_stack **headb)
