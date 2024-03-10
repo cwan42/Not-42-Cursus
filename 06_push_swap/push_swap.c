@@ -17,18 +17,24 @@ void	printloops(t_stack **list, t_stack **listb)
 	t_stack	*head = *list;
 	t_stack	*headb = *listb;
 
-	while (head->next != *list)
+	if (*list)
 	{
-		ft_printf("%d ", head->num);
-		head = head->next;
+		while (head->next != *list)
+		{
+			ft_printf("%d ", head->num);
+			head = head->next;
+		}
+		ft_printf("%d.\t", head->num);
 	}
-	ft_printf("%d.\t", head->num);
-	while (headb->next != *listb)
+	if (*listb)
 	{
-		ft_printf("%d ", headb->num);
-		headb = headb->next;
+		while (headb->next != *listb)
+		{
+			ft_printf("%d ", headb->num);
+			headb = headb->next;
+		}
+		ft_printf("%d.\n", headb->num);
 	}
-	ft_printf("%d.\n", headb->num);
 }
 
 #include <stdio.h>
