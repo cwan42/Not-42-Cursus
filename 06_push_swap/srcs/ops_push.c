@@ -12,13 +12,30 @@
 
 #include "push_swap.h"
 
+static	void	pushifooz(t_stack **heada, t_stack **headb)
+{
+	t_stack	*ogb;
+
+	if ((*heada == (*heada)->next) && !*headb)
+	{
+		*headb = *heada;
+		*heada = NULL;
+	}
+	else if ((*heada != (*heada)->next) && !*headb)
+	{
+		ogb = *headb;
+		(*headb)->prev->next = *heada;
+		*headb = *heada;
+		(*headb)->prev = ogb->prev;
+		(*headb)->next = ogb;
+	}
+}
+
 static	void	push(t_stack **heada, t_stack **headb)
 {
 	t_stack	*oga;
 	t_stack	*ogb;
 
-	if (!*heada)
-		return ;
 	oga = *heada;
 	(*heada)->prev->next = (*heada)->next;
 	(*heada)->next->prev = (*heada)->prev;
@@ -30,24 +47,34 @@ static	void	push(t_stack **heada, t_stack **headb)
 		*headb = oga;
 		(*headb)->prev = ogb->prev;
 		(*headb)->next = ogb;
-		ogb->prev = *headb;
+		ogb->prev = oga;
 	}
 	else
 	{
 		*headb = oga;
 		(*headb)->prev = oga;
 		(*headb)->next = oga;
-	}	
+	}
 }
 
 void	pa(t_stack **heada, t_stack **headb)
 {
-	push(headb, heada);
+	if (!*heada)
+		return ;
+	if (*headb == (*headb)->next || !*heada)
+		pushifooz(headb, heada);
+	else
+		push(headb, heada);
 	ft_printf("pa\n");
 }
 
 void	pb(t_stack **heada, t_stack **headb)
 {
-	push(heada, headb);
+	if (!*heada)
+		return ;
+	if (*heada == (*heada)->next || !*headb)
+		pushifooz(heada, headb);
+	else
+		push(heada, headb);
 	ft_printf("pb\n");
 }
