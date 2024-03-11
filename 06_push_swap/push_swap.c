@@ -6,12 +6,78 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 11:13:46 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/11 16:24:48 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+t_stack	**convcheck(char **av)
+{
+	int		i;
+	char	*wspace;
+	char	*str;
+	char	**arr;
+	t_stack	**lista;
+
+	i = 1;
+	str = malloc(1);
+	str = " ";
+	while (av[i])
+	{
+		wspace = ft_strjoin(av[i++], " ");
+		str = ft_strjoin(str, wspace);
+		free(wspace);
+	}
+	i = 0;
+	while ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ')
+// TEST FOR NON INTEGERS
+		i++;
+	arr = ft_split(str, ' ');
+//	SPLIT ARRAY test for dup
+	if (str[i])
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	return (lista);
+}
+
+int	main(int ac, char *av[])
+{
+	t_stack	**list = NULL;
+	t_stack *head = *list;
+
+	if (ac > 1)
+		list = convcheck(av);
+	if (*list)
+	{
+		while (head->next != *list)
+		{
+			ft_printf("%d ", head->num);
+			head = head->next;
+		}
+		ft_printf("%d.\t", head->num);
+	}	
+/*
+	char	**array;
+	int		i;
+
+	i = 0;
+	while (ac == 2 && ((av[1][i] >= '0' && av[1][i] <= '9') || av[1][i] == ' '))
+		i++;
+	array = ft_split((av[1]), ' ');
+	while (array
+	if (av[1][i])
+		return (ft_putstr_fd("Error\n", 2), 1);
+//	intcheckconv(array);
+	while (*array)
+	{
+		ft_printf("%s ", *array);
+		array++;
+	}
+	no param -> display nothing and return prompt
+	if error, display "Error" \n on stderr. (if arg != integer, > MAXINT or dup
+*/
+}
+/*
 void	printloops(t_stack **list, t_stack **listb)
 {
 	t_stack	*head = *list;
@@ -91,4 +157,4 @@ int	main(void)
 	ft_freestack(list);
 	ft_freestack(listb);
 	return (0);
-}
+}*/
