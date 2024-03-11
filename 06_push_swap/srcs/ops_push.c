@@ -6,75 +6,55 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:32 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 16:33:50 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/11 12:12:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void	pushifooz(t_stack **heada, t_stack **headb)
-{
-	t_stack	*ogb;
-
-	if ((*heada == (*heada)->next) && !*headb)
-	{
-		*headb = *heada;
-		*heada = NULL;
-	}
-	else if ((*heada != (*heada)->next) && !*headb)
-	{
-		ogb = *headb;
-		(*headb)->prev->next = *heada;
-		*headb = *heada;
-		(*headb)->prev = ogb->prev;
-		(*headb)->next = ogb;
-	}
-}
-
-static	void	push(t_stack **heada, t_stack **headb)
+static	void	push(t_stack **sta, t_stack **stb)
 {
 	t_stack	*oga;
 	t_stack	*ogb;
 
-	oga = *heada;
-	(*heada)->prev->next = (*heada)->next;
-	(*heada)->next->prev = (*heada)->prev;
-	*heada = (*heada)->next;
-	if (*headb)
+	oga = *sta;
+	if (*sta != (*sta)->next)
 	{
-		ogb = *headb;
+		(*sta)->prev->next = (*sta)->next;
+		(*sta)->next->prev = (*sta)->prev;
+		*sta = (*sta)->next;
+	}
+	else
+		*sta = NULL;
+	if (*stb)
+	{
+		ogb = *stb;
 		ogb->prev->next = oga;
-		*headb = oga;
-		(*headb)->prev = ogb->prev;
-		(*headb)->next = ogb;
+		*stb = oga;
+		(*stb)->prev = ogb->prev;
+		(*stb)->next = ogb;
 		ogb->prev = oga;
 	}
 	else
 	{
-		*headb = oga;
-		(*headb)->prev = oga;
-		(*headb)->next = oga;
+		oga->next = oga;
+		oga->prev = oga;
+		*stb = oga;
 	}
 }
 
-void	pa(t_stack **heada, t_stack **headb)
+void	pa(t_stack **sta, t_stack **stb)
 {
-	if (!*heada)
+	if (!*stb)
 		return ;
-	if (*headb == (*headb)->next || !*heada)
-		pushifooz(headb, heada);
-	else
-		push(headb, heada);
+	push(stb, sta);
 	ft_printf("pa\n");
 }
 
-void	pb(t_stack **heada, t_stack **headb)
+void	pb(t_stack **sta, t_stack **stb)
 {
-	if (!*heada)
+	if (!*sta)
 		return ;
-	if (*heada == (*heada)->next || !*headb)
-		pushifooz(heada, headb);
-	else
-		push(heada, headb);
+	push(sta, stb);
 	ft_printf("pb\n");
 }
