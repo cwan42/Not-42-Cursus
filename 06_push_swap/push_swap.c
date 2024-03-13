@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 14:31:16 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/13 17:31:11 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,30 @@ int	inputcheck(char **av, t_stack **list)
 {
 	char	*wspace;
 	char	*str;
+	char	*tmpptr;
 	char	**arr;
 	int		i;
-	int		j;
 
-	str = " ";
+	str = ft_calloc(1, sizeof(char *));
 	*list = NULL;
 	av++;
 	while (*av)
 	{
+		tmpptr = str;
 		wspace = ft_strjoin(*av++, " ");
 		str = ft_strjoin(str, wspace);
-		free(wspace);
+		(void)(free(wspace), free(tmpptr));
 	}
+	tmpptr = str;
+	while ((*str >= '0' && *str <= '9') || *str == ' ' || *str == '\n')
+		str++;
+	if (*str)
+		return (free(tmpptr), 1);
+	arr = ft_split((tmpptr), ' ');
 	i = 0;
-	j = 0;
-	while ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ' || str[i] == '\n')
-		i++;
-	arr = ft_split((str), ' ');
-	while (arr[j])
-		ft_stkadd_back(list, ft_stknew(ft_atoi(arr[j++])));
-	j = 0;
-	while (arr[j])
-		free(arr[j++]);
-	free(arr);
-	if (str[i])
-		return (free(str), 1);
-	return (free(str), 0);
+	while (arr[i])
+		ft_stkadd_back(list, ft_stknew(ft_atoi(arr[i++])));
+	return (free(tmpptr), ft_free(arr), 0);
 }
 
 //	ARRAY test for duplicates, MININT/MAXINT
@@ -82,10 +79,12 @@ int	main(int ac, char *av[])
 
 	stacka = malloc(sizeof(t_stack *));
 	stackb = malloc(sizeof(t_stack *));
+	*stackb = NULL;
 	if (ac > 1 && stacka && stackb)
 		if (inputcheck(av, stacka))
-			return (ft_putstr_fd("Error\n", 2), 1);
-	char	str[4];
+			return (ft_putstr_fd("Error\n", 2), ft_freestack(stacka), \
+			free(stackb), 1);
+/*	char	str[4];
 	ft_printf("Enter a valid operation (sa, sb, ss, pa, pb, ra, rb, rr, rra,");
 	ft_printf(" rrb, rrr) or type END to exit: \n");
 	printloops(stacka, stackb);
@@ -117,8 +116,7 @@ int	main(int ac, char *av[])
 		else if (ft_strncmp(str, "rrr", 4) == 0)
 			rrr(stacka, stackb);
 		printloops(stacka, stackb);
-	}
-	ft_freestack(stacka);
-	ft_freestack(stackb);
-	return (0);
+	}*/
+	printloops(stacka, stackb);
+	return (ft_freestack(stacka), free(stackb), 0);
 }
