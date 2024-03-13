@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:05:49 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 16:09:09 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/13 18:25:33 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,17 @@ void	ft_freestack(t_stack **lst)
 
 	if (!lst || !*lst)
 		return ;
-	tmp = *lst;
-	head = *lst;
-	while (tmp->next != head)
+	if (*lst)
 	{
-		nextnode = tmp->next;
+		tmp = *lst;
+		head = *lst;
+		while (tmp->next != head)
+		{
+			nextnode = tmp->next;
+			free(tmp);
+			tmp = nextnode;
+		}
 		free(tmp);
-		tmp = nextnode;
 	}
-	free(tmp);
 	free(lst);
 }
