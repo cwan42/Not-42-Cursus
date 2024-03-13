@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 17:31:11 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/13 18:28:51 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	inputcheck(char **av, t_stack **list)
 		(void)(free(wspace), free(tmpptr));
 	}
 	tmpptr = str;
-	while ((*str >= '0' && *str <= '9') || *str == ' ' || *str == '\n')
+	while (ft_isdigit(*str) || *str == ' ' || *str == '\n')
 		str++;
 	if (*str)
 		return (free(tmpptr), 1);
@@ -79,10 +79,11 @@ int	main(int ac, char *av[])
 
 	stacka = malloc(sizeof(t_stack *));
 	stackb = malloc(sizeof(t_stack *));
+	*stacka = NULL;
 	*stackb = NULL;
-	if (ac > 1 && stacka && stackb)
+	if (ac > 1)
 		if (inputcheck(av, stacka))
-			return (ft_putstr_fd("Error\n", 2), ft_freestack(stacka), \
+			return (ft_putstr_fd("Error\n", 2), free(stacka), \
 			free(stackb), 1);
 /*	char	str[4];
 	ft_printf("Enter a valid operation (sa, sb, ss, pa, pb, ra, rb, rr, rra,");
@@ -117,6 +118,9 @@ int	main(int ac, char *av[])
 			rrr(stacka, stackb);
 		printloops(stacka, stackb);
 	}*/
-	printloops(stacka, stackb);
+	if (stacka && stackb)
+		printloops(stacka, stackb);
+	if (!*stacka)
+		return (free(stacka), free(stackb), 0);
 	return (ft_freestack(stacka), free(stackb), 0);
 }
