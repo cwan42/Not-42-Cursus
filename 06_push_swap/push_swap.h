@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 09:55:52 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/13 11:44:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void	rra(t_stack **heada);
 void	rrb(t_stack **headb);
 void	rrr(t_stack **heada, t_stack **headb);
 
+void	ft_free(char **arr);
 #endif
