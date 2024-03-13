@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 12:16:03 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/13 14:31:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	inputcheck(char **av, t_stack **list)
 	char	*str;
 	char	**arr;
 	int		i;
+	int		j;
 
-	str = malloc(1);
 	str = " ";
+	*list = NULL;
 	av++;
 	while (*av)
 	{
@@ -29,72 +30,30 @@ int	inputcheck(char **av, t_stack **list)
 		free(wspace);
 	}
 	i = 0;
+	j = 0;
 	while ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ' || str[i] == '\n')
 		i++;
 	arr = ft_split((str), ' ');
-	while (*arr)
-		ft_stkadd_back(list, ft_stknew(ft_atoi(*arr++)));
+	while (arr[j])
+		ft_stkadd_back(list, ft_stknew(ft_atoi(arr[j++])));
+	j = 0;
+	while (arr[j])
+		free(arr[j++]);
+	free(arr);
 	if (str[i])
 		return (free(str), 1);
-	return (0);
+	return (free(str), 0);
 }
-/*
+
 //	ARRAY test for duplicates, MININT/MAXINT
-}*/
-
-int	main(int ac, char *av[])
-{
-	t_stack	**list = NULL;
-//	t_stack *head = *list;
-
-	list = malloc(sizeof(t_stack *));
-	if (ac > 1)
-	{
-		if (inputcheck(av, list))
-			return (ft_putstr_fd("Error\n", 2), 1);
-		else
-			ft_printf("%d\n", (*list)->num);
-	}
-	return (0);
-}
-	
-/*f (*list)
-	{
-		while (head->next != *list)
-		{
-			ft_printf("%d ", head->num);
-			head = head->next;
-		}
-		ft_printf("%d.\t", head->num);
-	}	*/
-/*
-	char	**array;
-	int		i;
-
-	i = 0;
-	while (ac == 2 && ((av[1][i] >= '0' && av[1][i] <= '9') || av[1][i] == ' '))
-		i++;
-	array = ft_split((av[1]), ' ');
-	while (array
-	if (av[1][i])
-		return (ft_putstr_fd("Error\n", 2), 1);
-//	intcheckconv(array);
-	while (*array)
-	{
-		ft_printf("%s ", *array);
-		array++;
-	}
-	no param -> display nothing and return prompt
-	if error, display "Error" \n on stderr. (if arg != integer, > MAXINT or dup
-*/
-/*
 void	printloops(t_stack **list, t_stack **listb)
 {
-	t_stack	*head = *list;
-	t_stack	*headb = *listb;
+	t_stack	*head;
+	t_stack	*headb;
 
 	if (*list)
 	{
+		head = *list;
 		while (head->next != *list)
 		{
 			ft_printf("%d ", head->num);
@@ -104,6 +63,7 @@ void	printloops(t_stack **list, t_stack **listb)
 	}
 	if (*listb)
 	{
+		headb = *listb;
 		while (headb->next != *listb)
 		{
 			ft_printf("%d ", headb->num);
@@ -115,56 +75,50 @@ void	printloops(t_stack **list, t_stack **listb)
 
 #include <stdio.h>
 
-int	main(void)
+int	main(int ac, char *av[])
 {
-	t_stack	**list = NULL;
-	t_stack	**listb = NULL;
-	int		i = 1;
-	char	str[4];
+	t_stack	**stacka;
+	t_stack	**stackb;
 
-	list = malloc(sizeof(t_stack *));
-	listb = malloc(sizeof(t_stack *));
-	if (!list || !listb)
-		return (1);
-	*list = NULL;
-	*listb = NULL;
-	while (i < 6)
-		ft_stkadd_back(list, ft_stknew(i++));
-	while (i < 11)
-		ft_stkadd_back(listb, ft_stknew(i++));
+	stacka = malloc(sizeof(t_stack *));
+	stackb = malloc(sizeof(t_stack *));
+	if (ac > 1 && stacka && stackb)
+		if (inputcheck(av, stacka))
+			return (ft_putstr_fd("Error\n", 2), 1);
+	char	str[4];
 	ft_printf("Enter a valid operation (sa, sb, ss, pa, pb, ra, rb, rr, rra,");
 	ft_printf(" rrb, rrr) or type END to exit: \n");
-	printloops(list, listb);
+	printloops(stacka, stackb);
 	while (1)
 	{
 		scanf("%4s", str);
 		if (ft_strncmp(str, "END", 4) == 0)
 			break ;
 		else if (ft_strncmp(str, "pa", 3) == 0)
-			pa(list, listb);
+			pa(stacka, stackb);
 		else if (ft_strncmp(str, "pb", 3) == 0)
-			pb(list, listb);
+			pb(stacka, stackb);
 		else if (ft_strncmp(str, "sa", 3) == 0)
-			sa(list);
+			sa(stacka);
 		else if (ft_strncmp(str, "sb", 3) == 0)
-			sb(listb);
+			sb(stackb);
 		else if (ft_strncmp(str, "ss", 3) == 0)
-			ss(list, listb);
+			ss(stacka, stackb);
 		else if (ft_strncmp(str, "ra", 3) == 0)
-			ra(list);
+			ra(stacka);
 		else if (ft_strncmp(str, "rb", 3) == 0)
-			rb(listb);
+			rb(stackb);
 		else if (ft_strncmp(str, "rr", 3) == 0)
-			rr(list, listb);
+			rr(stacka, stackb);
 		else if (ft_strncmp(str, "rra", 4) == 0)
-			rra(list);
+			rra(stacka);
 		else if (ft_strncmp(str, "rrb", 4) == 0)
-			rrb(listb);
+			rrb(stackb);
 		else if (ft_strncmp(str, "rrr", 4) == 0)
-			rrr(list, listb);
-		printloops(list, listb);
+			rrr(stacka, stackb);
+		printloops(stacka, stackb);
 	}
-	ft_freestack(list);
-	ft_freestack(listb);
+	ft_freestack(stacka);
+	ft_freestack(stackb);
 	return (0);
-}*/
+}
