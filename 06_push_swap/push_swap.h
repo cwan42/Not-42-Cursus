@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 11:44:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/16 19:43:41 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	rra(t_stack **heada);
 void	rrb(t_stack **headb);
 void	rrr(t_stack **heada, t_stack **headb);
 
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_free(char **arr);
 #endif
