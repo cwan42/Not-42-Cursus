@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 18:28:51 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/16 20:24:55 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ int	inputcheck(char **av, t_stack **list)
 		return (free(tmpptr), 1);
 	arr = ft_split((tmpptr), ' ');
 	i = 0;
+/*	while (arr[i + 1]) 
+	{
+		if (ft_strcmp(arr[i], arr[i + 1]))
+			return (ft_free(arr), 1);
+		i++;
+	}
+	i = 0;*/
 	while (arr[i])
 		ft_stkadd_back(list, ft_stknew(ft_atoi(arr[i++])));
 	return (free(tmpptr), ft_free(arr), 0);
 }
-
-//	ARRAY test for duplicates, MININT/MAXINT
+//	test for MININT/MAXINT
 void	printloops(t_stack **list, t_stack **listb)
 {
 	t_stack	*head;
