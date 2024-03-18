@@ -6,22 +6,70 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/16 20:24:55 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/18 10:47:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	inputcheck(char **av, t_stack **list)
+int	checkmaxmin(char **arr)
+{
+	int		i;
+	int		j;
+	long	num;
+
+	i = 0;
+	while (arr[i])
+	{
+		j = 1;
+		if ((arr[i][0] >= '0' && arr[i][0] <= '9') || arr[i][0] == '-')
+		{
+			if (!arr[i][1])
+				return (1);
+			while (arr[i][j])
+			{
+				if (arr[i][j] >= '0' && arr[i][j] <= '9')
+					j++;
+				else
+					return (1);
+			}
+		}
+		i++;
+	}
+	i = 0;
+	while (arr[i])
+	{
+		num = ft_atoi(arr[i]);
+		if (num > 2147483647 || num < -2147483648)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	checkdup(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i + 1])
+	{
+		if (!ft_strcmp(arr[i], arr[i + 1]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	procargv(char **av, t_stack **stacka)
 {
 	char	*wspace;
 	char	*str;
 	char	*tmpptr;
+	char	**tmpptr2;
 	char	**arr;
-	int		i;
 
 	str = ft_calloc(1, sizeof(char *));
-	*list = NULL;
 	av++;
 	while (*av)
 	{
@@ -31,24 +79,17 @@ int	inputcheck(char **av, t_stack **list)
 		(void)(free(wspace), free(tmpptr));
 	}
 	tmpptr = str;
-	while (ft_isdigit(*str) || *str == ' ' || *str == '\n')
+	while (ft_isdigit(*str) || *str == ' ' || *str == '-' || *str == '\n')
 		str++;
-	if (*str)
-		return (free(tmpptr), 1);
-	arr = ft_split((tmpptr), ' ');
-	i = 0;
-/*	while (arr[i + 1]) 
-	{
-		if (ft_strcmp(arr[i], arr[i + 1]))
-			return (ft_free(arr), 1);
-		i++;
-	}
-	i = 0;*/
-	while (arr[i])
-		ft_stkadd_back(list, ft_stknew(ft_atoi(arr[i++])));
-	return (free(tmpptr), ft_free(arr), 0);
+	arr = ft_split(tmpptr, ' ');
+	if (*str || checkmaxmin(arr) || checkdup(arr))
+		return (free(tmpptr), ft_free(arr), 1);
+	tmpptr2 = arr;
+	while (*arr)
+		ft_stkadd_back(stacka, ft_stknew(ft_atoi(*arr++)));
+	return (free(tmpptr), ft_free(tmpptr2), 0);
 }
-//	test for MININT/MAXINT
+
 void	printloops(t_stack **list, t_stack **listb)
 {
 	t_stack	*head;
@@ -84,14 +125,21 @@ int	main(int ac, char *av[])
 	t_stack	**stackb;
 
 	stacka = malloc(sizeof(t_stack *));
-	stackb = malloc(sizeof(t_stack *));
 	*stacka = NULL;
-	*stackb = NULL;
 	if (ac > 1)
+	{
+		if (procargv(av, stacka))
+			return (ft_putstr_fd("Error\n", 2), free(stacka), 1);
+	}
+	else
+		return (free(stacka), 0);
+	stackb = malloc(sizeof(t_stack *));
+	*stackb = NULL;
+/*	if (ac > 1)
 		if (inputcheck(av, stacka))
 			return (ft_putstr_fd("Error\n", 2), free(stacka), \
-			free(stackb), 1);
-/*	char	str[4];
+			free(stackb), 1);*/
+	char	str[4];
 	ft_printf("Enter a valid operation (sa, sb, ss, pa, pb, ra, rb, rr, rra,");
 	ft_printf(" rrb, rrr) or type END to exit: \n");
 	printloops(stacka, stackb);
@@ -123,10 +171,10 @@ int	main(int ac, char *av[])
 		else if (ft_strncmp(str, "rrr", 4) == 0)
 			rrr(stacka, stackb);
 		printloops(stacka, stackb);
-	}*/
+	}
 	if (stacka && stackb)
 		printloops(stacka, stackb);
 	if (!*stacka)
-		return (free(stacka), free(stackb), 0);
+		return (free(stacka), free(stackb), 1);
 	return (ft_freestack(stacka), free(stackb), 0);
 }
