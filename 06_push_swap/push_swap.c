@@ -6,26 +6,24 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/18 10:47:16 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/18 15:44:41 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	checkmaxmin(char **arr)
+int	checkvalid(char **arr)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	while (arr[i])
 	{
 		j = 1;
-		if (!(arr[i][0] >= '0' && arr[i][0] <= '9') && arr[i][0] != '-')
-			return (1);
-		if (arr[i][0] == '-' && !arr[i][1])
-			return (1);
-		if (arr[i][0] == '-' && !(arr[i][1] >= '0' && arr[i][1] <= '9'))
+		if ((!(arr[i][0] >= '0' && arr[i][0] <= '9') && arr[i][0] != '-') ||
+		(arr[i][0] == '-' && !arr[i][1]) ||
+		(arr[i][0] == '-' && !(arr[i][1] >= '0' && arr[i][1] <= '9')))
 			return (1);
 		while (arr[i][j])
 		{
@@ -35,10 +33,17 @@ int	checkmaxmin(char **arr)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	checkmaxmin(char **arr)
+{
+	int	i;
+
 	i = 0;
 	while (arr[i])
 	{
-		if ((ft_atoi(arr[i]) > 2147483647) || (ft_atoi(arr[i]) < -2147483648))
+		if ((ft_atol(arr[i]) > 2147483647) || (ft_atol(arr[i]) < -2147483648))
 			return (1);
 		i++;
 	}
@@ -80,7 +85,7 @@ int	procargv(char **av, t_stack **stacka)
 	while (ft_isdigit(*str) || *str == ' ' || *str == '-' || *str == '\n')
 		str++;
 	arr = ft_split(tmpptr, ' ');
-	if (*str || checkmaxmin(arr) || checkdup(arr))
+	if (*str || checkvalid(arr) || checkmaxmin(arr) || checkdup(arr))
 		return (free(tmpptr), ft_free(arr), 1);
 	tmpptr2 = arr;
 	while (*arr)
