@@ -16,31 +16,29 @@ int	checkmaxmin(char **arr)
 {
 	int		i;
 	int		j;
-	long	num;
-
+	
 	i = 0;
 	while (arr[i])
 	{
 		j = 1;
-		if ((arr[i][0] >= '0' && arr[i][0] <= '9') || arr[i][0] == '-')
+		if (!(arr[i][0] >= '0' && arr[i][0] <= '9') && arr[i][0] != '-')
+			return (1);
+		if (arr[i][0] == '-' && !arr[i][1])
+			return (1);
+		if (arr[i][0] == '-' && !(arr[i][1] >= '0' && arr[i][1] <= '9'))
+			return (1);
+		while (arr[i][j])
 		{
-			if (!arr[i][1])
+			if (!(arr[i][j] >= '0' && arr[i][j] <= '9'))
 				return (1);
-			while (arr[i][j])
-			{
-				if (arr[i][j] >= '0' && arr[i][j] <= '9')
-					j++;
-				else
-					return (1);
-			}
+			j++;
 		}
 		i++;
 	}
 	i = 0;
 	while (arr[i])
 	{
-		num = ft_atoi(arr[i]);
-		if (num > 2147483647 || num < -2147483648)
+		if ((ft_atoi(arr[i]) > 2147483647) || (ft_atoi(arr[i]) < -2147483648))
 			return (1);
 		i++;
 	}
