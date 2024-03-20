@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/18 15:56:51 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:06:08 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 typedef struct s_stack
 {
-	int				num;
-	struct s_stack	*next;
-	struct s_stack	*prev;
+	int				nu;
+	struct s_stack	*n;
+	struct s_stack	*p;
 }					t_stack;
 
 t_stack	*ft_stklast(t_stack *lst);
@@ -50,5 +50,8 @@ long	ft_atol(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_free(char **arr);
 
-int	procargv(char **av, t_stack **stacka);
+int		procargv(char **av, t_stack **stacka);
+
+int		stacksize(t_stack **a);
+int		initpri(t_stack **a, t_stack **b);
 #endif

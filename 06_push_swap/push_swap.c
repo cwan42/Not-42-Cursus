@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/18 15:56:10 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:11:45 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,28 @@ void	printloops(t_stack **list, t_stack **listb)
 	if (*list)
 	{
 		head = *list;
-		while (head->next != *list)
+		while (head->n != *list)
 		{
-			ft_printf("%d ", head->num);
-			head = head->next;
+			ft_printf("%d ", head->nu);
+			head = head->n;
 		}
-		ft_printf("%d.\t", head->num);
+		ft_printf("%d.\t", head->nu);
 	}
 	if (*listb)
 	{
 		headb = *listb;
-		while (headb->next != *listb)
+		while (headb->n != *listb)
 		{
-			ft_printf("%d ", headb->num);
-			headb = headb->next;
+			ft_printf("%d ", headb->nu);
+			headb = headb->n;
 		}
-		ft_printf("%d.\n", headb->num);
+		ft_printf("%d.\n", headb->nu);
 	}
+	else
+		ft_printf("nil.\n");
 }
 
-#include <stdio.h>
-
+//#include <stdio.h>
 int	main(int ac, char *av[])
 {
 	t_stack	**stacka;
@@ -57,11 +58,15 @@ int	main(int ac, char *av[])
 		return (free(stacka), 0);
 	stackb = malloc(sizeof(t_stack *));
 	*stackb = NULL;
-/*	if (ac > 1)
-		if (inputcheck(av, stacka))
-			return (ft_putstr_fd("Error\n", 2), free(stacka), \
-			free(stackb), 1);*/
-	char	str[4];
+	initpri(stacka, stackb);
+	if (stacka && stackb)
+		printloops(stacka, stackb);
+	if (!*stacka)
+		return (free(stacka), free(stackb), 1);
+	return (ft_freestack(stacka), free(stackb), 0);
+}
+
+/*	char	str[4];
 	ft_printf("Enter a valid operation (sa, sb, ss, pa, pb, ra, rb, rr, rra,");
 	ft_printf(" rrb, rrr) or type END to exit: \n");
 	printloops(stacka, stackb);
@@ -99,4 +104,4 @@ int	main(int ac, char *av[])
 	if (!*stacka)
 		return (free(stacka), free(stackb), 1);
 	return (ft_freestack(stacka), free(stackb), 0);
-}
+}*/
