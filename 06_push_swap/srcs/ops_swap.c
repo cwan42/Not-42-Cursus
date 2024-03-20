@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:43 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 15:29:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:09:06 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ static void	swap(t_stack **head)
 {
 	t_stack	*third;
 
-	if (!*head || (!(*head)->next))
+	if (!*head || (!(*head)->n))
 		return ;
 	third = NULL;
-	if ((*head)->next->next == *head)
-		*head = (*head)->next;
+	if ((*head)->n->n == *head)
+		*head = (*head)->n;
 	else
 	{
-		third = (*head)->next->next;
-		(*head)->prev->next = (*head)->next;
-		*head = (*head)->next;
-		(*head)->next = (*head)->prev;
-		(*head)->prev = (*head)->prev->prev;
-		(*head)->next->next = third;
-		(*head)->next->prev = *head;
-		third->prev = (*head)->next;
+		third = (*head)->n->n;
+		(*head)->p->n = (*head)->n;
+		*head = (*head)->n;
+		(*head)->n = (*head)->p;
+		(*head)->p = (*head)->p->p;
+		(*head)->n->n = third;
+		(*head)->n->p = *head;
+		third->p = (*head)->n;
 	}
 }
 

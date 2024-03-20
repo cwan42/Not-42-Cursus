@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:13:32 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/11 12:29:46 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:07:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ static	void	push(t_stack **sta, t_stack **stb)
 	t_stack	*oga;
 
 	oga = *sta;
-	if (*sta != (*sta)->next)
+	if (*sta != (*sta)->n)
 	{
-		(*sta)->prev->next = (*sta)->next;
-		(*sta)->next->prev = (*sta)->prev;
-		*sta = (*sta)->next;
+		(*sta)->p->n = (*sta)->n;
+		(*sta)->n->p = (*sta)->p;
+		*sta = (*sta)->n;
 	}
 	else
 		*sta = NULL;
 	if (*stb)
 	{
-		(*stb)->prev->next = oga;
-		oga->next = *stb;
-		oga->prev = (*stb)->prev;
-		(*stb)->prev = oga;
+		(*stb)->p->n = oga;
+		oga->n = *stb;
+		oga->p = (*stb)->p;
+		(*stb)->p = oga;
 		*stb = oga;
 	}
 	else
 	{
-		oga->next = oga;
-		oga->prev = oga;
+		oga->n = oga;
+		oga->p = oga;
 		*stb = oga;
 	}
 }

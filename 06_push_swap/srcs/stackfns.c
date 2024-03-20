@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:05:49 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/13 18:25:33 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:10:40 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_stack	*ft_stklast(t_stack *lst)
 	if (!lst)
 		return (NULL);
 	last = lst;
-	while (last->next != lst)
-		last = last->next;
+	while (last->n != lst)
+		last = last->n;
 	return (last);
 }
 
@@ -31,9 +31,9 @@ t_stack	*ft_stknew(int value)
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
-	new->num = value;
-	new->next = new;
-	new->prev = new;
+	new->nu = value;
+	new->n = new;
+	new->p = new;
 	return (new);
 }
 
@@ -44,16 +44,16 @@ void	ft_stkadd_back(t_stack **lst, t_stack *node)
 	if (!*lst)
 	{
 		*lst = node;
-		node->next = node;
-		node->prev = node;
+		node->n = node;
+		node->p = node;
 	}
 	else
 	{
 		last = ft_stklast(*lst);
-		node->next = *lst;
-		node->prev = last;
-		last->next = node;
-		(*lst)->prev = node;
+		node->n = *lst;
+		node->p = last;
+		last->n = node;
+		(*lst)->p = node;
 	}
 }
 
@@ -69,9 +69,9 @@ void	ft_freestack(t_stack **lst)
 	{
 		tmp = *lst;
 		head = *lst;
-		while (tmp->next != head)
+		while (tmp->n != head)
 		{
-			nextnode = tmp->next;
+			nextnode = tmp->n;
 			free(tmp);
 			tmp = nextnode;
 		}

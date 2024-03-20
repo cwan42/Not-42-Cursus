@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:03:22 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/08 09:50:22 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:08:00 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	rotate(t_stack **head)
 {
-	if (!*head || (!(*head)->next) || (!(*head)->prev))
+	if (!*head || (!(*head)->n) || (!(*head)->p))
 		return ;
-	*head = (*head)->next;
+	*head = (*head)->n;
 }
 
 void	ra(t_stack **heada)
