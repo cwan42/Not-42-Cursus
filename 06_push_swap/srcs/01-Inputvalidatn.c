@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01-Inputvalidation.c                               :+:      :+:    :+:   */
+/*   01-Inputvalidatn.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/18 15:55:53 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/20 21:40:59 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,18 @@ static int	checkmaxmin(char **arr)
 static int	checkdup(char **arr)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (arr[i + 1])
+	while (arr[i])
 	{
-		if (!ft_strcmp(arr[i], arr[i + 1]))
-			return (1);
+		j = 0;
+		while (arr[j])
+		{
+			if (!ft_strcmp(arr[i], arr[j]) && (i != j))
+				return (1);
+			j++;
+		}
 		i++;
 	}
 	return (0);
