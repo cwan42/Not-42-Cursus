@@ -6,11 +6,39 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/22 06:54:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/22 07:25:23 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	stepstome(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *a;
+	i = 0;
+	if ((*b)->nu < mediannode(a)->nu)
+	{
+		while ((*b)->nu < tmp->nu)
+		{
+			tmp = tmp->n;
+			i++;
+		}
+	}
+	else if ((*b)->nu > mediannode(a)->nu)
+	{
+		while ((*b)->nu > tmp->p->nu)
+		{
+			tmp = tmp->p;
+			i--;
+		}
+	}
+	else if ((*b)->nu > numax(a) || (*b)->nu < numin(a))
+		i = 1;
+	return (i);
+}
 
 void	init3(t_stack **a)
 {
@@ -34,19 +62,15 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
+//	if (*b)
+//		ft_printf("mediannode %d, steps are %d\n", mediannode(a)->nu, stepstome(a, b));
 }
 
 int	initpri(t_stack **a, t_stack **b)
 {
-	int	size;
-
 	if (!a || !*a || !b)
 		return (1);
-	size = stacksize(a);
-//	if (size > 0 && size < 4)
-//		init3(a);
-//	else if (size > 3 && size < 6)
-	if (size < 6)
+	if (stacksize(a) < 6)
 		init5(a, b);
 	return (0);
 }
