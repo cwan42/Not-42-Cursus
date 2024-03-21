@@ -6,14 +6,15 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/20 18:55:34 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/22 06:50:49 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = 	srcs/ops_push.c srcs/ops_swap.c srcs/ops_rotate.c srcs/ops_rrotate.c \
-		srcs/stackfns.c srcs/utils.c srcs/01-Inputvalidatn.c srcs/02-procif3.c \
+		srcs/stackfns.c srcs/stackutils.c srcs/utils.c \
+		srcs/01-Inputvalidatn.c srcs/02-procif3.c \
 		push_swap.c
 
 BSRCS = \

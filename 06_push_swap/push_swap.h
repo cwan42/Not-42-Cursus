@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/20 20:06:08 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/22 06:50:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@ typedef struct s_stack
 	struct s_stack	*p;
 }					t_stack;
 
+t_stack	*mediannode(t_stack **a);
 t_stack	*ft_stklast(t_stack *lst);
 t_stack	*ft_stknew(int value);
 void	ft_stkadd_back(t_stack **lst, t_stack *node);
 void	ft_freestack(t_stack **lst);
+
+int		numax(t_stack **a);
+int		numin(t_stack **a);
+int		stacksize(t_stack **a);
+int		stacksorted(t_stack **a);
+int		stacksortedrev(t_stack **a);
 
 void	pa(t_stack **heada, t_stack **headb);
 void	pb(t_stack **heada, t_stack **headb);
