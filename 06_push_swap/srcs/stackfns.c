@@ -6,11 +6,26 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:05:49 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/20 20:10:40 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/22 06:49:56 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*mediannode(t_stack **a)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *a;
+	i = 0;	
+	while (i < (stacksize(a) / 2))
+	{
+		tmp = tmp->n;
+		i++;
+	}
+	return (tmp);
+}
 
 t_stack	*ft_stklast(t_stack *lst)
 {
