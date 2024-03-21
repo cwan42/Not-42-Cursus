@@ -6,93 +6,15 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/22 06:15:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/22 06:51:18 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	numax(t_stack **a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = tmp->p->nu;
-	while (tmp->n != *a)
-	{
-		if (tmp->nu > i)
-			i = tmp->nu;
-		tmp = tmp->n;
-	}
-	return (i);
-}
-
-int	numin(t_stack **a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = tmp->p->nu;
-	while (tmp->n != *a)
-	{
-		if (tmp->nu < i)
-			i = tmp->nu;
-		tmp = tmp->n;
-	}
-	return (i);
-}
-
-int	stacksize(t_stack **a)
-{
-	t_stack	*ptr;
-	int		count;
-
-	ptr = *a;
-	count = 1;
-	while (ptr->n != *a)
-	{
-		ptr = ptr->n;
-		count++;
-	}
-	return (count);
-}
-
-int	stacksorted(t_stack	**a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = 0;
-	while (i != stacksize(a) && tmp->nu != (*a)->nu)
-	{
-		i++;
-		tmp = tmp->n;
-		if (tmp->nu > tmp->n->nu)
-			return (1);
-	}
-	return (0);
-} // need to fix, prob cos using circular list so need to find way to temrinate
-
-t_stack	*mediannode(t_stack **a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = 0;	
-	while (i < (stacksize(a) / 2))
-	{
-		tmp = tmp->n;
-		i++;
-	}
-	return (tmp);
-}
-
 void	init3(t_stack **a)
 {
+	ft_printf("Stacksorted is %d, rev is %d\n", stacksorted(a), stacksortedrev(a));
 	if (stacksize(a) < 3 && (*a)->nu > (*a)->n->nu)
 		sa(a);
 	else if (stacksize(a) == 3)
