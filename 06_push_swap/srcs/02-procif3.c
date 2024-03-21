@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/22 06:51:18 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/22 06:54:17 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init3(t_stack **a)
 {
-	ft_printf("Stacksorted is %d, rev is %d\n", stacksorted(a), stacksortedrev(a));
 	if (stacksize(a) < 3 && (*a)->nu > (*a)->n->nu)
 		sa(a);
 	else if (stacksize(a) == 3)
