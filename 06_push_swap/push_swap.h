@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/22 06:50:14 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/24 07:04:28 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int		numin(t_stack **a);
 int		stacksize(t_stack **a);
 int		stacksorted(t_stack **a);
 int		stacksortedrev(t_stack **a);
+
+int		indexpos(t_stack **a, int num);
+int		indexb2a(t_stack **a, t_stack **b);
+int		stepsreq(int pos, t_stack **a);
 
 void	pa(t_stack **heada, t_stack **headb);
 void	pb(t_stack **heada, t_stack **headb);
