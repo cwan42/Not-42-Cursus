@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 03:22:16 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/03/24 07:16:39 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	init5(t_stack **a, t_stack **b)
 	init3(a);
 	if (!stacksorted(b))
 		sb(b);
-	while (*b)
+	ft_printf("stepsreq: %d, indexb2a: %d\n", stepsreq(indexb2a(a, b), a), indexb2a(a, b));
+}
+/*	while (*b)
 	{
 		if ((*b)->nu > (*a)->p->nu && ((*b)->nu < (*a)->nu ||\
 		 (*a)->p->nu == numax(a)))
@@ -70,7 +72,6 @@ void	init5(t_stack **a, t_stack **b)
 //		rra(a);
 //2 3 1 4 5
 }
-/*
 	while (*b && !stacksorted(a))
 	{
 		if (((*b)->nu > ft_stklast(*a)->nu && ft_stklast(*a)->nu == numax(a)) ||\
