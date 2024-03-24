@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 16:55:12 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/24 17:26:58 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ void	init5(t_stack **a, t_stack **b)
 			ra(a);
 		while (stepsreq(indexb2a(a, b), a) < 0)
 			rra(a);
-		if (!stepsreq(indexb2a(a, b), a) && !stacksorted(a) && \
-		((*b)->nu < numin(a) || (*b)->nu > numax(a)))
-			pa(a, b);
-		else if (!stepsreq(indexb2a(a, b), a) && (*b)->nu < (*a)->nu && \
-		(*b)->nu > (*a)->p->nu)
+		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
+		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
+		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
 			pa(a, b);
 		else if ((*b)->nu > mediannode(a)->nu)
 			ra(a);
