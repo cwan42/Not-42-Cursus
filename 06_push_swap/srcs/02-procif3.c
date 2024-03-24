@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 07:16:39 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/03/24 16:55:12 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init3(t_stack **a)
 	if ((*a)->nu < (*a)->n->nu && (*a)->n->nu < (*a)->p->nu)
 		return ;
 	if ((*a)->nu < (*a)->n->nu && (*a)->nu < (*a)->p->nu)
-		(void)sa(a),ra(a);
+		(void)(sa(a),ra(a));
 	else if ((*a)->nu > (*a)->n->nu && (*a)->nu < (*a)->p->nu)
 		sa(a);
 	else if ((*a)->nu < (*a)->n->nu && (*a)->nu > (*a)->p->nu)
@@ -27,7 +27,7 @@ void	init3(t_stack **a)
 	else if ((*a)->nu > (*a)->n->nu && (*a)->n->nu < (*a)->p->nu)
 		ra(a);
 	else if ((*a)->nu > (*a)->n->nu && (*a)->n->nu > (*a)->p->nu)
-		(void)sa(a),rra(a);
+		(void)(sa(a),rra(a));
 }
 /*	init3 shorter ver
 void	init3(t_stack **a)
@@ -52,37 +52,35 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
-	if (!stacksorted(b))
+	if (stacksortedrev(b))
 		sb(b);
-	ft_printf("stepsreq: %d, indexb2a: %d\n", stepsreq(indexb2a(a, b), a), indexb2a(a, b));
-}
-/*	while (*b)
+	while (*b)
 	{
-		if ((*b)->nu > (*a)->p->nu && ((*b)->nu < (*a)->nu ||\
-		 (*a)->p->nu == numax(a)))
+		while (stepsreq(indexb2a(a, b), a) > 0)
+			ra(a);
+		while (stepsreq(indexb2a(a, b), a) < 0)
+			rra(a);
+		if (!stepsreq(indexb2a(a, b), a) && !stacksorted(a) && \
+		((*b)->nu < numin(a) || (*b)->nu > numax(a)))
 			pa(a, b);
-		else if ((*b)->nu < numin(a) && (*a)->p->nu == numax(a))
+		else if (!stepsreq(indexb2a(a, b), a) && (*b)->nu < (*a)->nu && \
+		(*b)->nu > (*a)->p->nu)
 			pa(a, b);
-		else if ((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)
-			pa(a, b);
+		else if ((*b)->nu > mediannode(a)->nu)
+			ra(a);
 		else
-			ra(a);
+			rra(a);
 	}
-//	while (stacksorted(a))
-//		rra(a);
-//2 3 1 4 5
+	while (stacksorted(a) && (*a)->nu > numin(a))
+		rra(a);
 }
-	while (*b && !stacksorted(a))
-	{
-		if (((*b)->nu > ft_stklast(*a)->nu && ft_stklast(*a)->nu == numax(a)) ||\
-			(((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
-			(void)(pa(a, b),ra(a));
-		else if ((*b)->nu < numax(a) && (*b)->nu > (*a)->nu)
-			ra(a);
-	}
-	while (stacksorted(a))
-		ra(a);		
-}*/
+
+void	initall(t_stack **a, t_stack **b)
+{
+	if (!a || !b || !stacksorted(a))
+		return ;
+	(void)(pb(a, b), pb(a, b));
+}
 
 int	initpri(t_stack **a, t_stack **b)
 {
@@ -90,5 +88,7 @@ int	initpri(t_stack **a, t_stack **b)
 		return (1);
 	if (stacksize(a) < 6)
 		init5(a, b);
+	else
+		initall(a, b);
 	return (0);
 }
