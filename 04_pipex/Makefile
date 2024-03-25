@@ -6,13 +6,17 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2024/02/24 11:56:18 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/25 16:26:04 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
+BNAME = pipex_bonus
+
 SRCS =	pipex.c
+
+BSRCS = pipex_bonus.c
 
 CC = cc
 
@@ -22,15 +26,25 @@ CFLAGS = -Wall -Wextra -Werror -g -I ./
 
 OBJS = $(SRCS:.c=.o)
 
+BOBJS = $(BSRCS:.c=.o)
+
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft bonus > /dev/null
 	@$(MAKE) -C ft_printf > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a -o $(NAME)
 
+$(BNAME): $(BOBJS)
+	@$(MAKE) -C libft bonus > /dev/null
+	@$(MAKE) -C ft_printf > /dev/null
+	$(CC) $(CFLAGS) $(BOBJS) ./libft/libft.a ./ft_printf/printf.a -o $(BNAME)
+	
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+all: $(NAME) ./libft/libft.a
+
+bonus: $(BNAME)
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
