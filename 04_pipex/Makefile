@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:52:57 by cwan              #+#    #+#              #
-#    Updated: 2024/03/25 16:26:04 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/25 16:53:06 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ clean:
 	
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BNAME)
 	@$(MAKE) -C libft fclean > /dev/null
 	@$(MAKE) -C ft_printf fclean > /dev/null
 
