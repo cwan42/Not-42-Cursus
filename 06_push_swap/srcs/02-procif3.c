@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/25 12:03:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/25 14:51:10 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksorted(a) && (*a)->nu > numin(a))
 		rra(a);
 }
-
+/*
 void	initall(t_stack **a, t_stack **b)
 {
 	(void)(pb(a, b), pb(a, b));
@@ -94,8 +94,30 @@ void	initall(t_stack **a, t_stack **b)
 //	while (stacksortedrev(b) && (*b)->nu != numax(b))
 //		rrb(b);
 	init5(a, b);
-}
+}*/
+void	cheapb2a(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	t_stack	*tgt;
+	int		best;
 
+	while (*b)
+	{
+		best = 10000;
+		tmp = *a;
+		while (tmp)
+		{
+			if (tmp->nu > (*b)->nu && tmp->nu < best)
+			{
+				best = tmp->nu;
+				tgt = tmp;
+			}
+			tmp = tmp->n;
+		}
+		if 
+	}
+	
+}
 int	initpri(t_stack **a, t_stack **b)
 {
 	if (!a || !*a || !b || !stacksorted(a))
