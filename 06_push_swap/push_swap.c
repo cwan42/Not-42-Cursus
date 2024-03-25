@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 17:01:56 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/25 11:34:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	main(int ac, char *av[])
 	stackb = malloc(sizeof(t_stack *));
 	*stackb = NULL;
 	initpri(stacka, stackb);
-	if (stacka && stackb)
-		printloops(stacka, stackb);
+//	if (stacka && stackb)
+//		printloops(stacka, stackb);
 	if (!*stacka)
 		return (free(stacka), free(stackb), 1);
 	return (ft_freestack(stacka), free(stackb), 0);
