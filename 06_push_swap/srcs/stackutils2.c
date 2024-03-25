@@ -6,7 +6,7 @@
 /*   By: cwan42 <cwan42@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 06:42:52 by cwan42            #+#    #+#             */
-/*   Updated: 2024/03/24 16:55:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/25 11:33:56 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,39 @@ int	indexb2a(t_stack **a, t_stack **b)
 	return (i);
 }
 
+int	indexa2b(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *b;
+	i = 0;
+	if ((*a)->nu > numax(b) || (*a)->nu < numin(b))
+		return (0);
+	while ((*a)->nu < tmp->nu)
+	{
+		if ((*a)->nu < tmp->p->nu && (*a)->nu > tmp->nu)
+			return (i);
+		tmp = tmp->n;
+		i++;
+	}
+	while ((*a)->nu > tmp->nu)
+	{
+		if ((*a)->nu > tmp->nu && (*a)->nu < tmp->p->nu)
+			return (i);
+		tmp = tmp->n;
+		i++;
+	}
+	return (i);
+}
+
 int	stepsreq(int pos, t_stack **a)
 {
-	if (pos <= (stacksize(a) / 2))
+	int	halfsize;
+
+	halfsize = stacksize(a) / 2;
+	if (pos <= halfsize)
 		return (pos);
-	else if (pos > (stacksize(a) / 2))
-		return ((stacksize(a) - pos) * -1);
 	else
-		return (0);
+		return (pos - halfsize);
 }

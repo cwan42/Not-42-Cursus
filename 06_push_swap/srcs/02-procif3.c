@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 17:26:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/25 12:03:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	init3(t_stack **a)
 
 void	init5(t_stack **a, t_stack **b)
 {
-	if (!a || !b || !stacksorted(a))
-		return ;
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
@@ -75,14 +73,32 @@ void	init5(t_stack **a, t_stack **b)
 
 void	initall(t_stack **a, t_stack **b)
 {
-	if (!a || !b || !stacksorted(a))
-		return ;
 	(void)(pb(a, b), pb(a, b));
+//	if (stacksortedrev(b))
+//		sb(b);
+	while (stacksize(a) > 3)
+	{
+		while (stepsreq(indexa2b(a, b), b) > 0)
+			rb(b);
+		while (stepsreq(indexa2b(a, b), b) < 0)
+			rrb(b);
+		if (!stepsreq(indexa2b(a, b), b) && ((!stacksortedrev(b) && \
+		((*a)->nu < numin(b) || (*a)->nu > numax(b))) || \
+		((*a)->nu > (*b)->nu && (*a)->nu < (*b)->p->nu)))
+			pb(a, b);
+		else if ((*a)->nu < mediannode(b)->nu)
+			rb(b);
+		else
+			rrb(b);
+	}
+//	while (stacksortedrev(b) && (*b)->nu != numax(b))
+//		rrb(b);
+	init5(a, b);
 }
 
 int	initpri(t_stack **a, t_stack **b)
 {
-	if (!a || !*a || !b)
+	if (!a || !*a || !b || !stacksorted(a))
 		return (1);
 	if (stacksize(a) < 6)
 		init5(a, b);
