@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/25 13:19:53 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/26 15:15:09 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CC = cc
 RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -g -I .
+XFLAGS = -lXext -lX11 -lm
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,7 +32,7 @@ $(NAME):$(OBJS) fdf.h
 	@$(MAKE) -C ft_printf > /dev/null
 	@$(MAKE) -C minilibx-linux > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a ./ft_printf/printf.a \
-	./minilibx-linux/libmlx.a -o $(NAME)
+	./minilibx-linux/libmlx.a $(XFLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
