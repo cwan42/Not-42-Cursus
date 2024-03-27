@@ -6,11 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/25 14:51:10 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/27 07:11:59 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	tgtval(t_stack **a, t_stack *b);
 
 void	init3(t_stack **a)
 {
@@ -50,6 +52,7 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
+	ft_printf("Targetnode is %d\n", tgtval(a, *b));
 	if (stacksortedrev(b))
 		sb(b);
 	while (*b)
@@ -95,6 +98,19 @@ void	initall(t_stack **a, t_stack **b)
 //		rrb(b);
 	init5(a, b);
 }*/
+
+int	tgtval(t_stack **a, t_stack *b)
+{
+	t_stack	*tmp;
+
+	tmp = *a;
+	if ((b->nu > numax(a) || b->nu < numin(a)))
+		return (numin(a));
+	while (b->nu > tmp->nu)
+		tmp = tmp->n;
+	return (tmp->nu);
+}
+/*
 void	cheapb2a(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
@@ -117,7 +133,8 @@ void	cheapb2a(t_stack **a, t_stack **b)
 		if 
 	}
 	
-}
+}*/
+
 int	initpri(t_stack **a, t_stack **b)
 {
 	if (!a || !*a || !b || !stacksorted(a))
@@ -125,6 +142,6 @@ int	initpri(t_stack **a, t_stack **b)
 	if (stacksize(a) < 6)
 		init5(a, b);
 	else
-		initall(a, b);
+		init5(a, b);
 	return (0);
 }
