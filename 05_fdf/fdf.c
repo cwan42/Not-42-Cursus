@@ -17,6 +17,7 @@ int	main(int ac, char *av[])
 	t_mlx	*fdf;
 
 	fdf = NULL;
+	// If av[1] is less than 4, segv could happen.
 	if (ac == 2 && !ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".fdf", 4))
 	{
 		fdf = initmlx(fdf, av[1]);
