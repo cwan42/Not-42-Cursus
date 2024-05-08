@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:38:26 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/08 15:46:37 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/08 20:52:55 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-#endif
-
 char	*readline(const char *prompt);
+
+#endif
