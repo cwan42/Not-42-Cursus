@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 08:59:59 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:27:41 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,31 @@ typedef struct s_mlx
 	int		cols;
 	int		rows;
 	double	theta;
-	double	x_rot;
-	double	y_rot;
-	double	x_rotnext;
-	double	y_rotnext;
+	double	xrot;
+	double	yrot;
+	double	xrotn;
+	double	yrotn;
 	double	scale;
+	double	xd;
+	double	yd;
+	int		pixels;
 	char	*data;
 	int		bpp;
 	int		size_line;
 	int		endian;
 }			t_mlx;
 
-int		keyinput(int button, void *fdf);
-t_mlx	*initmlx(t_mlx *fdf, char *av);
-int		intinput(char *av, t_mlx *fdf);
-
+//01-input.c
 void	fdfvalues(t_mlx *fdf);
-float	ft_abs(int n);
+int		intinput(char *av, t_mlx *fdf);
+t_mlx	*initmlx(t_mlx *fdf, char *av);
+
+//02-mlxutils.c
+void	drawstuff(t_mlx *fdf);
+
+//03-utils.c
+int		xbutton(t_mlx *fdf);
+int		keyinput(int button, void *fdf);
 void	ft_freeint(int **arr);
 void	ft_free(char **arr);
 
