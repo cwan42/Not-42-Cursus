@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/08 21:26:39 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/08 22:07:50 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,27 @@ int	minishellloop(t_tools *tools)
 	return (1);
 }
 
+char	*readcmd(void)
+{
+	char	buffer[1024];
+	char	*ptr = NULL;
+	char	ptrlen = 0;
+
+	while (fgets(buffer, 1024, stdin))
+	{
+		WIP
+	}
+}
+
+void	print_prompt(void)
+{
+	ft_putstr_fd("prompt ", 2);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_tools	*tools;
+	char	*cmd;
 
 	tools = NULL;
 	if (ac == 1 && !av[1])
@@ -76,8 +94,24 @@ int	main(int ac, char **av, char **envp)
 		ft_printf("Test minishell launched\n");
 		tools = inittools(tools, envp);
 	}
-	minishellloop(tools);
-	for (int i = 0; tools->env[i]; i++)
-		ft_printf("%s\n", tools->env[i]);
+	while (1)
+	{
+		print_prompt();
+		cmd = readcmd();
+		if (!cmd)
+			exit(1);
+		if (!cmd[0] || !ft_strncmp(cmd, "\n", 1))
+			free (cmd);
+		if (!ft_strncmp(cmd, "exit\n", 5))
+		{
+			free (cmd);
+			break ;
+		}
+		ft_printf("%s\n", cmd);
+		free (cmd);
+	}
+//	minishellloop(tools);
+//	for (int i = 0; tools->env[i]; i++)
+//		ft_printf("%s\n", tools->env[i]);
 	return (0);
 }
