@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/10 00:03:50 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/10 00:12:34 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	main(int ac, char **av, char **envp)
 		if (!ft_strncmp(line, "env", 3))
 			for (t_list *node = *tools->env; node; node = node->next)
 				ft_printf("%s\n", (char *)node->content);
+		else if (line)
+			ft_printf("%s%s\n", line, " : command not found");
 		if (!ft_strncmp(line, "exit", 4))
 			exit(1);
 	}
