@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/09 18:00:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/09 23:07:43 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,80 +59,31 @@ t_tools	*inittools(t_tools *tools, char **envp)
 	return (tools);
 }
 
-int	minishellloop(t_tools *tools)
+void	init_prompt(void)
 {
-//	tools->argline = readline("Test minishell launched\n");
-	(void)(tools);
-	return (1);
-}
-/*
-char	*readcmd(void)
-{
-	char	buffer[1024];
-	char	*ptr = NULL;
-	char	ptrlen = 0;
-
-	while (fgets(buffer, 1024, stdin))
-	{
-		WIP
-	}
-}
-
-void	print_prompt(void)
-{
-	ft_putstr_fd("prompt ", 2);
+	ft_putstr("\033[32mminihell\033[0m$ ");
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_tools	*tools;
-	char	*cmd;
+	char	*line;
 
 	tools = NULL;
 	if (ac == 1 && !av[1])
 	{
-		ft_printf("Test minishell launched\n");
+		ft_printf("Minihell loaded, enter command or type 'exit' to quit.\n");
 		tools = inittools(tools, envp);
 	}
 	while (1)
 	{
-		print_prompt();
-		cmd = readcmd();
-		if (!cmd)
-			exit(1);
-		if (!cmd[0] || !ft_strncmp(cmd, "\n", 1))
-			free (cmd);
-		if (!ft_strncmp(cmd, "exit\n", 5))
-		{
-			free (cmd);
-			break ;
-		}
-		ft_printf("%s\n", cmd);
-		free (cmd);
-	}
-//	minishellloop(tools);
-//	for (int i = 0; tools->env[i]; i++)
-//		ft_printf("%s\n", tools->env[i]);
-	return (0);
-}*/
-
-//int	main(int ac, char **av, char **envp)
-int	main()
-{
-	char	*line;
-
-	while (1)
-	{
-		line = readline("Enter a command or type 'exit' to quit: ");
-		if (line)
-			break;
+		init_prompt();
+		line = readline(NULL);
+		if (!ft_strncmp(line, "env", 3))
+			for (int i = 0; tools->env[i]; i++)
+				ft_printf("%s\n", tools->env[i]);
 		if (!ft_strncmp(line, "exit", 4))
-		{
-			free(line);
-			break;
-		}
-		ft_printf("You entered: %s\n", line);
-		free(line);
+			exit(1);
 	}
 	return (0);
 }
