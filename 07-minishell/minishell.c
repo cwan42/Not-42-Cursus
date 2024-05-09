@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/10 00:01:34 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/10 00:03:50 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ typedef struct s_tools
 	t_list	**env;
 	int		simplecmds;
 }			t_tools;
-
-void	ft_free(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (arr)
-	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
-	}
-}
 
 void	init_env(t_tools *tools, char **envp)
 {
