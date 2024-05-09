@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:28:23 by cwan              #+#    #+#              #
-#    Updated: 2024/05/09 17:59:19 by cwan             ###   ########.fr        #
+#    Updated: 2024/05/09 23:23:00 by cwan42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS = -Wall -Wextra -Werror -g -I .
 OBJS = $(SRCS:.c=.o)
 
 $(NAME):$(OBJS) minishell.h
-	@$(MAKE) -C libft > /dev/null
+	@$(MAKE) -C libft bonus > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -lreadline -o $(NAME)
 
 %.o: %.c

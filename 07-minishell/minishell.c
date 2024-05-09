@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/09 23:07:43 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/10 00:01:34 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 typedef struct s_tools
 {
 	char	*argline;
-	char	**env;
+	t_list	**env;
 	int		simplecmds;
 }			t_tools;
 
@@ -32,22 +32,21 @@ void	ft_free(char **arr)
 	}
 }
 
-void	initenvp(t_tools *tools, char **envp)
+void	init_env(t_tools *tools, char **envp)
 {
 	int		i;
+	t_list	*node;
 
-	i = 0;	
+	i = 0;
+	tools->env = malloc(sizeof(t_list *));
+	*tools->env = NULL;
 	while (envp[i])
-		i++;
-	tools->env = ft_calloc(sizeof(char *), i + 1);
-	if (!tools->env)
-		return ;
-	i = -1;
-	while (envp[++i])
 	{
-		tools->env[i] = ft_strdup(envp[i]);
-		if (!tools->env[i])
-			ft_free(tools->env);
+		node = ft_lstnew(envp[i]);
+		if (!node)
+			return ;
+		ft_lstadd_back(tools->env, node);
+		i++;
 	}
 }
 
@@ -55,7 +54,7 @@ t_tools	*inittools(t_tools *tools, char **envp)
 {
 	tools = (t_tools *)ft_calloc(1, sizeof(t_tools));
 	tools->simplecmds = 0;
-	initenvp(tools, envp);
+	init_env(tools, envp);
 	return (tools);
 }
 
@@ -80,8 +79,8 @@ int	main(int ac, char **av, char **envp)
 		init_prompt();
 		line = readline(NULL);
 		if (!ft_strncmp(line, "env", 3))
-			for (int i = 0; tools->env[i]; i++)
-				ft_printf("%s\n", tools->env[i]);
+			for (t_list *node = *tools->env; node; node = node->next)
+				ft_printf("%s\n", (char *)node->content);
 		if (!ft_strncmp(line, "exit", 4))
 			exit(1);
 	}
