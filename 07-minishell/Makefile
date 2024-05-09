@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:28:23 by cwan              #+#    #+#              #
-#    Updated: 2024/05/08 21:29:42 by cwan42           ###   ########.fr        #
+#    Updated: 2024/05/09 17:59:19 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS = $(SRCS:.c=.o)
 
 $(NAME):$(OBJS) minishell.h
 	@$(MAKE) -C libft > /dev/null
-	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -lreadline -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/08 22:07:50 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:00:17 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	minishellloop(t_tools *tools)
 	(void)(tools);
 	return (1);
 }
-
+/*
 char	*readcmd(void)
 {
 	char	buffer[1024];
@@ -113,5 +113,26 @@ int	main(int ac, char **av, char **envp)
 //	minishellloop(tools);
 //	for (int i = 0; tools->env[i]; i++)
 //		ft_printf("%s\n", tools->env[i]);
+	return (0);
+}*/
+
+//int	main(int ac, char **av, char **envp)
+int	main()
+{
+	char	*line;
+
+	while (1)
+	{
+		line = readline("Enter a command or type 'exit' to quit: ");
+		if (line)
+			break;
+		if (!ft_strncmp(line, "exit", 4))
+		{
+			free(line);
+			break;
+		}
+		ft_printf("You entered: %s\n", line);
+		free(line);
+	}
 	return (0);
 }
