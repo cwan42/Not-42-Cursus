@@ -52,3 +52,6 @@ rl_replace_line - replace contents of rl_line_buffer w text.
 rl_redisplay - change what's displayed on screen to reflect rl_line_buffer.
 add_history - 
 
+wait/ waitpid - accepts pointer to an int of exit status of child process.
+wait3/ wait 4 - accepts addn args, flags specifying wait behaviour, rusage
+
