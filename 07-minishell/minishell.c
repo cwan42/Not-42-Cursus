@@ -6,42 +6,29 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/10 00:12:34 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/10 12:42:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-typedef struct s_tools
+/*
+void init_hist(t_tools *tools)
 {
-	char	*argline;
-	t_list	**env;
-	int		simplecmds;
-}			t_tools;
+	char	*history[499];
+	int		hist_head;
+	int		hist_size;
 
-void	init_env(t_tools *tools, char **envp)
-{
-	int		i;
-	t_list	*node;
-
-	i = 0;
-	tools->env = malloc(sizeof(t_list *));
-	*tools->env = NULL;
-	while (envp[i])
-	{
-		node = ft_lstnew(envp[i]);
-		if (!node)
-			return ;
-		ft_lstadd_back(tools->env, node);
-		i++;
-	}
-}
+	hist_head = 0;
+	hist_size = 0;
+}*/
 
 t_tools	*inittools(t_tools *tools, char **envp)
 {
 	tools = (t_tools *)ft_calloc(1, sizeof(t_tools));
 	tools->simplecmds = 0;
 	init_env(tools, envp);
+//	init_hist(tools);
 	return (tools);
 }
 
@@ -66,12 +53,14 @@ int	main(int ac, char **av, char **envp)
 		init_prompt();
 		line = readline(NULL);
 		if (!ft_strncmp(line, "env", 3))
-			for (t_list *node = *tools->env; node; node = node->next)
-				ft_printf("%s\n", (char *)node->content);
+			print_env(tools);
+		else if (!ft_strncmp(line, "pwd", 3))
+			ft_pwd();
+		else if (!ft_strncmp(line, "exit", 4))
+			exit(1);
 		else if (line)
 			ft_printf("%s%s\n", line, " : command not found");
-		if (!ft_strncmp(line, "exit", 4))
-			exit(1);
+		free(line);
 	}
 	return (0);
 }
