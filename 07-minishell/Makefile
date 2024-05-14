@@ -6,24 +6,24 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:28:23 by cwan              #+#    #+#              #
-#    Updated: 2024/05/10 12:41:51 by cwan             ###   ########.fr        #
+#    Updated: 2024/05/14 17:02:33 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = srcs/builtins/env.c srcs/builtins/pwd.c \
+SRCS = srcs/builtins/env.c srcs/builtins/pwd.c srcs/builtins/exit.c \
 		minishell.c \
 
 CC = cc
 
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -g -I .
+CFLAGS = -Wall -Wextra -Werror -g -I . -Iinclude
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME):$(OBJS) minishell.h
+$(NAME):$(OBJS)
 	@$(MAKE) -C libft bonus > /dev/null
 	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -lreadline -o $(NAME)
 
