@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/14 17:07:33 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/14 21:57:12 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_tools	*inittools(t_tools *tools, char **envp)
 
 void	init_prompt(void)
 {
-	ft_putstr("\033[32mminihell\033[0m$ ");
+	printf("\033[32mminihell\033[0m$ ");
 }
 
 void	init_cmds(t_tools *tools, char *str)
@@ -29,10 +29,23 @@ void	init_cmds(t_tools *tools, char *str)
 	int	i;
 
 	i = 0;
+	if (tools->cmds && tools->tokens)
+		freearr(tools->cmds);
+//		ft_memset(tools->cmds, 0, tools->tokens);
 	tools->cmds = ft_split(str, ' ');
-	while (str[i])
+	while (tools->cmds[i])
 		i++;
 	tools->tokens = i;
+}
+
+void	parser(t_tools *tools)
+{
+	if (!ft_strncmp(tools->cmds[0], "env", 3))
+		print_env(tools);
+	else if (!ft_strncmp(tools->cmds[0], "pwd", 3))
+		ft_pwd();
+	else if (!ft_strncmp(tools->cmds[0], "exit", 4))
+		exithell(tools);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -54,12 +67,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		add_history(line);
 		init_cmds(tools, line);
-		if (!ft_strncmp(line, "env", 3))
-			print_env(tools);
-		else if (!ft_strncmp(line, "pwd", 3))
-			ft_pwd();
-		else if (!ft_strncmp(line, "exit", 4))
-			exithell(tools);
+		parser(tools);
 		free(line);
 	}
 	return (0);
