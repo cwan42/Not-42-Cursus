@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/15 16:21:32 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/15 16:31:02 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int	main(int ac, char **av, char **envp)
 	tools = inittools(tools, envp);
 	while (1)
 	{
-		init_prompt();
-		line = readline(NULL);
+		line = readline("\033[32mminihell\033[0m$ ");
 		if (!line)
 			break ;
 		add_history(line);
