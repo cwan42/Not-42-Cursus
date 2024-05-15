@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/14 21:57:12 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/15 12:21:31 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ void	init_prompt(void)
 	printf("\033[32mminihell\033[0m$ ");
 }
 
-void	init_cmds(t_tools *tools, char *str)
+void	setcmds(t_tools *tools, char *str)
 {
 	int	i;
 
 	i = 0;
 	if (tools->cmds && tools->tokens)
+	{
 		freearr(tools->cmds);
-//		ft_memset(tools->cmds, 0, tools->tokens);
+		tools->tokens = 0;
+	}
 	tools->cmds = ft_split(str, ' ');
 	while (tools->cmds[i])
 		i++;
@@ -42,10 +44,14 @@ void	parser(t_tools *tools)
 {
 	if (!ft_strncmp(tools->cmds[0], "env", 3))
 		print_env(tools);
+	else if (!ft_strncmp(tools->cmds[0], "cd", 2))
+		cd(tools);
 	else if (!ft_strncmp(tools->cmds[0], "pwd", 3))
 		ft_pwd();
 	else if (!ft_strncmp(tools->cmds[0], "exit", 4))
 		exithell(tools);
+	else if (!ft_strncmp(tools->cmds[0], "ls", 2))
+		execve("/bin/ls", &tools->cmds[0], NULL);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -54,11 +60,9 @@ int	main(int ac, char **av, char **envp)
 	char	*line;
 
 	tools = NULL;
-	if (ac == 1 && !av[1])
-	{
-		ft_printf("Minihell loaded, enter command or type 'exit' to quit.\n");
-		tools = inittools(tools, envp);
-	}
+	(void)(ac), (void)(av[0]);
+	ft_printf("Minihell loaded, enter command or type 'exit' to quit.\n");
+	tools = inittools(tools, envp);
 	while (1)
 	{
 		init_prompt();
@@ -66,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 			break ;
 		add_history(line);
-		init_cmds(tools, line);
+		setcmds(tools, line);
 		parser(tools);
 		free(line);
 	}

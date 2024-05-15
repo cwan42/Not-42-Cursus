@@ -11,7 +11,7 @@ Parser = reads command line and inputes into data structure "Command Table"
 Executor = take table and create process for each simple command, create pipes for output of processes, and redirect std ioe if any.
 Subsys = ENV, wildcards, subshells
 
-Data Strucure for command table:
+Data Structure for command table:
 
 typedef struct SimCom
 {

@@ -6,13 +6,14 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:28:23 by cwan              #+#    #+#              #
-#    Updated: 2024/05/14 17:02:33 by cwan             ###   ########.fr        #
+#    Updated: 2024/05/15 12:20:05 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = srcs/builtins/env.c srcs/builtins/pwd.c srcs/builtins/exit.c \
+SRCS = srcs/builtins/cd.c srcs/builtins/env.c srcs/builtins/exit.c \
+	srcs/builtins/pwd.c \
 		minishell.c \
 
 CC = cc
