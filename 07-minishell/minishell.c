@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/16 14:52:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/16 16:55:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,20 @@ t_tools	*inittools(t_tools *tools, char **envp)
 	return (tools);
 }
 
-void	init_prompt(void)
+/*
+void	identtype(t_list *lst)
 {
-	printf("\033[32mminihell\033[0m$ ");
-}
+	t_list	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->content[0] ==
+		else if (tmp->content[0] ==
+		else
+
+	}
+}*/
 
 void	setcmds(t_tools *tools, char *str)
 {
@@ -35,6 +45,7 @@ void	setcmds(t_tools *tools, char *str)
 		tools->tokens = 0;
 	}
 	tools->cmds = ft_split(str, ' ');
+//	identtype(tools->cmds);
 	while (tools->cmds[i])
 		i++;
 	tools->tokens = i;
