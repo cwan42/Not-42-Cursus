@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:38:26 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/15 12:17:59 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/16 14:51:43 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ typedef struct s_tools
 	int		tokens;
 }			t_tools;
 
+//builtins - echo
+
 //builtins - cd
 int		cd(t_tools *tools);
 
 //builtins - env
 void	init_env(t_tools *tools, char **envp);
-void    print_env(t_tools *tools);
+void	print_env(t_tools *tools);
 
 //builtins - exit
 void	freearr(char **arr);
@@ -39,6 +41,7 @@ void	freelist(t_list **lst);
 int		exithell(t_tools *tools);
 
 //builtins - pwd
-void ft_pwd(void);
+char	*ft_cwd(void);
+void	ft_pwd(void);
 
 #endif

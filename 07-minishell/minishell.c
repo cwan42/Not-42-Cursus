@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/15 16:31:02 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/16 14:52:38 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	main(int ac, char **av, char **envp)
 	char	*line;
 
 	tools = NULL;
-	(void)(ac), (void)(av[0]);
+	(void)(ac);
+	(void)(av[0]);
 	ft_printf("Minihell loaded, enter command or type 'exit' to quit.\n");
 	tools = inittools(tools, envp);
 	while (1)
