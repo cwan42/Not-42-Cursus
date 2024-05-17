@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:38:26 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/16 14:51:43 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/17 12:29:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+//for type: 1 <; 2 <<; 3 cmd; 4 param; 5 "; 6 '; 7 |; 8 >; 9 >>
 typedef struct s_tools
 {
-	char	**cmds;
 	t_list	**env;
+	char	**cmds;
+	int		*type;
+	int		ecode;
 	int		tokens;
 }			t_tools;
 

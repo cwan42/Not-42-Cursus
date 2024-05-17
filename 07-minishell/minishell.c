@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/16 16:55:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/17 16:03:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,56 @@ t_tools	*inittools(t_tools *tools, char **envp)
 	return (tools);
 }
 
-/*
-void	identtype(t_list *lst)
+int	inittype(t_tools *tools)
 {
-	t_list	*tmp;
+	int		i;
 
-	tmp = lst;
-	while (tmp)
+	i = 0;
+	if (tools->type)
 	{
-		if (tmp->content[0] ==
-		else if (tmp->content[0] ==
+		free(tools->type);
+		tools->type = NULL;
+	}
+	tools->type = malloc(tools->tokens * sizeof(int));
+	ft_memset(tools->type, 2, tools->tokens * sizeof(int));
+	while (tools->cmds[i])
+	{
+		if (i == 0 || !ft_strncmp(tools->cmds[i - 1], "|", 1))
+			tools->type[i] = 3;
+		else if (!ft_strncmp(tools->cmds[i], "<<", 2))
+			tools->type[i] = 2;
+		else if (!ft_strncmp(tools->cmds[i], "<", 1))
+			tools->type[i] = 1;
+		else if (!ft_strncmp(tools->cmds[i], "\"", 1))
+			tools->type[i] = 5;
+		else if (!ft_strncmp(tools->cmds[i], "\'", 1))
+			tools->type[i] = 6;
+		else if (!ft_strncmp(tools->cmds[i], "|", 1))
+			tools->type[i] = 7;
+		else if (!ft_strncmp(tools->cmds[i], ">>", 2))
+			tools->type[i] = 9;
+		else if (!ft_strncmp(tools->cmds[i], ">", 1))
+			tools->type[i] = 8;
 		else
+			tools->type[i] = 4;
+		i++;
+	}
+	tools->type[i] = '\0';
+	i = 0;
+	while (tools->type[i])
+		printf("%d ", tools->type[i++]);
+	printf("\n");
+	return (0);
+}
+/*
+char	*addspacestostr(char *str)
+{
+	int	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '<' || str[i] == '>' || str[i] == '|'
 	}
 }*/
 
@@ -44,11 +82,17 @@ void	setcmds(t_tools *tools, char *str)
 		freearr(tools->cmds);
 		tools->tokens = 0;
 	}
+//preprocess str here by adding spaces where there should be spaces but aren't
 	tools->cmds = ft_split(str, ' ');
-//	identtype(tools->cmds);
 	while (tools->cmds[i])
 		i++;
 	tools->tokens = i;
+	inittype(tools);
+}
+
+void	trueparser(t_tools *tools)
+{
+	
 }
 
 void	parser(t_tools *tools)
