@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2023/09/19 14:48:57 by cwan             ###   ########.fr        #
+#    Updated: 2024/05/22 16:38:34 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,14 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+#all: $(NAME)
 
-bonus: $(NAME) $(BOBJS)
-	ar rcs $(NAME) $(BOBJS)
+bonus: $(NAME) $(OBJS) $(BOBJS)
+	@if [ "$(BOBJS)" -nt "$(NAME)" ]; then \
+		ar rcs $(NAME) $(BOBJS); \
+#	else \
+#		echo "make: '$(NAME)' is up to date."; \
+	fi
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
