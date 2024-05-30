@@ -5,44 +5,53 @@ int	ft_putstr(char *str)
 {
 	int	i = 0;
 
-	if (str)
+	if (!str)
+		return (write(1, "(null)", 6));
+	while (str[i])
+			i += write(1, &str[i], 1);
+	return (i);
+}
+
+int	ft_putnbr(long num, int base)
+{
+	char	*str;
+	int		i;
+
+	str = "01234567890abcdef";
+	i = 0;
+	if (num < 0)
 	{
-		while (*str)
-		{
-			write(1, str, 1);
-			str++;
-			i++;
-		}
+		i += write(1, "-", 1);
+		num = -num;
 	}
-	else
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+	if (num >= base)
+		i += ft_putnbr(num / base, base);
+	i += write(1, &str[num % base], 1);
 	return (i);
 }
 
 int	ft_printf(const char *str, ...)
 {
+	int		i = 0;
 	int		len = 0;
 	va_list	args;
 
 	va_start (args, str);
-	while (*str)
+	while (str[i])
 	{
-		if (*str == '%')
+		if (str[i] == '%')
 		{
-			str++;
-			if (*str == 's')
+			i++;
+			if (str[i] == 's')
 				len += ft_putstr(va_arg(args, char *));
-			if (*str == 'd')
+			if (str[i] == 'd')
 				len += ft_putnbr(va_arg(args, int), 10);
-			if (*str == 'x')
+			if (str[i] == 'x')
 				len += ft_putnbr(va_arg(args, unsigned int), 16);
 		}
 		else
-			len += write(1, &*str, 1);
-		str++;
+			len += write(1, &str[i], 1);
+		i++;
 	}
 	va_end(args);
 	return (len);
@@ -56,8 +65,6 @@ int	main(void)
 {
 	char	str[200];
 	int		nbr;
-	int		i;
-	int		i2;
 	int		len = 0;
 
 	while (1)
@@ -66,21 +73,13 @@ int	main(void)
 		scanf("%199s", str);
 		if (strncmp(str, "END", 4) == 0)
 			break ;
-		ft_printf("Whole str: %s\n"
+		len = ft_printf("str: %s, ", str);
+		printf("len is: %d\n", len - 7);
 		nbr = atoi(str);
-		ft_printf("Char:%c\tString:%s\n", *str, str);
-		printf("Real:%c\tReal: %s\n", *str, str);
-		ft_printf("Pointer\t%p", str);
-		printf(" : %p\n", str);
+		printf("Real:%s\n", str);
 		ft_printf("Decimal\t%d", nbr);
 		printf(" : %d\n", nbr);
-		ft_printf("Integer\t%i", nbr);
-		printf(" : %i\n", nbr);
-		ft_printf("Unsign\t%u", ((unsigned int)nbr));
-		printf(" : %u\n", ((unsigned int)nbr));
-		ft_printf("Hex x:%x\t X: %X\n", nbr, nbr);
-		printf("Real: %x\t X: %X\n", nbr, nbr);
-		ft_printf("%%\t%%");
-		printf(" : %%\n\n");
+		ft_printf("Hex:\t%x", nbr);
+		printf(" : %x\n", nbr);
 	}
 }
