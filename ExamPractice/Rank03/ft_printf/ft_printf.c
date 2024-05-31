@@ -17,7 +17,7 @@ int	ft_putnbr(long num, int base)
 	char	*str;
 	int		i;
 
-	str = "01234567890abcdef";
+	str = "0123456789abcdef";
 	i = 0;
 	if (num < 0)
 	{
@@ -56,7 +56,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -82,4 +82,4 @@ int	main(void)
 		ft_printf("Hex:\t%x", nbr);
 		printf(" : %x\n", nbr);
 	}
-}
+}*/
