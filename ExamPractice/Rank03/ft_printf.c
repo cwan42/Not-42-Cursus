@@ -56,7 +56,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -82,4 +82,4 @@ int	main(void)
 		ft_printf("Hex:\t%x", nbr);
 		printf(" : %x\n", nbr);
 	}
-}*/
+}

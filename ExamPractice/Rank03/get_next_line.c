@@ -6,39 +6,44 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:33:22 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/15 10:49:18 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/31 13:03:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 10
 # endif
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-	char	c;
-	int		i;
-	int		bytes;
+	static char	buffer[666666] = {'\0'};
+	static int	i = 0;
+	int			j = 0;
+	int			bytesread = 1;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	i = 0;
-	bytes = read(fd, &c, 1);
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (bytes)
+	while (bytesread > 0)
 	{
-		buffer[i++] = c;
-		if (c == '\n')
-			break;
-		bytes = read(fd, &c, 1);
+		bytesread = read(fd, &buffer[j], BUFFER_SIZE);
+		if (bytesread == -1 || !buffer[i])
+			return (NULL);
+		j += bytesread;
 	}
-	if (bytes <= 0 && i == 0)
-		return (free(buffer), NULL);
-	buffer[i] = '\0';
-	return (buffer);
+	bytesread = 0;
+	while (buffer[i + bytesread] && buffer[i + bytesread] != '\n')
+		bytesread++;
+	line = malloc(bytesread + 1 + (buffer[i + bytesread] == '\n'));
+	if (!line)
+		return (NULL);
+	line[bytesread + (buffer[i + bytesread] == '\n')] = '\0';
+	j = 0;
+	while (j <= bytesread)
+		line[j++] = buffer[i++];
+	return (line);
 }
 
 /*
