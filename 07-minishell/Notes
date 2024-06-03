@@ -3,7 +3,17 @@ BASH Reference manual: https://www.gnu.org/software/bash/manual/bash.html#Introd
 Purdue Write own shell: https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
 GNU Readline library: https://tiswww.case.edu/php/chet/readline/readline.html
 
-Structure of shell
+Control operator (token that performs a control function):
+\n || && & ; ;; ;& | |& ( )
+
+Metacharacter (char when unquoted, separates words. space, tab, newline or:
+| & ; ( ) < >
+
+Shell operation -> read input, break into words and operators, by quoting rules
+-> Alias expansion -> parses tokens into simple and compound commands ->
+Shell expansion -> break expanded tokens into lists of filenames, cmds and args
+-> perform redirection, remove redirection operator and operands from arg list
+-> executes command -> wait for command to complete update exist status
 
 Parser -> Executor -> Subsystems
 
