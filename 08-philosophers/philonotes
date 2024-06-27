@@ -1,0 +1,26 @@
+
+
+Mutual exclusion: concurrency control to prevent race conditions.
+Only 1 thread accesses a critical section at a time, no concurrent writes.
+Req: free of deadlocks (lockout-freedom, k-bounded waiting property)
+4 sections: Non-critical section, trying, critical section, exit.
+
+
+args == n, ttd, tte, tts, ntepme
+msg format:
+timestamp X has taken a fork
+timestamp X is eating
+timestamp X is sleeping
+timestamp X is thinking
+timestamp X died
+(ded announcment < 10ms after death actual)
+when finish eating, sleep immediately, then think. repeat while 1 or ntepme
+
+external functions to check:
+pthread_create, detach, join
+pthread_mutex_init, destroy, lock, unlock
+
+each philo is a thread, n philo n forks.
+protect fork state with mutex
+
+ "--tool=helgrind" and "--tool=drd"
