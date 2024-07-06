@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/17 16:03:46 by cwan             ###   ########.fr       */
+/*   Updated: 2024/07/06 17:44:14 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ void	setcmds(t_tools *tools, char *str)
 	inittype(tools);
 }
 
-void	trueparser(t_tools *tools)
-{
-	
-}
+//void	trueparser(t_tools *tools)
 
 void	parser(t_tools *tools)
 {
