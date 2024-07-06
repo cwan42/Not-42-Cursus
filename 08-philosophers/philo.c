@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:26:20 by cwan              #+#    #+#             */
-/*   Updated: 2024/07/06 16:55:49 by cwan             ###   ########.fr       */
+/*   Updated: 2024/07/06 17:42:31 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	errormessage(int code)
 		printf("Optional number of times each philosopher must eat\n");
 	}
 	if (code == 2)
-		printf("Wrong syntax, all values must be a positive integer or 0\n");	
+		printf("Wrong syntax, all values must be a positive integer\n");
 	exit (1);
 }
 
@@ -46,21 +46,19 @@ void	inputcheck(int ac, char **av)
 	}
 }
 
-t_uni	*inituni(char **av)
+void	inituni(t_uni *uni, char **av)
 {
-	t_uni	*uni;
-
-	uni = (t_uni *)malloc(sizeof(t_uni));
 	av++;
 	uni->np = ft_atoi(*av++);
-	uni->ttd = ft_atoi(*av++);
-	uni->tte = ft_atoi(*av++);
-	uni->tts = ft_atoi(*av++);
+	uni->ttd = ft_atoi(*av++) * 1000;
+	uni->tte = ft_atoi(*av++) * 1e3;
+	uni->tts = ft_atoi(*av++) * 1000;
 	uni->nte = -1;
 	if (*av)
 		uni->nte = ft_atoi(*av++);
-	printf("Np is %d, ttd is %d, tte is %d, tts is %d, nte is %d\n", uni->np, uni->ttd, uni->tte, uni->tts, uni->nte);
-	return (uni);
+	uni->endgame = 0;
+	uni->philos = (t_philo *)malloc(sizeof(t_philo) * uni->np);
+//	if (!uni->philos) free philos structs		
 }
 
 void	freestruct(t_uni *uni)
@@ -68,12 +66,21 @@ void	freestruct(t_uni *uni)
 	free(uni);
 }
 
+void	initdata(t_uni *uni)
+{
+	printf("Ininitdata, uni ptr = %p\n", uni);
+}
+
 int	main(int ac, char *av[])
 {
 	t_uni	*uni;
+
+	uni = (t_uni *)malloc(sizeof(t_uni));
 	inputcheck(ac, av);
-	printf("Passed inputcheck\n");
-	uni = inituni(av);
+	inituni(uni, av);
+	printf("np is %d, ttd is %d, tte is %d, tts is %d, nte is %d\n", uni->np, uni->ttd, uni->tte, uni->tts, uni->nte);
+	printf("Endgame is %d\n", uni->endgame);
+	initdata(uni);
 	freestruct(uni);
 	return (0);
 }

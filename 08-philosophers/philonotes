@@ -24,3 +24,4 @@ each philo is a thread, n philo n forks.
 protect fork state with mutex
 
  "--tool=helgrind" and "--tool=drd"
+-fsanitize=address
