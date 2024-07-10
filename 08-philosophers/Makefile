@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 16:33:49 by cwan              #+#    #+#              #
-#    Updated: 2024/07/06 16:37:12 by cwan             ###   ########.fr        #
+#    Updated: 2024/07/10 09:40:12 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -pthread
 
 SRCS = utils.c philo.c
 
