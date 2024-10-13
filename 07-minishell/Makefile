@@ -1,45 +1,56 @@
-# **************************************************************************** #
+#**************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
+#    By: cbandara <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/07 14:28:23 by cwan              #+#    #+#              #
-#    Updated: 2024/05/15 12:20:05 by cwan             ###   ########.fr        #
+#    Created: 2024/05/10 13:33:09 by cbandara          #+#    #+#              #
+#    Updated: 2024/09/06 18:42:26 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = srcs/builtins/cd.c srcs/builtins/env.c srcs/builtins/exit.c \
-	srcs/builtins/pwd.c \
-		minishell.c \
-
 CC = cc
 
-RM = rm -f
+FLAGS = -Wall -Wextra -Werror -g -I . -Iinclude
 
-CFLAGS = -Wall -Wextra -Werror -g -I . -Iinclude
+LIBFT_DIR = ./libft
+
+LIBFT = $(LIBFT_DIR)/libft.a
+
+SRCS =	srcs/01-initcmdtab.c srcs/02-strproc.c srcs/02-strproc2.c \
+		srcs/03-initarrexpander.c srcs/04-quoteexpforreal.c\
+		srcs/builtins/cd.c srcs/builtins/echo.c srcs/builtins/env.c \
+		srcs/builtins/exit.c srcs/builtins/export.c srcs/builtins/pwd.c \
+		srcs/builtins/unset.c \
+		srcs/signals.c srcs/signals_heredoc.c srcs/modifiedsplit.c \
+		srcs/minishell.c srcs/utils.c \
+		srcs/executer.c srcs/executer2.c srcs/executer3.c srcs/executer4.c \
+		srcs/exec.c srcs/exec2.c srcs/exec3.c srcs/heredoc.c srcs/errmsg.c \
+		srcs/minishell_utils.c srcs/inputcheck1.c
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME):$(OBJS)
-	@$(MAKE) -C libft bonus > /dev/null
-	$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -lreadline -o $(NAME)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 all: $(NAME)
 
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(FLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR) bonus
+
+%.o: %.c $(INCLUDE)
+	$(CC) $(FLAGS) -c -o $@ $<
+	
 clean:
-	$(RM) $(OBJS) $(BOBJS)
-	@$(MAKE) -C libft clean > /dev/null
+	rm -f $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	@$(MAKE) -C libft fclean > /dev/null
+	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

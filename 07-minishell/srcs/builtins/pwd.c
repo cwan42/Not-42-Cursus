@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: cbandara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 12:40:09 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/16 14:50:36 by cwan             ###   ########.fr       */
+/*   Created: 2024/05/10 13:32:30 by cbandara          #+#    #+#             */
+/*   Updated: 2024/09/20 15:07:54 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-//ft_cwd returns the cwd as string, reqs freeing
 char	*ft_cwd(void)
 {
 	char	*cwd;
@@ -27,8 +26,8 @@ char	*ft_cwd(void)
 	return (cwd);
 }
 
-//ft_pwd just prints 
-void	ft_pwd(void)
+//ft_pwd just prints
+int	ft_pwd(t_tools *tools)
 {
 	char	cwd[4096];
 	char	*path;
@@ -37,7 +36,9 @@ void	ft_pwd(void)
 	if (!path)
 	{
 		perror("getcwd");
-		return ;
+		return (1);
 	}
-	ft_printf("%s\n", cwd);
+	printf("%s\n", cwd);
+	tools->ecode = 0;
+	return (0);
 }
