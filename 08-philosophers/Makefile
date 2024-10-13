@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 16:33:49 by cwan              #+#    #+#              #
-#    Updated: 2024/07/10 09:40:12 by cwan             ###   ########.fr        #
+#    Updated: 2024/09/30 14:37:01 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror -g -pthread
 
-SRCS = utils.c philo.c
+SRCS = utils.c philo.c 01-inputvalidation.c 02-inituni.c XX-cleanup.c
 
 OBJS = $(SRCS:.c=.o)
 
