@@ -16,12 +16,13 @@ void	errormessage(int code)
 {
 	if (code == 1)
 	{
-		printf(P"Incorrect number of arguments. Rerun with 4 or 5 values:\n"OG);
-		printf(P2"No. of philosphers, time to die, eat, sleep in seconds\n"OG);
+		printf(P"Wrong no. of arguments. Run with 4 or 5 values:\n"OG);
+		printf(P2"No. of philosphers,"OG);
+		printf(P2" time to die, eat, sleep in seconds\n"OG);
 		printf(P3"Optional: number of meals to eat\n"OG);
 	}
 	if (code == 2)
-		printf(P4"Wrong syntax, all values must be a positive integer\n"OG);
+		printf(P4"Wrong syntax, values must be positive integers\n"OG);
 	exit (1);
 }
 
