@@ -15,21 +15,18 @@
 void	*doit()
 {
 	printf("testing thread\n");
-	usleep(3000000);
-	printf("Ending thread\n");
 	return (0);
 }
 
 void	initdata(t_uni *uni)
 {
-	pthread_t	pp;
-	pthread_t	pp2;
-
-	pthread_create(&pp, NULL, &doit, NULL);
-	pthread_create(&pp2, NULL, &doit, NULL);
-	pthread_join(pp, NULL);
-	pthread_join(pp2, NULL);
-	printf("In initdata, uni ptr = %p\n", uni);
+	int	i = 0;
+	while (i < uni->np)
+	{
+		pthread_create(&uni->philos->tid, NULL, &doit, NULL);
+		pthread_join(uni->philos->tid, NULL);
+		i++;
+	}
 }
 
 int	main(int ac, char *av[])

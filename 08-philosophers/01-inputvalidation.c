@@ -41,8 +41,11 @@ int	maxmincheck(char **av)
 	if (ft_atoi(*av) < 1 || ft_atoi(*av) > 200)
 		return (printf(P4"Time to sleep must be between 1 to 200\n"OG), 1);
 	av++;
-	if (ft_atoi(*av) < 1 || ft_atoi(*av) > 200)
-		return (printf(P5"Number of meals must be between 1 to 200\n"OG), 1);
+	if (*av)
+	{
+		if (ft_atoi(*av) < 1 || ft_atoi(*av) > 200)
+			return (printf(P5"Number of meals must be between 1 to 200\n"OG), 1);
+	}
 	return (0);
 }
 

@@ -23,6 +23,6 @@ void	inituni(t_uni *uni, char **av)
 	if (*av)
 		uni->nte = ft_atoi(*av++);
 	uni->endgame = 0;
-	uni->philos = (t_philo *)ft_calloc(sizeof(t_philo), uni->np);
+	uni->philos = (t_philo *)ft_calloc(uni->np, sizeof(t_philo));
 	gettimeofday(&uni->start, NULL);
 }
